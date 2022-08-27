@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
@@ -14,7 +14,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "eslint-plugin-mui-unused-classes": "^1.0.3",
-    "mui-status": "^0.0.20",
+    "mui-status": "^0.0.22",
     "nodemon": "^2.0.19",
     "npm-check-updates": "^11.8.5",
     "react": "16.14.0",
@@ -25,7 +25,11 @@
   },
   "scripts": {
     "preinstall": "npm cache clean --force",
-    "start": "npm link mui-status && react-scripts start",
+    "postinstall": "npm run link.all && npm link mui-status && npm ls mui-status && npm ls react && npm ls react-dom",
+    "link.all": "npm run link.react && npm run link.react.dom",
+    "link.react": "cd node_modules/react && npm link",
+    "link.react.dom": "cd node_modules/react-dom && npm link",
+    "start": "react-scripts start",
     "update": "npx ncu -u",
     "build": "react-scripts build",
     "test": "react-scripts test"
