@@ -14,7 +14,7 @@ function App() {
   return (
     <div>
       <SayHello name="ddd" />
-      <SayBye name="ddd" />
+      {/* <SayBye name="ddd" /> */}
       {/* <MuiStatusProvider> */}
 
 
