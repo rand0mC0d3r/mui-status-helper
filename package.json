@@ -24,10 +24,11 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "preinstall": "npm cache clean --force",
-    "postinstall": "npm run link.all && npm link mui-status && npm ls mui-status && npm ls react && npm ls react-dom",
-    "link.all": "npm run link.react && npm run link.react.dom",
+    "preinstall": "rm -rf node_modules && npm cache clean --force",
+    "postinstall": "npm run link.all && npm link mui-status && npm ls mui-status && npm ls react && npm ls react-dom && npm ls @material-ui",
+    "link.all": "npm run link.react && npm run link.react.dom && npm run link.mui",
     "link.react": "cd node_modules/react && npm link",
+    "link.mui": "cd node_modules/@material-ui && npm link",
     "link.react.dom": "cd node_modules/react-dom && npm link",
     "start": "react-scripts start",
     "update": "npx ncu -u",
