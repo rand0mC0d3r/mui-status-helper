@@ -26,8 +26,10 @@
     "link.all": "npm run link.react.dom && npm run link.react && npm ls react && npm ls react-dom",
     "link.lib": "npm link mui-status && npm ls mui-status",
     "link.react": "cd node_modules/react && npm link",
+    "link.mui.core": "cd node_modules/@material-ui/core && npm link",
+    "link.mui.icons": "cd node_modules/@material-ui/icons && npm link",
     "link.react.dom": "cd node_modules/react-dom && npm link",
-    "start": "npm run link.lib && react-scripts start",
+    "start": "npm run link.mui.core && npm run link.mui.icons && npm run link.lib && react-scripts start",
     "update": "npx ncu -u",
     "build": "react-scripts build",
     "test": "react-scripts test"
