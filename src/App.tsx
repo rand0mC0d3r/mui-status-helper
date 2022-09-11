@@ -2,7 +2,7 @@
 // import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 // import * as MuiStatus from from 'mui-status'
 // import MuiStatus from 'mui-status'
-import SayHello, { SayBye } from 'mui-status'
+import SayHello, { MuiStatusChild } from 'mui-status'
 // import SayHello from 'mui-status'
 
 import './App.css'
@@ -19,7 +19,7 @@ function App() {
 
 
       {/* </MuiStatusProvider> */}
-      {/* <MuiStatusChild text="ddd" /> */}
+      <MuiStatusChild text="ddd" />
     </div>
   )
 }
