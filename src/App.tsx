@@ -1,25 +1,26 @@
-/* eslint-disable no-unused-vars */
-// import { createTheme, ThemeProvider } from '@material-ui/core/styles'
-// import * as MuiStatus from from 'mui-status'
-// import MuiStatus from 'mui-status'
-import SayHello, { MuiStatusChild } from 'mui-status'
-// import SayHello from 'mui-status'
-
+import { MenuItem, MenuList } from '@material-ui/core'
+import ListAltIcon from '@material-ui/icons/ListAlt'
+import { MuiStatus, MuiStatusChild, MuiStatusPanel, MuiStatusProvider } from 'mui-status'
 import './App.css'
-// import ImplementationFrame from './parts/_ImplementationFrame'
 
 function App() {
-
-
   return (
     <div>
-      <SayHello name="ddd" />
-      {/* <SayBye name="ddd" /> */}
-      {/* <MuiStatusProvider> */}
-
-
-      {/* </MuiStatusProvider> */}
-      <MuiStatusChild text="ddd" />
+      <MuiStatusProvider position="bottom">
+        <MuiStatus id="dsfdsfsd" >
+          <MuiStatusChild text="ddd" />
+        </MuiStatus>
+        <MuiStatus secondary id="eeewe" >
+          <MuiStatusChild text="eee" />
+        </MuiStatus>
+        <MuiStatusPanel id="fdfdff" popover={<MenuList id="menu-list-grow" onKeyDown={() => { }}>
+          <MenuItem onClick={() => { }}>Profile</MenuItem>
+          <MenuItem onClick={() => { }}>My account</MenuItem>
+          <MenuItem onClick={() => { }}>Logout</MenuItem>
+        </MenuList>}>
+          <MuiStatusChild icon={<ListAltIcon />} text="Menu" />
+        </MuiStatusPanel>
+      </MuiStatusProvider>
     </div>
   )
 }
