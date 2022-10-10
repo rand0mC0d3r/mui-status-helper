@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { MenuItem, MenuList, Tooltip } from '@material-ui/core'
+import { MenuItem, MenuList, Tooltip, Typography } from '@material-ui/core'
 import CodeIcon from '@material-ui/icons/Code'
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
@@ -24,7 +24,14 @@ function App() {
   const [selectedText, setSelectedText] = useState('')
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
 
-  return <MuiStatusProvider debug position="bottom" tooltipComponent={(tooltip: any, component: any) => <Tooltip arrow title={tooltip}>{component}</Tooltip>}>
+  return <MuiStatusProvider
+    debug
+    position="bottom"
+    tooltipComponent={(tooltip: any, component: any) =>
+      <Tooltip arrow title={<Typography variant='subtitle2'>{tooltip}</Typography>}>
+        {component}
+      </Tooltip>}
+  >
     <MuiStatus {...{ id: 'avatarStatus', style: { minWidth: '48px' }, tooltip: 'Avatar user' }}>
       <MuiStatusChild mask image='https://picsum.photos/32/32' />
     </MuiStatus>
@@ -35,7 +42,7 @@ function App() {
     </MenuList>}>
       <MuiStatusChild icon={<ListAltIcon />} text="Menu" />
     </MuiStatusPanel>
-    <MuiStatus id="selectedText" tooltip={selectedText}>
+    <MuiStatus id="selectedText" highlight={selectedText.length > 10 ? 'secondary' : 'primary'}  tooltip={selectedText}>
       {selectedText.length > 0 && <MuiStatusChild
         icon={<CodeIcon />}
         text={`${selectedText.length > 0 ? `${selectedText.substring(0, 10)}...` : selectedText} (${String(selectedText.length)})`} />}
