@@ -60,7 +60,9 @@ function App() {
 
     <div style={{ display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center' }}>
       <div style={{ flex: '0 0 50%' }}>
-        <textarea onMouseUp={() => {
+        <textarea onMouseMove={() => {
+          console.log('ddd')
+        }} onMouseUp={() => {
           let textVal = selectionRef.current
           let cursorStart = textVal.selectionStart
           let cursorEnd = textVal.selectionEnd
