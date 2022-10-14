@@ -6,7 +6,7 @@
     "jest": true
   },
   "extends": "eslint:recommended",
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "ignorePatterns": [
     "components/**/*.js"
   ],
