@@ -4,21 +4,21 @@
   "private": true,
   "dependencies": {
     "@mui/icons-material": "^5.10.9",
-    "@mui/lab": "^5.0.0-alpha.103",
-    "@mui/material": "^5.10.9",
-    "@types/jest": "^29.1.2",
-    "@types/node": "^18.8.5",
+    "@mui/lab": "^5.0.0-alpha.105",
+    "@mui/material": "^5.10.11",
+    "@types/jest": "^29.2.0",
+    "@types/node": "^18.11.7",
     "@types/react": "^17.0.2",
     "@types/react-dom": "17.0.2",
     "eslint-plugin-mui-unused-classes": "^1.0.3",
-    "mui-status": "^0.0.22",
+    "mui-status": "^0.0.43",
     "nodemon": "^2.0.20",
-    "npm-check-updates": "^16.3.11",
+    "npm-check-updates": "^16.3.16",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-scripts": "5.0.1",
     "typescript": "~4.8.4",
-    "web-vitals": "^3.0.3"
+    "web-vitals": "^3.0.4"
   },
   "scripts": {
     "clean": "rm -rf node_modules && npm cache clean --force",
@@ -27,6 +27,7 @@
     "link.lib": "npm link mui-status && npm ls mui-status",
     "#MUI": "",
     "linkMuiCore": "cd node_modules/@mui/material && npm link",
+    "linkMuiSystem": "cd node_modules/@mui/system && npm link",
     "linkMuiIcons": "cd node_modules/@mui/icons-material && npm link",
     "linkMuiStyles": "cd node_modules/@mui/styles && npm link",
     "linkMuiEngine": "cd node_modules/@mui/styled-engine && npm link",
@@ -36,8 +37,8 @@
     "#ReactDom": "reactDom",
     "linkReactDom": "cd node_modules/react-dom && npm link",
     "linkReactDomTypes": "cd node_modules/\\@types/react-dom && npm link",
-    "prestart": "npm run linkMuiCore && npm run linkMuiIcons && npm run linkReact && npm run linkReactDom && npm run link.lib",
-    "start": "react-scripts start",
+    "prestart": "npm run linkMuiCore && npm run linkMuiSystem && npm run linkMuiIcons && npm run linkReact && npm run linkReactDom && npm run link.lib",
+    "start": "PORT=3005 react-scripts start",
     "update": "npx ncu -u",
     "build": "react-scripts build",
     "test": "react-scripts test"
@@ -61,6 +62,6 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^7.4.0"
+    "concurrently": "^7.5.0"
   }
 }

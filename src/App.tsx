@@ -10,8 +10,9 @@ import PersonIcon from '@mui/icons-material/Person'
 import SmartToyIcon from '@mui/icons-material/SmartToy'
 import TextFieldsIcon from '@mui/icons-material/TextFields'
 import WarningIcon from '@mui/icons-material/Warning'
-import { Box, MenuItem, MenuList, Snackbar, Tooltip, Typography } from '@mui/material'
-import { MuiStatus, MuiStatusChild, MuiStatusPanel, MuiStatusProvider } from 'mui-status'
+import { Box, LinearProgress, Typography } from '@mui/material'
+import { Theme } from '@mui/system'
+import { Status, StatusConsole, StatusHelper, StatusPanel, StatusProvider } from 'mui-status'
 import { createRef, SyntheticEvent, useState } from 'react'
 import './App.css'
 
@@ -28,6 +29,7 @@ function App() {
   const selectionRef = createRef<any>()
   const [selectedText, setSelectedText] = useState('')
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
+  const [progress, setProgress] = useState(0)
 
   const [open, setOpen] = useState(false)
 
@@ -35,103 +37,203 @@ function App() {
     setOpen(true)
   }
 
-  return <>
-    <MuiStatusProvider
-      debug
-      position="bottom"
-      tooltipComponent={(tooltip: any, component: any) =>
-        <Tooltip arrow title={<Typography variant='caption'>{tooltip}</Typography>}>
-          {component}
-        </Tooltip>}
-    >
-      <MuiStatus {...{ id: 'avatarStatus', style: { minWidth: '48px' }, tooltip: 'Avatar user' }}>
-        <MuiStatusChild mask image='https://picsum.photos/32/32' />
-      </MuiStatus>
+  const generateTooltip = () => {
 
-      <MuiStatusPanel id="menu" tooltip={'test'} popover={<MenuList id="menu-list-grow" onKeyDown={() => { }}>
-        <MenuItem onClick={() => { }}>Profile</MenuItem>
-        <MenuItem onClick={() => { }}>My account</MenuItem>
-        <MenuItem onClick={() => { }}>Logout</MenuItem>
-      </MenuList>}>
-        <MuiStatusChild icon={<ListAltIcon />} text="Menu" />
-      </MuiStatusPanel>
-
-      <MuiStatusPanel id="infoSection" tooltip={'Iframe'} popover={<div style={{ width: '500px', height: '650px' }}>
-        <iframe
-          style={{ width: '100%', height: '100%', border: '0px none' }}
-          src="https://v4.mui.com/components/material-icons/#material-icons"
-        />
-      </div>}>
-        <MuiStatusChild icon={<ListAltIcon />} text="Iframe" />
-      </MuiStatusPanel>
-
-      <MuiStatus id="selectedText" highlight={selectedText.length > 10 ? 'secondary' : 'primary'}  tooltip={selectedText}>
-        {selectedText.length > 0 && <MuiStatusChild
-          icon={<CodeIcon />}
-          text={`${selectedText.length > 0 ? `${selectedText.substring(0, 10)}...` : selectedText} (${String(selectedText.length)})`} />}
-      </MuiStatus>
-      <MuiStatus id="selectionRange">
-        {(selectedText.length > 0 && (selectionIndexes.start !== 0 || selectionIndexes.end !== 0)) &&
-       <MuiStatusChild icon={<TextFieldsIcon />} text={`${selectionIndexes.start}:${selectionIndexes.end}`} />}
-      </MuiStatus>
-
-
-      <MuiStatus id="timeExpired" tooltip="WakaTime: Today's coding time. Click for dashboard">
-        <MuiStatusChild icon={<AccessTimeFilledIcon />} text="2 hrs 32 min" />
-      </MuiStatus>
-
-
-      <MuiStatus id="gitBranch" onClick={handleClick} secondary
-        tooltip={<Box display='flex' flexDirection="column" style={{ width: '300px', padding: '8px' }}>
-          <Box display='flex' alignItems="center" style={{ gap: '8px' }}>
-            <PersonIcon />
-            <Typography style={{ lineHeight: '1' }} variant='subtitle2'>Anonymous User</Typography>
-          </Box>
-          <Box display='flex' alignItems="center" style={{ gap: '8px', padding: '8px 0px' }}>
-            <Typography variant='caption'>Sample commit message (2 seconds ago) |</Typography>
-            <FileCopyIcon style={{ fontSize: 16 }} />
-          </Box>
-          <Typography
-            style={{
-              borderTop: '1px solid #888',
-              paddingTop: '8px',
-              marginTop: '8px',
-            }}
-            color="action"
-            variant='caption'
-          >
+    return <Box display='flex' flexDirection="column" style={{ width: '300px', padding: '8px' }}>
+      <Box display='flex' alignItems="center" style={{ gap: '8px' }}>
+        <PersonIcon />
+        <Typography style={{ lineHeight: '1' }} variant='subtitle2'>Anonymous User</Typography>
+      </Box>
+      <Box display='flex' alignItems="center" style={{ gap: '8px', padding: '8px 0px' }}>
+        <Typography variant='caption'>Sample commit message (2 seconds ago) |</Typography>
+        <FileCopyIcon style={{ fontSize: 16 }} />
+      </Box>
+      <Typography
+        style={{
+          borderTop: '1px solid #888',
+          paddingTop: '8px',
+          marginTop: '8px',
+        }}
+        color="action"
+        variant='caption'
+      >
               Click to show commit
-          </Typography>
-        </Box>}>
-        <MuiStatusChild icon={<LinearScaleIcon />} text="You, 7 seconds ago" />
-      </MuiStatus>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        message="Note archived"
-      />
+      </Typography>
+      <Box display='flex' alignItems="center" style={{ gap: '8px' }}>
+        <PersonIcon />
+        <Typography style={{ lineHeight: '1' }} variant='subtitle2'>Anonymous User</Typography>
+      </Box>
+      <Box display='flex' alignItems="center" style={{ gap: '8px', padding: '8px 0px' }}>
+        <Typography variant='caption'>Sample commit message (2 seconds ago) |</Typography>
+        <FileCopyIcon style={{ fontSize: 16 }} />
+      </Box>
+      <Typography
+        style={{
+          borderTop: '1px solid #888',
+          paddingTop: '8px',
+          marginTop: '8px',
+        }}
+        color="action"
+        variant='caption'
+      >
+              Click to show commit
+      </Typography>
+      <Box display='flex' alignItems="center" style={{ gap: '8px' }}>
+        <PersonIcon />
+        <Typography style={{ lineHeight: '1' }} variant='subtitle2'>Anonymous User</Typography>
+      </Box>
+      <Box display='flex' alignItems="center" style={{ gap: '8px', padding: '8px 0px' }}>
+        <Typography variant='caption'>Sample commit message (2 seconds ago) |</Typography>
+        <FileCopyIcon style={{ fontSize: 16 }} />
+      </Box>
+      <Typography
+        style={{
+          borderTop: '1px solid #888',
+          paddingTop: '8px',
+          marginTop: '8px',
+        }}
+        color="action"
+        variant='caption'
+      >
+              Click to show commit
+      </Typography>
+    </Box>
 
 
-      <MuiStatus id="lineColumn" secondary tooltip="GoTo Line:Column">
-        <MuiStatusChild text="Ln 63, Col 38" />
-      </MuiStatus>
-      <MuiStatus id="spaces" secondary tooltip="Pagination spacing strategy">
-        <MuiStatusChild text="Spaces: 2" />
-      </MuiStatus>
 
-      <MuiStatus id="errors" secondary highlight='secondary'
+  }
+
+  return <>
+    <StatusProvider
+      debug
+      // chipComponent={(...props: ChipProps)  => <Chip {...props} />}
+      // typographyComponent={(props: any, children: any) => <Typography {...props}>{children}</Typography>}
+      hasLock={true}
+      position="bottom"
+    >
+
+      {/* // visual tests */}
+
+      <Status id="tooltipAndText" tooltip={generateTooltip()}>
+        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text" />
+      </Status>
+
+      <Status id="tooltipAndText2Status" tooltip={generateTooltip()}>
+        <StatusHelper icon={<ListAltIcon />} notifications="3/2" text="text" />
+        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text" />
+      </Status>
+
+      <Status id="tooltipAndText3Status" tooltip={generateTooltip()}>
+        <ListAltIcon />
+        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text" />
+      </Status>
+
+      <Status id="tooltipAndText4Status" tooltip={generateTooltip()}>
+        <LinearProgress variant="determinate" value={44} />
+        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text" />
+      </Status>
+
+      <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
+        <StatusHelper icon={<ListAltIcon />} notifications="pri" text="primary" />
+      </Status>
+
+      <Status id="tooltipAndTextSecondary" tooltip="secondary" highlight='secondary'>
+        <StatusHelper icon={<ListAltIcon />} notifications="sec" text="secondary" />
+      </Status>
+
+      <Status id="tooltipAndTextClick" tooltip={generateTooltip()} onClick={() => {}}>
+        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text Click" />
+      </Status>
+
+      <Status id="tooltipAndTextPrimaryClick" tooltip="primary Click" highlight='primary'
+        onClick={() => {}}>
+        <StatusHelper icon={<ListAltIcon />} notifications="pri" text="primary" />
+      </Status>
+
+      <Status id="tooltipAndTextSecondaryClick" tooltip="secondary Click" highlight='secondary'
+        onClick={() => {}}>
+        <StatusHelper icon={<ListAltIcon />} notifications="sec" text="secondary" />
+      </Status>
+
+      <StatusConsole
+        tooltip="Iframe Material UI"
+        consoleTitle="Image List"
+        id="infoSectionConsole"
+        // popoverTitle="Iframe Material UI"
+        console={<iframe
+          style={{ width: '100%', height: '100%', border: '0px none' }}
+          src="https://v4.mui.com/components/image-list/"
+        />}>
+        <StatusHelper icon={<ListAltIcon />} notifications="sec" text="secondary" />
+      </StatusConsole>
+
+      <StatusPanel
+        id="infoSection"
+        popoverTitle="Iframe Material UI"
+        tooltip={'Iframe'}
+        popover={<div style={{ width: '500px', height: '650px' }}
+        >
+          <iframe
+            style={{ width: '100%', height: '100%', border: '0px none' }}
+            src="https://v4.mui.com/components/material-icons/#material-icons"
+          />
+        </div>}>
+        <StatusHelper notifications={1} icon={<ListAltIcon />} text="Iframe" />
+      </StatusPanel>
+
+
+      {/* // visual tests END */}
+
+
+
+      {/*
+
+      <Status id="tooltipAndText" secondary tooltip="GoTo Line:Column">
+        <StatusHelper text="Ln 63, Col 38" />
+      </Status>
+      <Status id="tooltipAndText" secondary tooltip="GoTo Line:Column">
+        <StatusHelper text="Ln 63, Col 38" />
+      </Status> */}
+
+
+
+
+
+
+
+
+
+      {/* <Status id="lineColumn" secondary tooltip="GoTo Line:Column">
+        <StatusHelper text="Ln 63, Col 38" />
+      </Status>
+
+      <Status id="spaces" secondary tooltip="Pagination spacing strategy">
+        <StatusHelper text="Spaces: 2" />
+      </Status>
+
+      <Status id="errors" secondary highlight='secondary'
         tooltip="Show error log">
-        <MuiStatusChild icon={<WarningIcon />} text="Errors: 24" />
-      </MuiStatus>
+        <StatusHelper icon={<WarningIcon />}  notifications={24}
+          text="Errors" />
+      </Status>
+      <Status id="errors2" secondary highlight='secondary'
+        tooltip="Show error log">
+        <StatusHelper icon={<WarningIcon />}  notifications={'FOO'}
+          text="Errors" />
+      </Status>
 
-      <MuiStatus id="copilot" secondary tooltip="Toggle copilot status">
-        <MuiStatusChild icon={<SmartToyIcon />} />
-      </MuiStatus>
-      <MuiStatus id="notifications" secondary tooltip="Notifications">
-        <MuiStatusChild icon={<NotificationsIcon />}  />
-      </MuiStatus>
+      <Status id="copilot" secondary tooltip="Toggle copilot status">
+        <StatusHelper icon={<SmartToyIcon />} />
+      </Status>
 
-      <div style={{ display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center' }}>
+      <Status id="notifications" secondary tooltip="Notifications">
+        <StatusHelper icon={<NotificationsIcon />} text='Console' />
+      </Status> */}
+
+      <div style={{
+        display: 'flex',
+        // background: 'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)',
+        justifyContent: 'center', height: '100%', alignItems: 'center' }}>
         <div style={{ flex: '0 0 50%' }}>
           <textarea onMouseUp={() => {
             let textVal = selectionRef.current
@@ -144,7 +246,7 @@ function App() {
           defaultValue={text.trim()} />
         </div>
       </div>
-    </MuiStatusProvider>
+    </StatusProvider>
   </>
 }
 
