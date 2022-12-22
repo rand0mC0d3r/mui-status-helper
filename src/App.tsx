@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
+import CloudSyncOutlinedIcon from '@mui/icons-material/CloudSyncOutlined'
 import CodeIcon from '@mui/icons-material/Code'
 import FileCopyIcon from '@mui/icons-material/FileCopy'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
@@ -8,6 +9,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import PersonIcon from '@mui/icons-material/Person'
 import SmartToyIcon from '@mui/icons-material/SmartToy'
+import StorageIcon from '@mui/icons-material/Storage'
 import TextFieldsIcon from '@mui/icons-material/TextFields'
 import WarningIcon from '@mui/icons-material/Warning'
 import { Box, LinearProgress, Typography } from '@mui/material'
@@ -105,32 +107,31 @@ function App() {
 
   return <>
     <StatusProvider
-      debug
-      // chipComponent={(...props: ChipProps)  => <Chip {...props} />}
-      // typographyComponent={(props: any, children: any) => <Typography {...props}>{children}</Typography>}
+      // debug
       hasLock={true}
-      position="bottom"
+      position="top"
     >
-
-      {/* // visual tests */}
-
-      <Status id="tooltipAndText" tooltip={generateTooltip()}>
-        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text" />
+      <Status id="tooltipAndText" >
+        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text noTT" />
       </Status>
 
-      <Status id="tooltipAndText2Status" tooltip={generateTooltip()}>
-        <StatusHelper icon={<ListAltIcon />} notifications="3/2" text="text" />
-        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text" />
+      <Status id="tooltipAndText2Status" onClick={() => {}} tooltip={generateTooltip()}>
+
+        <StatusHelper icon={<StorageIcon />} notifications="ON" />
+        <StatusHelper icon={<CloudSyncOutlinedIcon />} notifications="ON" />
+        <StatusHelper text="Sync 28 files" />
       </Status>
 
-      <Status id="tooltipAndText3Status" tooltip={generateTooltip()}>
-        <ListAltIcon />
+      <Status id="tooltipAndText3Status" onClick={() => {}} tooltip={generateTooltip()}>
+        <ListAltIcon  />
         <StatusHelper icon={<ListAltIcon />} notifications="text" text="text" />
       </Status>
 
       <Status id="tooltipAndText4Status" tooltip={generateTooltip()}>
-        <LinearProgress variant="determinate" value={44} />
-        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text" />
+        <StatusHelper childrenIndex={3} icon={<ListAltIcon />} notifications="text"
+          text="progress">
+          <LinearProgress style={{ width: '60px', height: '12px' }} />
+        </StatusHelper>
       </Status>
 
       <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
