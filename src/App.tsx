@@ -1,20 +1,25 @@
 /* eslint-disable no-unused-vars */
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
+import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import CloudSyncOutlinedIcon from '@mui/icons-material/CloudSyncOutlined'
 import CodeIcon from '@mui/icons-material/Code'
+import CompareArrowsOutlinedIcon from '@mui/icons-material/CompareArrowsOutlined'
+import FaceIcon from '@mui/icons-material/Face'
 import FileCopyIcon from '@mui/icons-material/FileCopy'
+import GridViewIcon from '@mui/icons-material/GridView'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import LinearScaleIcon from '@mui/icons-material/LinearScale'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import PersonIcon from '@mui/icons-material/Person'
+import ReplayIcon from '@mui/icons-material/Replay'
 import SmartToyIcon from '@mui/icons-material/SmartToy'
 import StorageIcon from '@mui/icons-material/Storage'
 import TextFieldsIcon from '@mui/icons-material/TextFields'
 import WarningIcon from '@mui/icons-material/Warning'
-import { Box, LinearProgress, Typography } from '@mui/material'
+import { Box, Button, LinearProgress, Typography } from '@mui/material'
 import { Theme } from '@mui/system'
-import { Status, StatusConsole, StatusHelper, StatusPanel, StatusProvider } from 'mui-status'
+import { Status, StatusConsole, StatusHelper, StatusNotifications, StatusPanel, StatusProvider, StatusSnackbar } from 'mui-status'
 import { createRef, SyntheticEvent, useState } from 'react'
 import './App.css'
 
@@ -107,39 +112,44 @@ function App() {
 
   return <>
     <StatusProvider
-      // debug
+      debug
       hasLock={true}
-      position="top"
+      position="bottom"
     >
-      <Status id="tooltipAndText" >
-        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text noTT" />
+      <Status endSeparator id="tooltipAndText" onClick={() => {}}>
+        <StatusHelper  icon={<GridViewIcon />} text="Menu" />
+      </Status>
+      <Status id="tooltipAndText" onClick={() => {}}>
+        <StatusHelper icon={<CompareArrowsOutlinedIcon />} notifications="ersE"
+          text="Rev"
+          reverse />
       </Status>
 
       <Status id="tooltipAndText2Status" onClick={() => {}} tooltip={generateTooltip()}>
-
         <StatusHelper icon={<StorageIcon />} notifications="ON" />
         <StatusHelper icon={<CloudSyncOutlinedIcon />} notifications="ON" />
         <StatusHelper text="Sync 28 files" />
       </Status>
 
       <Status id="tooltipAndText3Status" onClick={() => {}} tooltip={generateTooltip()}>
-        <ListAltIcon  />
-        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text" />
+        <StatusHelper icon={<ChatBubbleOutlineOutlinedIcon />}
+          notifications="BIG"
+          text="Tooltip" />
       </Status>
 
-      <Status id="tooltipAndText4Status" tooltip={generateTooltip()}>
+      {/* <Status id="tooltipAndText4Status" tooltip={generateTooltip()}>
         <StatusHelper childrenIndex={3} icon={<ListAltIcon />} notifications="text"
           text="progress">
           <LinearProgress style={{ width: '60px', height: '12px' }} />
         </StatusHelper>
-      </Status>
+      </Status> */}
 
       <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
-        <StatusHelper icon={<ListAltIcon />} notifications="pri" text="primary" />
+        <StatusHelper icon={<ListAltIcon />} notifications="0" text="p" />
       </Status>
 
       <Status id="tooltipAndTextSecondary" tooltip="secondary" highlight='secondary'>
-        <StatusHelper icon={<ListAltIcon />} notifications="sec" text="secondary" />
+        <StatusHelper icon={<ListAltIcon />} notifications="0" text="s" />
       </Status>
 
       <Status id="tooltipAndTextClick" tooltip={generateTooltip()} onClick={() => {}}>
@@ -151,7 +161,8 @@ function App() {
         <StatusHelper icon={<ListAltIcon />} notifications="pri" text="primary" />
       </Status>
 
-      <Status id="tooltipAndTextSecondaryClick" tooltip="secondary Click" highlight='secondary'
+      <Status secondary id="tooltipAndTextSecondaryClick" tooltip="secondary Click"
+        highlight='secondary'
         onClick={() => {}}>
         <StatusHelper icon={<ListAltIcon />} notifications="sec" text="secondary" />
       </Status>
@@ -182,6 +193,44 @@ function App() {
         <StatusHelper notifications={1} icon={<ListAltIcon />} text="Iframe" />
       </StatusPanel>
 
+
+      <StatusNotifications />
+
+
+
+
+      <StatusSnackbar message='test' source="AutoFixer"
+        severity='info' />
+      <StatusSnackbar message='test' code='lorem ipsum' source="AutoFixer"
+        severity='success'
+        actions={[
+          <Button>Slack it</Button>,
+          <Button color="inherit">Post to Jira</Button>,
+        ]
+
+        }/>
+      <StatusSnackbar message={[
+        'ncus ex, quis dictum nunc massa vitae risus.',
+        'Mauris sed velit pulvinar, convallis lacus non, egestas',
+        'orci. Mauris pellentesque at metus et pharetra.',
+        'Nam imperdiet ipsum vitae massa vestibulum varius. Nu'].join('')} code="demo" severity='warning' />
+      <StatusSnackbar message='Unfortunately the image cannot be saved' actions={[
+        <Button>Create ticket</Button>,
+      ]} severity='error'
+      code={`react-jsx-runtime.development.js:117 Warning: Each child in a list should have a unique "key" prop.
+
+Check the render method of. See https://reactjs.org/link/warning-keys for more information.
+    at __WEBPACK_DEFAULT_EXPORT__ (http://localhost:3005/static/js/bundle.js:61233:21)
+    at div
+    at http://localhost:3005/static/js/bundle.js:1552:66
+    at __WEBPACK_DEFAULT_EXPORT__ (http://localhost:3005/static/js/bundle.js:61723:67)
+    at div
+    at http://localhost:3005/static/js/bundle.js:1552:66
+    at div
+    at http://localhost:3005/static/js/bundle.js:1552:66
+    at __WEBPACK_DEFAULT_EXPORT__ (http://localhost:3005/static/js/bundle.js:62011:21)
+    at StatusProvider (http://localhost:3005/static/js/bundle.js:60670:19)
+    at App (http://localhost:3005/static/js/bundle.js:54:90)`} />
 
       {/* // visual tests END */}
 
@@ -232,20 +281,28 @@ function App() {
       </Status> */}
 
       <div style={{
+        alignSelf: 'center',
         display: 'flex',
-        // background: 'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)',
-        justifyContent: 'center', height: '100%', alignItems: 'center' }}>
-        <div style={{ flex: '0 0 50%' }}>
-          <textarea onMouseUp={() => {
-            let textVal = selectionRef.current
-            let cursorStart = textVal.selectionStart
-            let cursorEnd = textVal.selectionEnd
-            let selectedText = text.substring(cursorStart,cursorEnd)
-            setSelectionIndexes({ start: cursorStart, end: cursorEnd })
-            setSelectedText(selectedText)
-          }} ref={selectionRef} style={{ width: '100%', height: '400px' }}
-          defaultValue={text.trim()} />
-        </div>
+        flexDirection: 'column',
+        justifyContent: 'center',
+        width: '80%',
+        height: '100%',
+        gap: '16px',
+        alignItems: 'center'
+      }}>
+        <Button onClick={() => window.location.reload()} variant='contained' color="primary"
+          fullWidth>
+          <ReplayIcon /> Reload
+        </Button>
+        <textarea onMouseUp={() => {
+          let textVal = selectionRef.current
+          let cursorStart = textVal.selectionStart
+          let cursorEnd = textVal.selectionEnd
+          let selectedText = text.substring(cursorStart,cursorEnd)
+          setSelectionIndexes({ start: cursorStart, end: cursorEnd })
+          setSelectedText(selectedText)
+        }} ref={selectionRef} style={{ width: '100%', height: '400px' }}
+        defaultValue={text.trim()} />
       </div>
     </StatusProvider>
   </>
