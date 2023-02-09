@@ -41,10 +41,24 @@ export default function ({
     return () => clearInterval(interval)
   }, [requests])
 
+  const generateHeader = (title: string) => {
+    return <Typography
+      variant="subtitle2"
+      style={{
+        borderBottom: '1px solid',
+        paddingBottom: '4px',
+        marginBottom: '4px',
+      }}
+    >
+      {title}
+    </Typography>
+  }
+
   return <>
     <Status id="tooltipAndText2Status"
+      secondary
       tooltip={<Box display='flex' flexDirection="column">
-        <Typography variant="subtitle2">Connection details status</Typography>
+        {generateHeader('Connection details status')}
         <Typography variant="caption">Average speed: {Math.round(details.download / 1000 * 100) / 1000} MB/s</Typography>
         <Typography variant="caption">Data transmitted: {Math.round(details.size / 1000)} KB</Typography>
         <Typography variant="caption">Files downloaded: {requests.length}</Typography>

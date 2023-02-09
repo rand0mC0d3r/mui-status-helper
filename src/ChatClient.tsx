@@ -57,7 +57,7 @@ export default function () {
           style={{ padding: '8px' }}
         >
           <Box display='flex'  flexDirection='row' style={{ gap: '8px', padding: '0px' }}>
-            {users.map(avatar => <Avatar style={avatar === user ? { backgroundColor: '#888' } : {}} variant="rounded">
+            {users.map(avatar => <Avatar key={avatar} style={avatar === user ? { backgroundColor: '#888' } : {}} variant="rounded">
               {avatar}
             </Avatar>)}
           </Box>

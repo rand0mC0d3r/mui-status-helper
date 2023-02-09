@@ -1,50 +1,21 @@
 /* eslint-disable no-unused-vars */
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled'
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined'
-import Cloud from '@mui/icons-material/Cloud'
-import CloudSyncOutlinedIcon from '@mui/icons-material/CloudSyncOutlined'
-import CodeIcon from '@mui/icons-material/Code'
-import CompareArrowsOutlinedIcon from '@mui/icons-material/CompareArrowsOutlined'
-import ContentCopy from '@mui/icons-material/ContentCopy'
-import ContentCut from '@mui/icons-material/ContentCut'
-import ContentPaste from '@mui/icons-material/ContentPaste'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import DeveloperBoardIcon from '@mui/icons-material/DeveloperBoard'
-import FaceIcon from '@mui/icons-material/Face'
 import FileCopyIcon from '@mui/icons-material/FileCopy'
-import GridViewIcon from '@mui/icons-material/GridView'
 import KeyboardIcon from '@mui/icons-material/Keyboard'
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
-import LinearScaleIcon from '@mui/icons-material/LinearScale'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import MemoryIcon from '@mui/icons-material/Memory'
-import NorthOutlinedIcon from '@mui/icons-material/NorthOutlined'
-import NotificationsIcon from '@mui/icons-material/Notifications'
 import PersonIcon from '@mui/icons-material/Person'
 import PlusOneIcon from '@mui/icons-material/PlusOne'
-import ReplayIcon from '@mui/icons-material/Replay'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
-import SmartToyIcon from '@mui/icons-material/SmartToy'
-import SouthOutlinedIcon from '@mui/icons-material/SouthOutlined'
-import StorageIcon from '@mui/icons-material/Storage'
-import TextFieldsIcon from '@mui/icons-material/TextFields'
-import WarningIcon from '@mui/icons-material/Warning'
-import { Box, Button, IconButton, LinearProgress, Tooltip, Typography } from '@mui/material'
-import Checkbox from '@mui/material/Checkbox'
-import Divider from '@mui/material/Divider'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import MenuItem from '@mui/material/MenuItem'
-import MenuList from '@mui/material/MenuList'
-import Paper from '@mui/material/Paper'
-import ToggleButton from '@mui/material/ToggleButton'
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import { Theme } from '@mui/system'
+import { Box, Button, IconButton, Tooltip, Typography } from '@mui/material'
 import { Status, StatusConsole, StatusHelper, StatusNotifications, StatusPanel, StatusProvider, StatusSnackbar } from 'mui-status'
 import { ChangeEvent, createRef, MouseEvent, useState } from 'react'
 import './App.css'
 import ChatClient from './ChatClient'
 import ControlPanel from './ControlPanel'
+import MenuPanel from './MenuPanel'
 import NotificationsGenerator from './NotificationsGenerator'
 import SpeedMonitor from './SpeedMonitor'
 
@@ -60,10 +31,13 @@ const text = [
 function App() {
   const selectionRef = createRef<any>()
   const [selectedText, setSelectedText] = useState('')
-  const [width, setWidth] = useState('100%')
+  const [width, setWidth] = useState('90%')
+  const [margin, setMargin] = useState('0px%')
+
   const [position, setPosition] = useState<'top' | 'bottom'>('top')
   const [variant, setVariant] = useState<'default' | 'primary' | 'secondary'>('default')
   const [hasBorder, setHasBorder] = useState(true)
+  const [fullWidth, setFullWidth] = useState(false)
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
   const [progress, setProgress] = useState(0)
 
@@ -125,18 +99,22 @@ function App() {
   return <>
     <StatusProvider
       debug
+      fullWidth={fullWidth}
       hasLock={true}
       hasBorder={hasBorder}
-      style={{ width }}
+      style={{ width, margin }}
       position={position}
+      size="medium"
     >
-      <StatusPanel
+
+      <MenuPanel variant={variant} />
+      {/* <StatusPanel
         variant={variant}
         hasToolbar={false}
         hasDecoration={false}
         endSeparator
         id="menu"
-        tooltip="Menu/Options"
+        tooltip="Menu / Options"
         popover={<MenuList>
           <MenuItem>
             <ListItemIcon>
@@ -175,7 +153,7 @@ function App() {
         </MenuList>}
       >
         <StatusHelper  icon={<GridViewIcon />} text="Menu" />
-      </StatusPanel>
+      </StatusPanel> */}
 
       <Status
         secondary
@@ -188,7 +166,9 @@ function App() {
         ], <>
           {generateCta('Delete item', <DeleteOutlineIcon htmlColor='#FFF' />)}
           {generateCta('Increase quantity', <PlusOneIcon htmlColor='#FFF' />)}
-        </>)} endSeparator>
+        </>)}
+        endSeparator
+      >
         <StatusHelper
           icon={<ShoppingCartOutlinedIcon />}
           notifications="1000+ Euro"
@@ -395,7 +375,7 @@ Check the render method of. See https://reactjs.org/link/warning-keys for more i
         <StatusHelper icon={<NotificationsIcon />} text='Console' />
       </Status> */}
 
-      <ControlPanel {...{ variant, setVariant, width, setWidth, hasBorder, setHasBorder, position, setPosition }} />
+      <ControlPanel {...{ variant, setVariant, fullWidth, setFullWidth, margin, setMargin, width, setWidth, hasBorder, setHasBorder, position, setPosition }} />
     </StatusProvider>
   </>
 }

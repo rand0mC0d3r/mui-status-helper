@@ -22,6 +22,10 @@ const text = [
 export default function ({
   variant,
   setVariant,
+  fullWidth,
+  setFullWidth,
+  margin,
+  setMargin,
   width,
   setWidth,
   hasBorder,
@@ -31,6 +35,10 @@ export default function ({
 } : {
 	variant: string,
 	setVariant: any,
+	fullWidth: boolean,
+	setFullWidth: any,
+	margin: string,
+	setMargin: any,
 	width: string,
 	setWidth: any,
 	hasBorder: boolean,
@@ -118,9 +126,11 @@ export default function ({
         gap: '16px'
       }}>
         {toggleBlock('Border', hasBorder, setHasBorder)}
+        {toggleBlock('FullWidth', fullWidth, setFullWidth)}
         {toggleOptions('Variant', ['default', 'primary', 'secondary'], setVariant, variant)}
         {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
         {toggleOptions('Width', ['75vw', '100%', '60%', '1400px'], setWidth, width)}
+        {toggleOptions('Margin', ['0px', '4px', '16px'], setMargin, margin)}
       </div>
       <div style={{ alignItems: 'center', flexDirection: 'column', display: 'flex', gap: '16px' }}>
         <Button onClick={() => window.location.reload()} variant='contained' color="primary"
