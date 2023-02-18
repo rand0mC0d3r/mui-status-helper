@@ -1,13 +1,10 @@
 /* eslint-disable no-unused-vars */
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
-import CircleNotificationsOutlinedIcon from '@mui/icons-material/CircleNotificationsOutlined'
 import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined'
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
-import SouthOutlinedIcon from '@mui/icons-material/SouthOutlined'
-import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined'
-import { Avatar, Box, Button, IconButton, TextField, Typography } from '@mui/material'
-import { Status, StatusHelper, StatusPanel } from 'mui-status'
-import { useCallback, useEffect, useState } from 'react'
+import { Avatar, Box, Button, TextField } from '@mui/material'
+import { StatusHelper, StatusPanel } from 'mui-status'
+import { Fragment, useEffect, useState } from 'react'
 import './App.css'
 
 export default function () {
@@ -35,6 +32,46 @@ export default function () {
     return () => clearInterval(interval)
   }, [fake])
 
+  const popover = <Box display='flex' alignItems={'stretch'} justifyContent={'space-between'}
+    flexDirection='column'
+    style={{  width: '500px', height: '650px' }}
+  >
+    <Box
+      display='flex'
+      flexDirection='row'
+      justifyContent={'space-between'}
+      style={{ padding: '8px' }}
+    >
+      <Box display='flex'  flexDirection='row' style={{ gap: '8px', padding: '0px' }}>
+        {users.map(avatar => <Avatar key={avatar} style={avatar === user ? { backgroundColor: '#888' } : {}} variant="rounded">
+          {avatar}
+        </Avatar>)}
+      </Box>
+      {/* <Button onClick={() => setFake(!fake)} size="small"
+            variant="outlined" color="primary">
+            <MarkUnreadChatAltOutlinedIcon />
+          </Button> */}
+    </Box>
+    <Box display='flex' flexDirection='column' style={{
+      flex: '1 1 auto',
+      margin: '0px 8px',
+      overflowY: 'auto',
+      color: '#AAA',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: '8px',
+      border: '1px dotted #888'
+    }}>
+					CHAT {user && `with ${user}`}
+    </Box>
+    <Box display='flex' flexDirection={'row'} style={{ padding: '8px', gap: '8px' }}>
+      <TextField variant='outlined' placeholder='Your answer...' fullWidth />
+      <Button variant="outlined" color="primary" endIcon={<SendOutlinedIcon />}>Send</Button>
+    </Box>
+  </Box>
+
+
   return <>
     <StatusPanel
       highlight={notifications !== '' ? 'primary' : 'default'}
@@ -45,46 +82,35 @@ export default function () {
       }}
       id="chatClient"
       popoverTitle="Chats"
+      popoverActions={[
+        {
+          icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
+          title: 'Generate fake chats',
+          onClick: () => setFake(!fake)
+        },
+        {
+          icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
+          title: 'Generate fake chats2',
+          onClick: () => setFake(!fake)
+        },
+        {
+          icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
+          title: 'Generate fake chats3',
+          onClick: () => setFake(!fake)
+        },
+      ]}
       tooltip={tooltip}
-      popover={<Box display='flex' alignItems={'stretch'} justifyContent={'space-between'}
-        flexDirection='column'
-        style={{  width: '500px', height: '650px' }}
-      >
-        <Box
-          display='flex'
-          flexDirection='row'
-          justifyContent={'space-between'}
-          style={{ padding: '8px' }}
-        >
-          <Box display='flex'  flexDirection='row' style={{ gap: '8px', padding: '0px' }}>
-            {users.map(avatar => <Avatar key={avatar} style={avatar === user ? { backgroundColor: '#888' } : {}} variant="rounded">
-              {avatar}
-            </Avatar>)}
-          </Box>
-          <Button onClick={() => setFake(!fake)} size="small"
-            variant="outlined" color="primary">
-            <MarkUnreadChatAltOutlinedIcon />
-          </Button>
-        </Box>
-        <Box display='flex' flexDirection='column' style={{
-          flex: '1 1 auto',
-          margin: '0px 8px',
-          overflowY: 'auto',
-          color: '#AAA',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: '8px',
-          border: '1px dotted #888'
-        }}>
-					CHAT {user && `with ${user}`}
-        </Box>
-        <Box display='flex' flexDirection={'row'} style={{ padding: '8px', gap: '8px' }}>
-          <TextField variant='outlined' placeholder='Your answer...' fullWidth />
-          <Button variant="outlined" color="primary" endIcon={<SendOutlinedIcon />}>Send</Button>
-        </Box>
-      </Box>}>
-      <StatusHelper notifications={notifications} icon={<ChatOutlinedIcon />} text="Chat" />
+      popover={popover}>
+      <StatusHelper {...{ notifications }}
+        icon={<ChatOutlinedIcon />}
+        childrenIndex = {5}
+        text="Chats" >
+        <Fragment>
+          <StatusHelper mask image={'https://avatars.githubusercontent.com/u/79695292?v=4'}/>
+          <StatusHelper mask image={'https://avatars.githubusercontent.com/u/11871180?v=4'}/>
+          <StatusHelper mask image={'https://avatars.githubusercontent.com/u/11874180?v=4'}/>
+        </Fragment>
+      </StatusHelper>
     </StatusPanel>
   </>
 

@@ -10,15 +10,9 @@ import ListItemText from '@mui/material/ListItemText'
 import { StatusHelper, StatusPanel } from 'mui-status'
 import './App.css'
 
-export default function ({
-  variant,
-} : {
-	variant: 'default' | 'primary' | 'secondary'
-}) {
-
+export default function () {
   return <>
     <StatusPanel
-      variant={variant}
       hasToolbar={false}
       hasDecoration={false}
       endSeparator

@@ -106,16 +106,17 @@ export default function ({
   }
 
   return <>
-    <div style={{
-      alignSelf: 'center',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      width: '80%',
-      height: '100%',
-      gap: '16px',
-      alignItems: 'center'
-    }}>
+    <div
+      style={{
+        alignSelf: 'center',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: '80%',
+        height: '100%',
+        gap: '16px',
+        alignItems: 'center'
+      }}>
       <div style={{
         alignItems: 'stretch',
         flexDirection: 'column',
@@ -127,7 +128,7 @@ export default function ({
       }}>
         {toggleBlock('Border', hasBorder, setHasBorder)}
         {toggleBlock('FullWidth', fullWidth, setFullWidth)}
-        {toggleOptions('Variant', ['default', 'primary', 'secondary'], setVariant, variant)}
+        {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}
         {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
         {toggleOptions('Width', ['75vw', '100%', '60%', '1400px'], setWidth, width)}
         {toggleOptions('Margin', ['0px', '4px', '16px'], setMargin, margin)}

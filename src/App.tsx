@@ -6,11 +6,12 @@ import FileCopyIcon from '@mui/icons-material/FileCopy'
 import KeyboardIcon from '@mui/icons-material/Keyboard'
 import ListAltIcon from '@mui/icons-material/ListAlt'
 import MemoryIcon from '@mui/icons-material/Memory'
+import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined'
 import PersonIcon from '@mui/icons-material/Person'
 import PlusOneIcon from '@mui/icons-material/PlusOne'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { Box, Button, IconButton, Tooltip, Typography } from '@mui/material'
-import { Status, StatusConsole, StatusHelper, StatusNotifications, StatusPanel, StatusProvider, StatusSnackbar } from 'mui-status'
+import { IndustrialProvider, Status, StatusConsole, StatusHelper, StatusNotifications, StatusPanel, StatusSnackbar } from 'mui-industrial'
 import { ChangeEvent, createRef, MouseEvent, useState } from 'react'
 import './App.css'
 import ChatClient from './ChatClient'
@@ -31,11 +32,11 @@ const text = [
 function App() {
   const selectionRef = createRef<any>()
   const [selectedText, setSelectedText] = useState('')
-  const [width, setWidth] = useState('90%')
+  const [width, setWidth] = useState('70%')
   const [margin, setMargin] = useState('0px%')
 
   const [position, setPosition] = useState<'top' | 'bottom'>('top')
-  const [variant, setVariant] = useState<'default' | 'primary' | 'secondary'>('default')
+  const [variant, setVariant] = useState<'default' | 'outlined'>('default')
   const [hasBorder, setHasBorder] = useState(true)
   const [fullWidth, setFullWidth] = useState(false)
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
@@ -97,7 +98,7 @@ function App() {
   }
 
   return <>
-    <StatusProvider
+    <IndustrialProvider
       debug
       fullWidth={fullWidth}
       hasLock={true}
@@ -105,9 +106,10 @@ function App() {
       style={{ width, margin }}
       position={position}
       size="medium"
+      variant={variant}
     >
 
-      <MenuPanel variant={variant} />
+      <MenuPanel />
       {/* <StatusPanel
         variant={variant}
         hasToolbar={false}
@@ -155,35 +157,6 @@ function App() {
         <StatusHelper  icon={<GridViewIcon />} text="Menu" />
       </StatusPanel> */}
 
-      <Status
-        secondary
-        id="tooltipAndText"
-        tooltip={generateTooltip([
-          { title: 'GeForce 4090 RTX', icon: <DeveloperBoardIcon/>, subtitle: '12 GB GDDR5, 493 Euro' },
-          { title: 'AMD 7900X3D', icon: <DeveloperBoardIcon/>, subtitle: '36 cores, 943 Euro' },
-          { title: 'Phoenix RAM DDR5', icon: <MemoryIcon/>, subtitle: '24GB (6 x 4GB), 236 Euro' },
-          { title: 'Keyboard Corsair', icon: <KeyboardIcon/>, subtitle: 'Rainbow lights, 69 Euro' }
-        ], <>
-          {generateCta('Delete item', <DeleteOutlineIcon htmlColor='#FFF' />)}
-          {generateCta('Increase quantity', <PlusOneIcon htmlColor='#FFF' />)}
-        </>)}
-        endSeparator
-      >
-        <StatusHelper
-          icon={<ShoppingCartOutlinedIcon />}
-          notifications="1000+ Euro"
-          text="4 items"
-          reverse />
-      </Status>
-
-      <SpeedMonitor />
-
-      <Status id="tooltipAndText3Status">
-        <StatusHelper icon={<ChatBubbleOutlineOutlinedIcon />}
-          notifications="Sample"
-          text="Foo/Bar" />
-      </Status>
-
       {/* <Status id="tooltipAndText4Status" tooltip={generateTooltip()}>
         <StatusHelper childrenIndex={3} icon={<ListAltIcon />} notifications="text"
           text="progress">
@@ -218,7 +191,7 @@ function App() {
 
       <NotificationsGenerator />
 
-      <StatusConsole
+      {/* <StatusConsole
         tooltip="Iframe Material UI"
         consoleTitle="Image List"
         id="infoSectionConsole"
@@ -228,7 +201,7 @@ function App() {
           src="https://v4.mui.com/components/image-list/"
         />}>
         <StatusHelper icon={<ListAltIcon />} text="Console" />
-      </StatusConsole>
+      </StatusConsole> */}
 
       <StatusConsole
         tooltip="Iframe Material UI"
@@ -239,15 +212,15 @@ function App() {
           style={{ width: '100%', height: '100%', border: '0px none' }}
           src="https://mui.com/material-ui/customization/color/"
         />}>
-        <StatusHelper icon={<ListAltIcon />} text="Console V5" />
+        <StatusHelper icon={<ListAltIcon />} text="MUI5 Console" />
       </StatusConsole>
 
       <StatusPanel
-        variant={variant}
         secondary
-        id="infoSection"
-        popoverTitle="Iframe Material UI"
-        tooltip={'Iframe'}
+        onClick={() => {}}
+        id="materialdV4"
+        popoverTitle="Search Icons on Material UI v4"
+        tooltip={'Search Icons on Material UI v4'}
         popover={<div style={{ width: '500px', height: '650px' }}
         >
           <iframe
@@ -255,13 +228,15 @@ function App() {
             src="https://v4.mui.com/components/material-icons/#material-icons"
           />
         </div>}>
-        <StatusHelper notifications={1} icon={<ListAltIcon />} text="Iframe" />
+        <StatusHelper notifications='v4' icon={<MenuBookOutlinedIcon />} text="Material UI" />
       </StatusPanel>
 
 
-      <StatusNotifications variant={variant} />
+      <StatusNotifications />
 
 
+
+      <SpeedMonitor />
 
       {/*
       <StatusSnackbar message='test' source="AutoFixer"
@@ -376,7 +351,7 @@ Check the render method of. See https://reactjs.org/link/warning-keys for more i
       </Status> */}
 
       <ControlPanel {...{ variant, setVariant, fullWidth, setFullWidth, margin, setMargin, width, setWidth, hasBorder, setHasBorder, position, setPosition }} />
-    </StatusProvider>
+    </IndustrialProvider>
   </>
 }
 
