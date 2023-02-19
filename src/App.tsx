@@ -193,7 +193,7 @@ function App() {
 
       <ChatClient />
 
-      {/* <NotificationsGenerator /> */}
+      <NotificationsGenerator />
 
       <Status
         tooltip="Material-UI Image List Component"
@@ -243,7 +243,7 @@ function App() {
       </StatusPanel> */}
 
 
-      <StatusNotifications />
+      {/* <StatusNotifications /> */}
 
 
 
@@ -280,38 +280,6 @@ function App() {
         ]
 
         }/> */}
-      <StatusSnackbar message='test' source="AutoFixer" onClick={() => { console.log('triggered')}}
-        severity='info' />
-      <StatusSnackbar message='test' code='lorem ipsum' source="AutoFixer"
-        severity='success'
-        actions={[
-          <Button>Slack it</Button>,
-          <Button color="inherit">Post to Jira</Button>,
-        ]
-
-        }/>
-      <StatusSnackbar message={[
-        'ncus ex, quis dictum nunc massa vitae risus.',
-        'Mauris sed velit pulvinar, convallis lacus non, egestas',
-        'orci. Mauris pellentesque at metus et pharetra.',
-        'Nam imperdiet ipsum vitae massa vestibulum varius. Nu'].join('')} code="demo" severity='warning' />
-      <StatusSnackbar message='Unfortunately the image cannot be saved' actions={[
-        <Button>Create ticket</Button>,
-      ]} severity='error'
-      code={`react-jsx-runtime.development.js:117 Warning: Each child in a list should have a unique "key" prop.
-
-Check the render method of. See https://reactjs.org/link/warning-keys for more information.
-    at __WEBPACK_DEFAULT_EXPORT__ (http://localhost:3005/static/js/bundle.js:61233:21)
-    at div
-    at http://localhost:3005/static/js/bundle.js:1552:66
-    at __WEBPACK_DEFAULT_EXPORT__ (http://localhost:3005/static/js/bundle.js:61723:67)
-    at div
-    at http://localhost:3005/static/js/bundle.js:1552:66
-    at div
-    at http://localhost:3005/static/js/bundle.js:1552:66
-    at __WEBPACK_DEFAULT_EXPORT__ (http://localhost:3005/static/js/bundle.js:62011:21)
-    at StatusProvider (http://localhost:3005/static/js/bundle.js:60670:19)
-    at App (http://localhost:3005/static/js/bundle.js:54:90)`} />
 
       {/* // visual tests END */}
 

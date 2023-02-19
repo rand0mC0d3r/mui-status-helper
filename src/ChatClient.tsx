@@ -4,7 +4,7 @@ import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAlt
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import { Avatar, Box, Button, TextField } from '@mui/material'
 import { Status, StatusHelper } from 'mui-industrial'
-import { Highlight, StatusType } from 'mui-status/lib/esm/index.types'
+import { Highlight, PanelWidth, StatusType } from 'mui-status/lib/esm/index.types'
 import { Fragment, useEffect, useState } from 'react'
 import './App.css'
 
@@ -31,10 +31,7 @@ export default function () {
     setFake(false)
   }
 
-  const content = <Box display='flex' alignItems={'stretch'} justifyContent={'space-between'}
-    flexDirection='column'
-    style={{  width: '500px', height: '650px' }}
-  >
+  const content = <>
     <Box
       display='flex'
       flexDirection='row'
@@ -64,7 +61,7 @@ export default function () {
       <TextField variant='outlined' placeholder='Your answer...' fullWidth />
       <Button variant="outlined" color="primary" endIcon={<SendOutlinedIcon />}>Send</Button>
     </Box>
-  </Box>
+  </>
 
 
   useEffect(() => {
@@ -82,6 +79,7 @@ export default function () {
       options={{
         as: StatusType.PANEL,
         panel: {
+          width: PanelWidth.SM,
           actions: [{
             icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
             title: 'Generate fake chats',

@@ -3,49 +3,32 @@ import ContentCopy from '@mui/icons-material/ContentCopy'
 import ContentCut from '@mui/icons-material/ContentCut'
 import ContentPaste from '@mui/icons-material/ContentPaste'
 import GridViewIcon from '@mui/icons-material/GridView'
-import { MenuItem, MenuList, Typography } from '@mui/material'
-import Divider from '@mui/material/Divider'
+import { Divider, MenuItem, MenuList, Tooltip, Typography } from '@mui/material'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { Status, StatusHelper, StatusOptionsProps, StatusType } from 'mui-industrial'
+import { Fragment } from 'react'
 import './App.css'
+
+const items = [
+  { type: 'item', icon: <ContentCut fontSize="small" />, text: 'Cut', shortcut: '⌘X' },
+  { type: 'item', icon: <ContentCopy fontSize="small" />, text: 'Copy', shortcut: '⌘C' },
+  { type: 'item', icon: <ContentPaste fontSize="small" />, text: 'Paste', shortcut: '⌘V' },
+  { type: 'divider' },
+  { type: 'item', icon: <Cloud fontSize="small" />, text: 'Web Clipboard', shortcut: '' },
+]
 
 export default function () {
   const content = <MenuList>
-    <MenuItem>
-      <ListItemIcon>
-        <ContentCut fontSize="small" />
-      </ListItemIcon>
-      <ListItemText>Cut</ListItemText>
-      <Typography variant="body2" color="text.secondary">
-             ⌘X
-      </Typography>
-    </MenuItem>
-    <MenuItem>
-      <ListItemIcon>
-        <ContentCopy fontSize="small" />
-      </ListItemIcon>
-      <ListItemText>Copy</ListItemText>
-      <Typography variant="body2" color="text.secondary">
-            ⌘C
-      </Typography>
-    </MenuItem>
-    <MenuItem>
-      <ListItemIcon>
-        <ContentPaste fontSize="small" />
-      </ListItemIcon>
-      <ListItemText>Paste</ListItemText>
-      <Typography variant="body2" color="text.secondary">
-             ⌘V
-      </Typography>
-    </MenuItem>
-    <Divider />
-    <MenuItem>
-      <ListItemIcon>
-        <Cloud fontSize="small" />
-      </ListItemIcon>
-      <ListItemText>Web Clipboard</ListItemText>
-    </MenuItem>
+    {items.map((item, index) => <Fragment key={`${item.type}-${item.text || index}`}>
+      {item.type === 'divider' ? <Divider key={index} />: <Tooltip arrow key={index} title={item.shortcut}
+        placement="right">
+        <MenuItem>
+          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemText>{item.text}</ListItemText>
+          {item.shortcut && <Typography variant="body2" color="text.secondary">{item.shortcut}</Typography>}
+        </MenuItem></Tooltip>}
+    </Fragment> )}
   </MenuList>
 
   return <>
