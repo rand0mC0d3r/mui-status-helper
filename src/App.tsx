@@ -11,7 +11,11 @@ import PersonIcon from '@mui/icons-material/Person'
 import PlusOneIcon from '@mui/icons-material/PlusOne'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { Box, Button, IconButton, Tooltip, Typography } from '@mui/material'
-import { IndustrialProvider, Status, StatusConsole, StatusHelper, StatusNotifications, StatusPanel, StatusSnackbar } from 'mui-industrial'
+import {
+  IndustrialProvider, Status, StatusConsole, StatusHelper, StatusNotifications,
+  StatusOptionsProps, StatusPanel, StatusSnackbar, StatusType
+} from 'mui-industrial'
+import { PlacementPosition } from 'mui-industrial/lib/esm/index.types'
 import { ChangeEvent, createRef, MouseEvent, useState } from 'react'
 import './App.css'
 import ChatClient from './ChatClient'
@@ -35,7 +39,7 @@ function App() {
   const [width, setWidth] = useState('70%')
   const [margin, setMargin] = useState('0px%')
 
-  const [position, setPosition] = useState<'top' | 'bottom'>('top')
+  const [position, setPosition] = useState<PlacementPosition>(PlacementPosition.TOP)
   const [variant, setVariant] = useState<'default' | 'outlined'>('default')
   const [hasBorder, setHasBorder] = useState(true)
   const [fullWidth, setFullWidth] = useState(false)
@@ -189,33 +193,40 @@ function App() {
 
       <ChatClient />
 
-      <NotificationsGenerator />
+      {/* <NotificationsGenerator /> */}
 
-      {/* <StatusConsole
-        tooltip="Iframe Material UI"
-        consoleTitle="Image List"
+      <Status
+        tooltip="Material-UI Image List Component"
+        options={{
+          as: StatusType.CONSOLE,
+          console: {
+            title: 'Material-UI Image List Component'
+          },
+          content: <iframe style={{ width: '100%', height: '100%', border: '0px none' }}
+            src="https://v4.mui.com/components/image-list/"
+          />
+        } as StatusOptionsProps}
         id="infoSectionConsole"
-        // popoverTitle="Iframe Material UI"
-        console={<iframe
-          style={{ width: '100%', height: '100%', border: '0px none' }}
-          src="https://v4.mui.com/components/image-list/"
-        />}>
-        <StatusHelper icon={<ListAltIcon />} text="Console" />
-      </StatusConsole> */}
+      >
+        <StatusHelper icon={<ListAltIcon />} text="MUI4 Console" />
+      </Status>
 
-      <StatusConsole
-        tooltip="Iframe Material UI"
-        consoleTitle="Image List V5"
-        id="infoSectionConsolev5"
-        // popoverTitle="Iframe Material UI"
-        console={<iframe
-          style={{ width: '100%', height: '100%', border: '0px none' }}
-          src="https://mui.com/material-ui/customization/color/"
-        />}>
-        <StatusHelper icon={<ListAltIcon />} text="MUI5 Console" />
-      </StatusConsole>
+      <Status {...{
+        id: 'infoSectionConsolev5',
+        tooltip: 'Image List V5',
+        options: {
+          as: StatusType.CONSOLE,
+          title: 'Image List V5',
+          content: <iframe
+            style={{ width: '100%', height: '100%', border: '0px none' }}
+            src="https://mui.com/material-ui/customization/color/"
+          />
+        } as StatusOptionsProps
+      }}>
+        <StatusHelper {...{ icon: <ListAltIcon />, text: 'MUI5 Console' }}/>
+      </Status>
 
-      <StatusPanel
+      {/* <StatusPanel
         secondary
         onClick={() => {}}
         id="materialdV4"
@@ -228,8 +239,8 @@ function App() {
             src="https://v4.mui.com/components/material-icons/#material-icons"
           />
         </div>}>
-        <StatusHelper notifications='v4' icon={<MenuBookOutlinedIcon />} text="Material UI" />
-      </StatusPanel>
+        <StatusHelper badge='v4' icon={<MenuBookOutlinedIcon />} text="Material UI" />
+      </StatusPanel> */}
 
 
       <StatusNotifications />

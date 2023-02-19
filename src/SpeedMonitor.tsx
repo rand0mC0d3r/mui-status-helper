@@ -1,8 +1,15 @@
 import NetworkCheckIcon from '@mui/icons-material/NetworkCheck'
 import { Box, Tooltip, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { Status, StatusHelper } from 'mui-status'
 import { useEffect, useState } from 'react'
 import './App.css'
+
+const STypography = styled(Typography)(() => ({
+  borderBottom: '1px solid',
+  paddingBottom: '4px',
+  marginBottom: '4px',
+}))
 
 export default function () {
   const [requests, setRequests] = useState<any[]>([])
@@ -13,6 +20,8 @@ export default function () {
 		size: number
   }>({ download: 0, size: 0 })
 
+  const generateHeader = (title: string) => <STypography variant="subtitle2">{title}</STypography>
+
   const registerRequest = (resource: any) => {
     if(requests.length === 0 || !requests.some(p => p.name === resource.name)) {
       setRequests((prev) => [...prev, resource])
@@ -22,6 +31,26 @@ export default function () {
       }))
     }
   }
+
+  const tooltip = <Box display='flex' flexDirection="column" style={{ gap: '8px' }}>
+    <Box display='flex' flexDirection="column">
+      {generateHeader('Connection details status')}
+      <Typography variant="caption">Average speed: {Math.round(details.download / 1000 * 100) / 1000} MB/s</Typography>
+      <Typography variant="caption">Data transmitted: {Math.round(details.size / 1000)} KB</Typography>
+      <Typography variant="caption">Files downloaded: {requests.length}</Typography>
+    </Box>
+
+    <Box display='flex' flexDirection="column">
+      {generateHeader('Call stack')}
+      {requestedItems.map(r => <Tooltip key={r.name} title={r.name}>
+        <Typography variant="caption">...{r.name.slice(-20)} ({r.size / 1000} KB)</Typography>
+      </Tooltip>)}
+    </Box>
+  </Box>
+
+  const badge = (details.download !== 0 && details.size !== 0)
+    ? `${Math.round(details.download / 1000 * 100) / 1000} MB/s | ${Math.round(details.size / 1000)} KB`
+    : 'Waiting...'
 
   useEffect(() => {
     setRequestedItems(requests
@@ -42,43 +71,10 @@ export default function () {
     return () => clearInterval(interval)
   }, [requests])
 
-  const generateHeader = (title: string) => {
-    return <Typography
-      variant="subtitle2"
-      style={{
-        borderBottom: '1px solid',
-        paddingBottom: '4px',
-        marginBottom: '4px',
-      }}
-    >
-      {title}
-    </Typography>
-  }
-
-  return <>
-    <Status id="tooltipAndText2Status"
-      secondary
-      tooltip={<Box display='flex' flexDirection="column" style={{ gap: '8px' }}>
-        <Box display='flex' flexDirection="column">
-          {generateHeader('Connection details status')}
-          <Typography variant="caption">Average speed: {Math.round(details.download / 1000 * 100) / 1000} MB/s</Typography>
-          <Typography variant="caption">Data transmitted: {Math.round(details.size / 1000)} KB</Typography>
-          <Typography variant="caption">Files downloaded: {requests.length}</Typography>
-        </Box>
-
-        <Box display='flex' flexDirection="column">
-          {generateHeader('Call stack')}
-          {requestedItems.map(r => <Tooltip key={r.name} title={r.name}>
-            <Typography variant="caption">...{r.name.slice(-20)} ({r.size / 1000} KB)</Typography>
-          </Tooltip>)}
-        </Box>
-      </Box>}
-    >
-      <StatusHelper style={{ minWidth: '150px' }}
-        icon={<NetworkCheckIcon color="primary" />}
-        notifications={`${Math.round(details.download / 1000 * 100) / 1000} MB/s | ${Math.round(details.size / 1000)} KB`}
-        text="Network"
-      />
-    </Status>
-  </>
+  return <Status id="tooltipAndText2Status"  secondary {...{ tooltip }}>
+    <StatusHelper style={{ minWidth: '150px' }} {...{ badge }}
+      icon={<NetworkCheckIcon color="primary" />}
+      text="Network"
+    />
+  </Status>
 }

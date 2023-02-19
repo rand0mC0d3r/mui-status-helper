@@ -7,55 +7,62 @@ import { MenuItem, MenuList, Typography } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import { StatusHelper, StatusPanel } from 'mui-status'
+import { Status, StatusHelper, StatusOptionsProps, StatusType } from 'mui-industrial'
 import './App.css'
 
 export default function () {
+  const content = <MenuList>
+    <MenuItem>
+      <ListItemIcon>
+        <ContentCut fontSize="small" />
+      </ListItemIcon>
+      <ListItemText>Cut</ListItemText>
+      <Typography variant="body2" color="text.secondary">
+             ⌘X
+      </Typography>
+    </MenuItem>
+    <MenuItem>
+      <ListItemIcon>
+        <ContentCopy fontSize="small" />
+      </ListItemIcon>
+      <ListItemText>Copy</ListItemText>
+      <Typography variant="body2" color="text.secondary">
+            ⌘C
+      </Typography>
+    </MenuItem>
+    <MenuItem>
+      <ListItemIcon>
+        <ContentPaste fontSize="small" />
+      </ListItemIcon>
+      <ListItemText>Paste</ListItemText>
+      <Typography variant="body2" color="text.secondary">
+             ⌘V
+      </Typography>
+    </MenuItem>
+    <Divider />
+    <MenuItem>
+      <ListItemIcon>
+        <Cloud fontSize="small" />
+      </ListItemIcon>
+      <ListItemText>Web Clipboard</ListItemText>
+    </MenuItem>
+  </MenuList>
+
   return <>
-    <StatusPanel
-      hasToolbar={false}
-      hasDecoration={false}
+    <Status
+      options={{
+        as: StatusType.PANEL,
+        panel: {
+          hasDecoration: false,
+          hasToolbar: false,
+        },
+        content
+      } as StatusOptionsProps}
       endSeparator
       id="menu"
       tooltip="Menu / Options"
-      popover={<MenuList>
-        <MenuItem>
-          <ListItemIcon>
-            <ContentCut fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Cut</ListItemText>
-          <Typography variant="body2" color="text.secondary">
-            ⌘X
-          </Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <ContentCopy fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Copy</ListItemText>
-          <Typography variant="body2" color="text.secondary">
-            ⌘C
-          </Typography>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <ContentPaste fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Paste</ListItemText>
-          <Typography variant="body2" color="text.secondary">
-            ⌘V
-          </Typography>
-        </MenuItem>
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <Cloud fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Web Clipboard</ListItemText>
-        </MenuItem>
-      </MenuList>}
     >
-      <StatusHelper  icon={<GridViewIcon />} text="Menu" />
-    </StatusPanel>
+      <StatusHelper {...{ icon: <GridViewIcon />, text: 'Menu' }}/>
+    </Status>
   </>
 }

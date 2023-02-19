@@ -3,7 +3,8 @@ import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined'
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import { Avatar, Box, Button, TextField } from '@mui/material'
-import { StatusHelper, StatusPanel } from 'mui-status'
+import { Status, StatusHelper } from 'mui-industrial'
+import { Highlight, StatusType } from 'mui-status/lib/esm/index.types'
 import { Fragment, useEffect, useState } from 'react'
 import './App.css'
 
@@ -11,7 +12,7 @@ export default function () {
   const [fake, setFake] = useState<boolean>(false)
   const [users, setUsers] = useState<string[]>(['DA', 'AC', 'BB', 'CF', 'BD', 'AA'])
   const [tooltip, setTooltip] = useState<string>('Chat client')
-  const [notifications, setNotifications] = useState<string>('')
+  const [badge, setBadge] = useState<string>('')
   const [user, setUser] = useState<string | undefined>()
 
   const generateChat = (flag: boolean) => {
@@ -19,20 +20,18 @@ export default function () {
       const randomId = Math.floor(Math.random() * users.length)
       const randomNotifications = Math.floor(Math.random() * 8) + 1
       setTooltip(`${users[randomId]} sent you ${randomNotifications} messages`)
-      setNotifications(`${randomNotifications}`)
+      setBadge(`${randomNotifications}`)
       setUser(users[randomId])
     }
   }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      generateChat(fake)
-    }, 1500)
+  const onClick = () => {
+    setBadge('')
+    setTooltip('Chat client')
+    setFake(false)
+  }
 
-    return () => clearInterval(interval)
-  }, [fake])
-
-  const popover = <Box display='flex' alignItems={'stretch'} justifyContent={'space-between'}
+  const content = <Box display='flex' alignItems={'stretch'} justifyContent={'space-between'}
     flexDirection='column'
     style={{  width: '500px', height: '650px' }}
   >
@@ -47,10 +46,6 @@ export default function () {
           {avatar}
         </Avatar>)}
       </Box>
-      {/* <Button onClick={() => setFake(!fake)} size="small"
-            variant="outlined" color="primary">
-            <MarkUnreadChatAltOutlinedIcon />
-          </Button> */}
     </Box>
     <Box display='flex' flexDirection='column' style={{
       flex: '1 1 auto',
@@ -72,36 +67,32 @@ export default function () {
   </Box>
 
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      generateChat(fake)
+    }, 1500)
+
+    return () => clearInterval(interval)
+  }, [fake])
+
   return <>
-    <StatusPanel
-      highlight={notifications !== '' ? 'primary' : 'default'}
-      onClick={() => {
-        setNotifications('')
-        setTooltip('Chat client')
-        setFake(false)
-      }}
+    <Status {...{ onClick, tooltip }}
       id="chatClient"
-      popoverTitle="Chats"
-      popoverActions={[
-        {
-          icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
-          title: 'Generate fake chats',
-          onClick: () => setFake(!fake)
+      highlight={badge !== '' ? Highlight.PRIMARY : Highlight.DEFAULT}
+      options={{
+        as: StatusType.PANEL,
+        panel: {
+          actions: [{
+            icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
+            title: 'Generate fake chats',
+            onClick: () => setFake(!fake)
+          }]
         },
-        {
-          icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
-          title: 'Generate fake chats2',
-          onClick: () => setFake(!fake)
-        },
-        {
-          icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
-          title: 'Generate fake chats3',
-          onClick: () => setFake(!fake)
-        },
-      ]}
-      tooltip={tooltip}
-      popover={popover}>
-      <StatusHelper {...{ notifications }}
+        title: 'Chats',
+        content
+      }}
+    >
+      <StatusHelper {...{ badge }}
         icon={<ChatOutlinedIcon />}
         childrenIndex = {5}
         text="Chats" >
@@ -111,7 +102,7 @@ export default function () {
           <StatusHelper mask image={'https://avatars.githubusercontent.com/u/11874180?v=4'}/>
         </Fragment>
       </StatusHelper>
-    </StatusPanel>
+    </Status>
   </>
 
 }
