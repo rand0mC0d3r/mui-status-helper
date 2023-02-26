@@ -10,10 +10,10 @@ import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined'
 import PersonIcon from '@mui/icons-material/Person'
 import PlusOneIcon from '@mui/icons-material/PlusOne'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
-import { Box, Button, IconButton, Tooltip, Typography } from '@mui/material'
+import { Box, Button, IconButton, LinearProgress, Tooltip, Typography } from '@mui/material'
 import {
-  IndustrialProvider, Status, StatusConsole, StatusHelper, StatusNotifications,
-  StatusOptionsProps, StatusPanel, StatusSnackbar, StatusType
+  IndustrialProvider, Status, StatusHelper,
+  StatusOptionsProps, StatusType
 } from 'mui-industrial'
 import { PlacementPosition } from 'mui-industrial/lib/esm/index.types'
 import { ChangeEvent, createRef, MouseEvent, useState } from 'react'
@@ -21,7 +21,7 @@ import './App.css'
 import ChatClient from './ChatClient'
 import ControlPanel from './ControlPanel'
 import MenuPanel from './MenuPanel'
-import NotificationsGenerator from './NotificationsGenerator'
+// import NotificationsGenerator from './NotificationsGenerator'
 import SpeedMonitor from './SpeedMonitor'
 
 const text = [
@@ -114,59 +114,13 @@ function App() {
     >
 
       <MenuPanel />
-      {/* <StatusPanel
-        variant={variant}
-        hasToolbar={false}
-        hasDecoration={false}
-        endSeparator
-        id="menu"
-        tooltip="Menu / Options"
-        popover={<MenuList>
-          <MenuItem>
-            <ListItemIcon>
-              <ContentCut fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>Cut</ListItemText>
-            <Typography variant="body2" color="text.secondary">
-            ⌘X
-            </Typography>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon>
-              <ContentCopy fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>Copy</ListItemText>
-            <Typography variant="body2" color="text.secondary">
-            ⌘C
-            </Typography>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon>
-              <ContentPaste fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>Paste</ListItemText>
-            <Typography variant="body2" color="text.secondary">
-            ⌘V
-            </Typography>
-          </MenuItem>
-          <Divider />
-          <MenuItem>
-            <ListItemIcon>
-              <Cloud fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>Web Clipboard</ListItemText>
-          </MenuItem>
-        </MenuList>}
-      >
-        <StatusHelper  icon={<GridViewIcon />} text="Menu" />
-      </StatusPanel> */}
 
-      {/* <Status id="tooltipAndText4Status" tooltip={generateTooltip()}>
-        <StatusHelper childrenIndex={3} icon={<ListAltIcon />} notifications="text"
+      <Status  id="tooltipAndText4Status" >
+        <StatusHelper childrenIndex={3} icon={<ListAltIcon />} badge="text"
           text="progress">
           <LinearProgress style={{ width: '60px', height: '12px' }} />
         </StatusHelper>
-      </Status> */}
+      </Status>
 
       {/* <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
         <StatusHelper icon={<ListAltIcon />} notifications="0" text="p" />
@@ -193,7 +147,7 @@ function App() {
 
       <ChatClient />
 
-      <NotificationsGenerator />
+      {/* <NotificationsGenerator /> */}
 
       <Status
         tooltip="Material-UI Image List Component"
@@ -243,7 +197,7 @@ function App() {
       </StatusPanel> */}
 
 
-      {/* <StatusNotifications /> */}
+      {/* <BlockNotifications /> */}
 
 
 

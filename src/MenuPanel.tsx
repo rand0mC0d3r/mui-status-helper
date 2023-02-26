@@ -7,7 +7,6 @@ import { Divider, MenuItem, MenuList, Tooltip, Typography } from '@mui/material'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { Status, StatusHelper, StatusOptionsProps, StatusType } from 'mui-industrial'
-import { Fragment } from 'react'
 import './App.css'
 
 const items = [
@@ -20,15 +19,20 @@ const items = [
 
 export default function () {
   const content = <MenuList>
-    {items.map((item, index) => <Fragment key={`${item.type}-${item.text || index}`}>
-      {item.type === 'divider' ? <Divider key={index} />: <Tooltip arrow key={index} title={item.shortcut}
-        placement="right">
+    {items.map((item, index) => item.type === 'divider'
+      ? <Divider key={`${item.type}-${item.text || index}`} />
+      : <Tooltip
+        arrow
+        key={`${item.type}-${item.text || index}`}
+        title={item.shortcut}
+        placement="right"
+      >
         <MenuItem>
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText>{item.text}</ListItemText>
           {item.shortcut && <Typography variant="body2" color="text.secondary">{item.shortcut}</Typography>}
-        </MenuItem></Tooltip>}
-    </Fragment> )}
+        </MenuItem>
+      </Tooltip>)}
   </MenuList>
 
   return <>
@@ -39,9 +43,11 @@ export default function () {
           hasDecoration: false,
           hasToolbar: false,
         },
-        content
+        content,
+        separators: {
+          end: true,
+        }
       } as StatusOptionsProps}
-      endSeparator
       id="menu"
       tooltip="Menu / Options"
     >

@@ -20,7 +20,7 @@
   "scripts": {
 		"===START===": "----------------------------------------------------------------------",
     "prestart": "npx link",
-    "start": "concurrently \"PORT=3005 react-scripts start\" \"npm run check.links\"",
+    "start": "concurrently --names 'AA,BB,CC' --prefix-colors 'red,green,yellow' \"PORT=3005 react-scripts start\" \"npm run check.links\"",
     "===BUILD===": "----------------------------------------------------------------------",
 		"build": "react-scripts build",
     "===TOOLS===": "----------------------------------------------------------------------",
