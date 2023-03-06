@@ -1,20 +1,21 @@
+/* eslint-disable no-unused-vars */
 import Cloud from '@mui/icons-material/Cloud'
 import ContentCopy from '@mui/icons-material/ContentCopy'
 import ContentCut from '@mui/icons-material/ContentCut'
 import ContentPaste from '@mui/icons-material/ContentPaste'
 import GridViewIcon from '@mui/icons-material/GridView'
-import { Divider, MenuItem, MenuList, Tooltip, Typography } from '@mui/material'
+import { Divider, ListItem, MenuItem, MenuList, Tooltip, Typography } from '@mui/material'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import { Status, StatusHelper, StatusOptionsProps, StatusType } from 'mui-industrial'
+import { Keyboard, KeyboardHelper, Status, StatusHelper, StatusOptionsProps, StatusType } from 'mui-industrial'
 import './App.css'
 
 const items = [
-  { type: 'item', icon: <ContentCut fontSize="small" />, text: 'Cut', shortcut: '⌘X' },
-  { type: 'item', icon: <ContentCopy fontSize="small" />, text: 'Copy', shortcut: '⌘C' },
-  { type: 'item', icon: <ContentPaste fontSize="small" />, text: 'Paste', shortcut: '⌘V' },
+  { id: 'cut', type: 'item', icon: <ContentCut fontSize="small" />, text: 'Cut', shortcut: '⌘X', char: 'X', altKey: true },
+  { id: 'copy', type: 'item', icon: <ContentCopy fontSize="small" />, text: 'Copy', shortcut: '⌘C', char: 'C', altKey: false, shiftKey: true, metaKey: true },
+  { id: 'paste', type: 'item', icon: <ContentPaste fontSize="small" />, text: 'Paste', shortcut: '⌘V', char: 'V', ctrlKey: true, shiftKey: true },
   { type: 'divider' },
-  { type: 'item', icon: <Cloud fontSize="small" />, text: 'Web Clipboard', shortcut: '' },
+  { id: 'webClipboard', type: 'item', icon: <Cloud fontSize="small" />, text: 'Web Clipboard', shortcut: '', char: 'W', ctrlKey: true, altKey: true },
 ]
 
 export default function () {
@@ -29,17 +30,29 @@ export default function () {
       >
         <MenuItem>
           <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText>{item.text}</ListItemText>
-          {item.shortcut && <Typography variant="body2" color="text.secondary">{item.shortcut}</Typography>}
+          <ListItemText style={{ width: '250px' }}>{item.text}</ListItemText>
+          {item?.id && <KeyboardHelper shortcutId={item.id} />}
         </MenuItem>
       </Tooltip>)}
   </MenuList>
 
   return <>
+    {items
+      .filter(item => item.type !== 'divider')
+      .filter(item => item.id)
+      .map((item) => item.char && <Keyboard key={item.char} onTrigger={() => alert(`menu ${item.text} ${item.char}`)}
+        altKey={item.altKey}
+        metaKey={item.metaKey}
+        ctrlKey={item.ctrlKey}
+        shiftKey={item.shiftKey}
+        label={item.text}
+        char={item.char}
+        id={item.id} />)}
+
     <Status
       options={{
-        as: StatusType.PANEL,
-        panel: {
+        as: StatusType.POPPER,
+        popper: {
           hasDecoration: false,
           hasToolbar: false,
         },

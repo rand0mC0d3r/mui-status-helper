@@ -20,6 +20,7 @@ import { ChangeEvent, createRef, MouseEvent, useState } from 'react'
 import './App.css'
 import ChatClient from './ChatClient'
 import ControlPanel from './ControlPanel'
+import KeyboardShortcuts from './KeyboardShortcuts'
 import MenuPanel from './MenuPanel'
 // import NotificationsGenerator from './NotificationsGenerator'
 import SpeedMonitor from './SpeedMonitor'
@@ -180,6 +181,7 @@ function App() {
         <StatusHelper {...{ icon: <ListAltIcon />, text: 'MUI5 Console' }}/>
       </Status>
 
+      <KeyboardShortcuts />
       {/* <StatusPanel
         secondary
         onClick={() => {}}
@@ -283,7 +285,8 @@ function App() {
         <StatusHelper icon={<NotificationsIcon />} text='Console' />
       </Status> */}
 
-      <ControlPanel {...{ variant, setVariant, fullWidth, setFullWidth, margin, setMargin, width, setWidth, hasBorder, setHasBorder, position, setPosition }} />
+      <ControlPanel {...{ variant, setVariant, fullWidth, setFullWidth, margin, setMargin, width,
+        setWidth, hasBorder, setHasBorder, position, setPosition }} />
     </IndustrialProvider>
   </>
 }

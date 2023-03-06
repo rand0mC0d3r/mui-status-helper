@@ -5,7 +5,7 @@ import SouthOutlinedIcon from '@mui/icons-material/SouthOutlined'
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { Status, StatusHelper, StatusType } from 'mui-industrial'
-import { PanelWidth, Severity } from 'mui-industrial/lib/esm/index.types'
+import { PopperWidth, Severity } from 'mui-industrial/lib/esm/index.types'
 import { useEffect, useState } from 'react'
 import './App.css'
 
@@ -105,10 +105,10 @@ export default function ({
     <Status
       id="notificationsGeneratorPanel"
       options={{
-        as: StatusType.PANEL,
+        as: StatusType.POPPER,
         title: 'Notifications Generator',
-        panel: {
-          width: PanelWidth.LG,
+        popper: {
+          width: PopperWidth.LG,
         },
         content: <Box display={'flex'}
           flexDirection={'column'}

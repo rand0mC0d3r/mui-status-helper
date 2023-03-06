@@ -3,8 +3,8 @@ import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined'
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import { Avatar, Box, Button, TextField } from '@mui/material'
-import { Status, StatusHelper } from 'mui-industrial'
-import { Highlight, PanelWidth, StatusType } from 'mui-status/lib/esm/index.types'
+import { Keyboard, KeyboardHelper, Status, StatusHelper } from 'mui-industrial'
+import { Highlight, PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
 import { Fragment, useEffect, useState } from 'react'
 import './App.css'
 
@@ -73,22 +73,24 @@ export default function () {
   }, [fake])
 
   return <>
-    <Status {...{ onClick, tooltip }}
+    <Keyboard id='chatClient' char="T" ctrlKey={true}
+      onTrigger={() => alert('opening chat client')} />
+    <Status {...{ onClick, tooltip: <div>{tooltip} <KeyboardHelper asChip shortcutId='chatClient' /> </div> }}
       id="chatClient"
       highlight={badge !== '' ? Highlight.PRIMARY : Highlight.DEFAULT}
       options={{
-        as: StatusType.PANEL,
-        panel: {
-          width: PanelWidth.SM,
+        as: StatusType.POPPER,
+        popper: {
+          width: PopperWidth.SM,
           actions: [{
             icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
             title: 'Generate fake chats',
             onClick: () => setFake(!fake)
           }]
-        },
+        } as StatusPopperProps,
         title: 'Chats',
         content
-      }}
+      } as StatusOptionsProps}
     >
       <StatusHelper {...{ badge }}
         icon={<ChatOutlinedIcon />}
