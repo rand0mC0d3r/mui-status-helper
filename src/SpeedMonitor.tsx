@@ -1,7 +1,7 @@
 import NetworkCheckIcon from '@mui/icons-material/NetworkCheck'
 import { Box, Tooltip, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { Status, StatusHelper } from 'mui-status'
+import { Status } from 'mui-status'
 import { useEffect, useState } from 'react'
 import './App.css'
 
@@ -72,7 +72,7 @@ export default function () {
   }, [requests])
 
   return <Status id="tooltipAndText2Status"  secondary {...{ tooltip }}>
-    <StatusHelper style={{ minWidth: '150px' }} {...{ badge }}
+    <Status.Body style={{ minWidth: '150px' }} {...{ badge }}
       icon={<NetworkCheckIcon color="primary" />}
       text="Network"
     />

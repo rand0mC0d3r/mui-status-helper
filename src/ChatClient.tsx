@@ -3,7 +3,7 @@ import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined'
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import { Avatar, Box, Button, TextField } from '@mui/material'
-import { Keyboard, KeyboardHelper, Status, StatusHelper } from 'mui-industrial'
+import { Keyboard, KeyboardHelper, Status } from 'mui-industrial'
 import { Highlight, PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
 import { Fragment, useEffect, useState } from 'react'
 import './App.css'
@@ -75,7 +75,7 @@ export default function () {
   return <>
     <Keyboard id='chatClient' char="T" ctrlKey={true}
       onTrigger={() => alert('opening chat client')} />
-    <Status {...{ onClick, tooltip: <div>{tooltip} <KeyboardHelper asChip shortcutId='chatClient' /> </div> }}
+    <Status {...{ onClick, tooltip: <div>{tooltip} <KeyboardHelper shortcutId='chatClient' /> </div> }}
       id="chatClient"
       highlight={badge !== '' ? Highlight.PRIMARY : Highlight.DEFAULT}
       options={{
@@ -92,16 +92,16 @@ export default function () {
         content
       } as StatusOptionsProps}
     >
-      <StatusHelper {...{ badge }}
+      <Status.Body {...{ badge }}
         icon={<ChatOutlinedIcon />}
         childrenIndex = {5}
         text="Chats" >
         <Fragment>
-          <StatusHelper mask image={'https://avatars.githubusercontent.com/u/79695292?v=4'}/>
-          <StatusHelper mask image={'https://avatars.githubusercontent.com/u/11871180?v=4'}/>
-          <StatusHelper mask image={'https://avatars.githubusercontent.com/u/11874180?v=4'}/>
+          <Status.Body mask image={'https://avatars.githubusercontent.com/u/79695292?v=4'}/>
+          <Status.Body mask image={'https://avatars.githubusercontent.com/u/11871180?v=4'}/>
+          <Status.Body mask image={'https://avatars.githubusercontent.com/u/11874180?v=4'}/>
         </Fragment>
-      </StatusHelper>
+      </Status.Body>
     </Status>
   </>
 

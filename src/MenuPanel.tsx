@@ -1,13 +1,12 @@
-/* eslint-disable no-unused-vars */
 import Cloud from '@mui/icons-material/Cloud'
 import ContentCopy from '@mui/icons-material/ContentCopy'
 import ContentCut from '@mui/icons-material/ContentCut'
 import ContentPaste from '@mui/icons-material/ContentPaste'
 import GridViewIcon from '@mui/icons-material/GridView'
-import { Divider, ListItem, MenuItem, MenuList, Tooltip, Typography } from '@mui/material'
+import { Divider, MenuItem, MenuList, Tooltip } from '@mui/material'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import { Keyboard, KeyboardHelper, Status, StatusHelper, StatusOptionsProps, StatusType } from 'mui-industrial'
+import { Keyboard, KeyboardHelper, Status, StatusOptionsProps, StatusType } from 'mui-industrial'
 import './App.css'
 
 const items = [
@@ -50,6 +49,7 @@ export default function () {
         id={item.id} />)}
 
     <Status
+      order={5}
       options={{
         as: StatusType.POPPER,
         popper: {
@@ -64,7 +64,7 @@ export default function () {
       id="menu"
       tooltip="Menu / Options"
     >
-      <StatusHelper {...{ icon: <GridViewIcon />, text: 'Menu' }}/>
+      <Status.Body {...{ icon: <GridViewIcon />, text: 'Menu' }}/>
     </Status>
   </>
 }

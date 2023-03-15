@@ -12,8 +12,7 @@ import PlusOneIcon from '@mui/icons-material/PlusOne'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { Box, Button, IconButton, LinearProgress, Tooltip, Typography } from '@mui/material'
 import {
-  IndustrialProvider, Status, StatusHelper,
-  StatusOptionsProps, StatusType
+  IndustrialProvider, Status, StatusOptionsProps, StatusType
 } from 'mui-industrial'
 import { PlacementPosition } from 'mui-industrial/lib/esm/index.types'
 import { ChangeEvent, createRef, MouseEvent, useState } from 'react'
@@ -117,12 +116,32 @@ function App() {
       <MenuPanel />
 
       <Status  id="tooltipAndText4Status" >
-        <StatusHelper childrenIndex={3} icon={<ListAltIcon />} badge="text"
+        <Status.Body childrenIndex={3} icon={<ListAltIcon />} badge="text"
           text="progress">
           <LinearProgress style={{ width: '60px', height: '12px' }} />
-        </StatusHelper>
+        </Status.Body>
       </Status>
 
+
+      <Status id="onlyText" order={-1} onClick={() => {}}>
+        <Status.Body text="first" />
+      </Status>
+
+      <Status id="onlyBadge" onClick={() => {}}>
+        <Status.Body badge="text" />
+      </Status>
+
+      <Status id="onlyIcon" onClick={() => {}}>
+        <Status.Body icon={<ListAltIcon />} />
+      </Status>
+
+      {/* <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
+        <StatusHelper icon={<ListAltIcon />} notifications="0" text="p" />
+      </Status>
+
+      {/* <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
+        <StatusHelper icon={<ListAltIcon />} notifications="0" text="p" />
+      </Status>
       {/* <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
         <StatusHelper icon={<ListAltIcon />} notifications="0" text="p" />
       </Status>
@@ -150,7 +169,7 @@ function App() {
 
       {/* <NotificationsGenerator /> */}
 
-      <Status
+      {/* <Status
         tooltip="Material-UI Image List Component"
         options={{
           as: StatusType.CONSOLE,
@@ -179,7 +198,7 @@ function App() {
         } as StatusOptionsProps
       }}>
         <StatusHelper {...{ icon: <ListAltIcon />, text: 'MUI5 Console' }}/>
-      </Status>
+      </Status> */}
 
       <KeyboardShortcuts />
       {/* <StatusPanel

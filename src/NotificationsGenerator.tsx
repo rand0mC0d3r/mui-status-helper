@@ -4,7 +4,7 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import SouthOutlinedIcon from '@mui/icons-material/SouthOutlined'
 import SpeedOutlinedIcon from '@mui/icons-material/SpeedOutlined'
 import { Box, Button, TextField, Typography } from '@mui/material'
-import { Status, StatusHelper, StatusType } from 'mui-industrial'
+import { Status, StatusType } from 'mui-industrial'
 import { PopperWidth, Severity } from 'mui-industrial/lib/esm/index.types'
 import { useEffect, useState } from 'react'
 import './App.css'
@@ -126,7 +126,7 @@ export default function ({
       }}
       tooltip='Iframe'
     >
-      <StatusHelper icon={<CircleNotificationsOutlinedIcon />} text="Notifications Generator" />
+      <Status.Body icon={<CircleNotificationsOutlinedIcon />} text="Notifications Generator" />
     </Status>
   </>
 
