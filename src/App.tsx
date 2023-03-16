@@ -36,7 +36,7 @@ const text = [
 function App() {
   const selectionRef = createRef<any>()
   const [selectedText, setSelectedText] = useState('')
-  const [width, setWidth] = useState('70%')
+  const [width, setWidth] = useState('90%')
   const [margin, setMargin] = useState('0px%')
 
   const [position, setPosition] = useState<PlacementPosition>(PlacementPosition.TOP)
@@ -113,196 +113,32 @@ function App() {
       variant={variant}
     >
 
-      <MenuPanel />
-
-      <Status  id="tooltipAndText4Status" >
-        <Status.Body childrenIndex={3} icon={<ListAltIcon />} badge="text"
+      {/* <Status id="tooltipAndText4Status" >
+        <Status.Body childrenOrder={3} icon={<ListAltIcon />} badge="text"
           text="progress">
           <LinearProgress style={{ width: '60px', height: '12px' }} />
         </Status.Body>
       </Status>
 
-
-      <Status id="onlyText" order={-1} onClick={() => {}}>
-        <Status.Body text="first" />
+      <Status id="onlyText" order={99} onClick={() => {}}>
+        <Status.Body text="last" />
       </Status>
 
       <Status id="onlyBadge" onClick={() => {}}>
         <Status.Body badge="text" />
       </Status>
 
+      <MenuPanel />
+
       <Status id="onlyIcon" onClick={() => {}}>
         <Status.Body icon={<ListAltIcon />} />
       </Status>
 
-      {/* <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
-        <StatusHelper icon={<ListAltIcon />} notifications="0" text="p" />
-      </Status>
-
-      {/* <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
-        <StatusHelper icon={<ListAltIcon />} notifications="0" text="p" />
-      </Status>
-      {/* <Status id="tooltipAndTextPrimary" tooltip="primary" highlight='primary'>
-        <StatusHelper icon={<ListAltIcon />} notifications="0" text="p" />
-      </Status>
-
-      <Status id="tooltipAndTextSecondary" tooltip="secondary" highlight='secondary'>
-        <StatusHelper icon={<ListAltIcon />} notifications="0" text="s" />
-      </Status>
-
-      <Status id="tooltipAndTextClick" tooltip={generateTooltip()} onClick={() => {}}>
-        <StatusHelper icon={<ListAltIcon />} notifications="text" text="text Click" />
-      </Status>
-
-      <Status id="tooltipAndTextPrimaryClick" tooltip="primary Click" highlight='primary'
-        onClick={() => {}}>
-        <StatusHelper icon={<ListAltIcon />} notifications="pri" text="primary" />
-      </Status>
-
-      <Status secondary id="tooltipAndTextSecondaryClick" tooltip="secondary Click"
-        highlight='secondary'
-        onClick={() => {}}>
-        <StatusHelper icon={<ListAltIcon />} notifications="sec" text="secondary" />
-      </Status> */}
-
       <ChatClient />
 
-      {/* <NotificationsGenerator /> */}
-
-      {/* <Status
-        tooltip="Material-UI Image List Component"
-        options={{
-          as: StatusType.CONSOLE,
-          console: {
-            title: 'Material-UI Image List Component'
-          },
-          content: <iframe style={{ width: '100%', height: '100%', border: '0px none' }}
-            src="https://v4.mui.com/components/image-list/"
-          />
-        } as StatusOptionsProps}
-        id="infoSectionConsole"
-      >
-        <StatusHelper icon={<ListAltIcon />} text="MUI4 Console" />
-      </Status>
-
-      <Status {...{
-        id: 'infoSectionConsolev5',
-        tooltip: 'Image List V5',
-        options: {
-          as: StatusType.CONSOLE,
-          title: 'Image List V5',
-          content: <iframe
-            style={{ width: '100%', height: '100%', border: '0px none' }}
-            src="https://mui.com/material-ui/customization/color/"
-          />
-        } as StatusOptionsProps
-      }}>
-        <StatusHelper {...{ icon: <ListAltIcon />, text: 'MUI5 Console' }}/>
-      </Status> */}
-
       <KeyboardShortcuts />
-      {/* <StatusPanel
-        secondary
-        onClick={() => {}}
-        id="materialdV4"
-        popoverTitle="Search Icons on Material UI v4"
-        tooltip={'Search Icons on Material UI v4'}
-        popover={<div style={{ width: '500px', height: '650px' }}
-        >
-          <iframe
-            style={{ width: '100%', height: '100%', border: '0px none' }}
-            src="https://v4.mui.com/components/material-icons/#material-icons"
-          />
-        </div>}>
-        <StatusHelper badge='v4' icon={<MenuBookOutlinedIcon />} text="Material UI" />
-      </StatusPanel> */}
 
-
-      {/* <BlockNotifications /> */}
-
-
-
-      <SpeedMonitor />
-
-      {/*
-      <StatusSnackbar message='test' source="AutoFixer"
-        severity='info' />
-      <StatusSnackbar message='test' code='lorem ipsum' source="AutoFixer"
-        severity='success'
-        actions={[
-          <Button>Slack it</Button>,
-          <Button color="inherit">Post to Jira</Button>,
-        ]
-
-        }/>
-      <StatusSnackbar message='test' source="AutoFixer"
-        severity='info' />
-      <StatusSnackbar message='test' code='lorem ipsum' source="AutoFixer"
-        severity='success'
-        actions={[
-          <Button>Slack it</Button>,
-          <Button color="inherit">Post to Jira</Button>,
-        ]
-
-        }/> */}
-      {/* <StatusSnackbar message='test' source="AutoFixer"
-        severity='info' />
-      <StatusSnackbar message='test' code='lorem ipsum' source="AutoFixer"
-        severity='success'
-        actions={[
-          <Button>Slack it</Button>,
-          <Button color="inherit">Post to Jira</Button>,
-        ]
-
-        }/> */}
-
-      {/* // visual tests END */}
-
-
-
-      {/*
-
-      <Status id="tooltipAndText" secondary tooltip="GoTo Line:Column">
-        <StatusHelper text="Ln 63, Col 38" />
-      </Status>
-      <Status id="tooltipAndText" secondary tooltip="GoTo Line:Column">
-        <StatusHelper text="Ln 63, Col 38" />
-      </Status> */}
-
-
-
-
-
-
-
-
-
-      {/* <Status id="lineColumn" secondary tooltip="GoTo Line:Column">
-        <StatusHelper text="Ln 63, Col 38" />
-      </Status>
-
-      <Status id="spaces" secondary tooltip="Pagination spacing strategy">
-        <StatusHelper text="Spaces: 2" />
-      </Status>
-
-      <Status id="errors" secondary highlight='secondary'
-        tooltip="Show error log">
-        <StatusHelper icon={<WarningIcon />}  notifications={24}
-          text="Errors" />
-      </Status>
-      <Status id="errors2" secondary highlight='secondary'
-        tooltip="Show error log">
-        <StatusHelper icon={<WarningIcon />}  notifications={'FOO'}
-          text="Errors" />
-      </Status>
-
-      <Status id="copilot" secondary tooltip="Toggle copilot status">
-        <StatusHelper icon={<SmartToyIcon />} />
-      </Status>
-
-      <Status id="notifications" secondary tooltip="Notifications">
-        <StatusHelper icon={<NotificationsIcon />} text='Console' />
-      </Status> */}
+      <SpeedMonitor /> */}
 
       <ControlPanel {...{ variant, setVariant, fullWidth, setFullWidth, margin, setMargin, width,
         setWidth, hasBorder, setHasBorder, position, setPosition }} />

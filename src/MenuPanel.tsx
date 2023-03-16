@@ -49,7 +49,7 @@ export default function () {
         id={item.id} />)}
 
     <Status
-      order={5}
+      order={-1}
       options={{
         as: StatusType.POPPER,
         popper: {

@@ -94,7 +94,7 @@ export default function () {
     >
       <Status.Body {...{ badge }}
         icon={<ChatOutlinedIcon />}
-        childrenIndex = {5}
+        childrenOrder = {5}
         text="Chats" >
         <Fragment>
           <Status.Body mask image={'https://avatars.githubusercontent.com/u/79695292?v=4'}/>
