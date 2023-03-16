@@ -42,6 +42,8 @@ function App() {
   const [position, setPosition] = useState<PlacementPosition>(PlacementPosition.TOP)
   const [variant, setVariant] = useState<'default' | 'outlined'>('default')
   const [hasBorder, setHasBorder] = useState(true)
+  const [showShortcuts, setShowShortcuts] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
   const [fullWidth, setFullWidth] = useState(false)
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
   const [progress, setProgress] = useState(0)
@@ -114,33 +116,34 @@ function App() {
     >
 
       {/* <Status id="tooltipAndText4Status" >
-        <Status.Body childrenOrder={3} icon={<ListAltIcon />} badge="text"
+        <Status.Template childrenOrder={3} icon={<ListAltIcon />} badge="text"
           text="progress">
           <LinearProgress style={{ width: '60px', height: '12px' }} />
-        </Status.Body>
+        </Status.Template>
       </Status>
 
       <Status id="onlyText" order={99} onClick={() => {}}>
-        <Status.Body text="last" />
+        <Status.Template text="last" />
       </Status>
 
       <Status id="onlyBadge" onClick={() => {}}>
-        <Status.Body badge="text" />
+        <Status.Template badge="text" />
       </Status>
 
       <MenuPanel />
 
       <Status id="onlyIcon" onClick={() => {}}>
-        <Status.Body icon={<ListAltIcon />} />
+        <Status.Template icon={<ListAltIcon />} />
       </Status>
 
-      <ChatClient />
+      <ChatClient /> */}
 
-      <KeyboardShortcuts />
+      {showMenu && <MenuPanel {...{ showShortcuts, setShowShortcuts }} />}
+      {showShortcuts && <KeyboardShortcuts />}
 
-      <SpeedMonitor /> */}
+      <SpeedMonitor />
 
-      <ControlPanel {...{ variant, setVariant, fullWidth, setFullWidth, margin, setMargin, width,
+      <ControlPanel {...{ variant, setVariant, showMenu, setShowMenu, fullWidth, setFullWidth, margin, setMargin, width,
         setWidth, hasBorder, setHasBorder, position, setPosition }} />
     </IndustrialProvider>
   </>

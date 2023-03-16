@@ -72,7 +72,7 @@ export default function () {
   }, [requests])
 
   return <Status id="tooltipAndText2Status"  secondary {...{ tooltip }}>
-    <Status.Body style={{ minWidth: '150px' }} {...{ badge }}
+    <Status.Template style={{ minWidth: '150px' }} {...{ badge }}
       icon={<NetworkCheckIcon color="primary" />}
       text="Network"
     />

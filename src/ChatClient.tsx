@@ -92,16 +92,16 @@ export default function () {
         content
       } as StatusOptionsProps}
     >
-      <Status.Body {...{ badge }}
+      <Status.Template {...{ badge }}
         icon={<ChatOutlinedIcon />}
         childrenOrder = {5}
         text="Chats" >
         <Fragment>
-          <Status.Body mask image={'https://avatars.githubusercontent.com/u/79695292?v=4'}/>
-          <Status.Body mask image={'https://avatars.githubusercontent.com/u/11871180?v=4'}/>
-          <Status.Body mask image={'https://avatars.githubusercontent.com/u/11874180?v=4'}/>
+          <Status.Template mask image={'https://avatars.githubusercontent.com/u/79695292?v=4'}/>
+          <Status.Template mask image={'https://avatars.githubusercontent.com/u/11871180?v=4'}/>
+          <Status.Template mask image={'https://avatars.githubusercontent.com/u/11874180?v=4'}/>
         </Fragment>
-      </Status.Body>
+      </Status.Template>
     </Status>
   </>
 

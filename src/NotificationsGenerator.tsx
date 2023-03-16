@@ -126,7 +126,7 @@ export default function ({
       }}
       tooltip='Iframe'
     >
-      <Status.Body icon={<CircleNotificationsOutlinedIcon />} text="Notifications Generator" />
+      <Status.Template icon={<CircleNotificationsOutlinedIcon />} text="Notifications Generator" />
     </Status>
   </>
 

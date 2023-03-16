@@ -24,6 +24,8 @@ export default function ({
   setVariant,
   fullWidth,
   setFullWidth,
+  showMenu,
+  setShowMenu,
   margin,
   setMargin,
   width,
@@ -37,6 +39,8 @@ export default function ({
 	setVariant: any,
 	fullWidth: boolean,
 	setFullWidth: any,
+  showMenu: boolean,
+  setShowMenu: any,
 	margin: string,
 	setMargin: any,
 	width: string,
@@ -126,6 +130,7 @@ export default function ({
         padding: '16px',
         gap: '16px'
       }}>
+        {toggleBlock('Show Menu', showMenu, setShowMenu)}
         {toggleBlock('Border', hasBorder, setHasBorder)}
         {toggleBlock('FullWidth', fullWidth, setFullWidth)}
         {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}
