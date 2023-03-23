@@ -36,14 +36,14 @@ const text = [
 function App() {
   const selectionRef = createRef<any>()
   const [selectedText, setSelectedText] = useState('')
-  const [width, setWidth] = useState('90%')
+  const [width, setWidth] = useState('100%')
   const [margin, setMargin] = useState('0px%')
 
-  const [position, setPosition] = useState<PlacementPosition>(PlacementPosition.TOP)
+  const [position, setPosition] = useState<PlacementPosition>(PlacementPosition.BOTTOM)
   const [variant, setVariant] = useState<'default' | 'outlined'>('default')
   const [hasBorder, setHasBorder] = useState(true)
   const [showShortcuts, setShowShortcuts] = useState(false)
-  const [showMenu, setShowMenu] = useState(false)
+  const [showMenu, setShowMenu] = useState(true)
   const [fullWidth, setFullWidth] = useState(false)
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
   const [progress, setProgress] = useState(0)
