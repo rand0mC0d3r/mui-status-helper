@@ -141,7 +141,7 @@ function App() {
       {showMenu && <MenuPanel {...{ showShortcuts, setShowShortcuts }} />}
       {showShortcuts && <KeyboardShortcuts />}
 
-      <SpeedMonitor />
+      {/* <SpeedMonitor /> */}
 
       <ControlPanel {...{ variant, setVariant, showMenu, setShowMenu, fullWidth, setFullWidth, margin, setMargin, width,
         setWidth, hasBorder, setHasBorder, position, setPosition }} />

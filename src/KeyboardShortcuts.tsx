@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import { Box } from '@mui/material'
 import { Keyboard, KeyboardHelper, Status, useShortcuts } from 'mui-industrial'
@@ -17,13 +18,13 @@ export default function () {
   </Box>
 
   return <>
-    <Keyboard
+    {/* <Keyboard
       id='keyboardShortcut'
       label='Keyboard shortcuts'
       char="K"
       ctrlKey={true}
       onTrigger={() => setOpen(!open)}
-    />
+    /> */}
     <Status {...{ tooltip: <div>test <KeyboardHelper shortcutId='keyboardShortcut' /> </div> }}
       id="kbdShortcuts"
       options={{
