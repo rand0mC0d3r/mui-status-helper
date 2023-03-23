@@ -1,4 +1,5 @@
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
+import Crop32OutlinedIcon from '@mui/icons-material/Crop32Outlined'
 import EditAttributesIcon from '@mui/icons-material/EditAttributes'
 import { Box } from '@mui/material'
 import { KeyboardHelper, Status, useRegisterShortcut, useShortcuts } from 'mui-industrial'
@@ -9,7 +10,8 @@ import './App.css'
 export default function () {
   const shortcuts = useShortcuts()
   const [open, setOpen] = useState<boolean>(false)
-  const [edit, setEdit] = useState<boolean>(false)
+  const [edit, setEdit] = useState<boolean>(true)
+  const [asChip, setAsChip] = useState<boolean>(true)
   const { handleKeyboardRegister, handleKeyboardDeRegister } =  useRegisterShortcut()
 
   const content = <Box display={'flex'} flexDirection="column" justifyItems={'flex-start'}>
@@ -19,7 +21,7 @@ export default function () {
       display='flex'
       justifyContent={'space-between'}
     >
-      {shortcut?.label || 'unlabeled'} <KeyboardHelper hasOverride shortcutId={shortcut.id} />
+      {shortcut?.label || 'unlabeled'} <KeyboardHelper hasOverride={edit} asChip={asChip} shortcutId={shortcut.id} />
     </Box>)}
   </Box>
 
@@ -50,6 +52,11 @@ export default function () {
             icon: <EditAttributesIcon color={edit ? 'primary' : 'action'} />,
             title: 'Edit Shortcuts',
             onClick: () => setEdit(prev => !prev)
+          },
+          {
+            icon: <Crop32OutlinedIcon color={asChip ? 'primary' : 'action'} />,
+            title: 'As chips',
+            onClick: () => setAsChip(prev => !prev)
           }
         ]
       } as StatusPopperProps,
