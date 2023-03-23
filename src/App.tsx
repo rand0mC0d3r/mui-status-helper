@@ -115,7 +115,7 @@ function App() {
       variant={variant}
     >
 
-      {/* <Status id="tooltipAndText4Status" >
+      <Status id="tooltipAndText4Status" >
         <Status.Template childrenOrder={3} icon={<ListAltIcon />} badge="text"
           text="progress">
           <LinearProgress style={{ width: '60px', height: '12px' }} />
@@ -130,18 +130,18 @@ function App() {
         <Status.Template badge="text" />
       </Status>
 
-      <MenuPanel />
+      {/* <MenuPanel /> */}
 
       <Status id="onlyIcon" onClick={() => {}}>
         <Status.Template icon={<ListAltIcon />} />
       </Status>
 
-      <ChatClient /> */}
+      <ChatClient />
 
       {showMenu && <MenuPanel/>}
       <KeyboardShortcuts />
 
-      {/* <SpeedMonitor /> */}
+      <SpeedMonitor />
 
       <ControlPanel {...{ variant, setVariant, showMenu, setShowMenu, fullWidth, setFullWidth, margin, setMargin, width,
         setWidth, hasBorder, setHasBorder, position, setPosition }} />

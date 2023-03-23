@@ -1,14 +1,14 @@
-/* eslint-disable no-unused-vars */
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import { Box } from '@mui/material'
-import { KeyboardHelper, Status, useShortcuts } from 'mui-industrial'
+import { KeyboardHelper, Status, useRegisterShortcut, useShortcuts } from 'mui-industrial'
 import { PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 export default function () {
   const shortcuts = useShortcuts()
   const [open, setOpen] = useState<boolean>(false)
+  const { handleKeyboardRegister, handleKeyboardDeRegister } =  useRegisterShortcut()
 
   const content = <Box display={'flex'} flexDirection="column" justifyItems={'flex-start'}>
     {shortcuts.map(shortcut => <Box key={shortcut.id} style={{ padding: '8px 16px' }} display='flex'
@@ -17,28 +17,28 @@ export default function () {
     </Box>)}
   </Box>
 
-  return <>
-    {/* <Keyboard
-      id='keyboardShortcut'
-      label='Keyboard shortcuts'
-      char="K"
-      ctrlKey={true}
-      onTrigger={() => setOpen(!open)}
-    /> */}
-    <Status {...{ tooltip: <div>test <KeyboardHelper shortcutId='keyboardShortcut' /> </div> }}
-      id="kbdShortcuts"
-      options={{
-        as: StatusType.POPPER,
-        popper: {
-          width: PopperWidth.SM,
-        } as StatusPopperProps,
-        title: 'Keyboard Shortcuts',
-        open,
-        content
-      } as StatusOptionsProps}
-    >
-      <Status.Template icon={<ChatOutlinedIcon />} text="Shortcuts" />
-    </Status>
-  </>
+  useEffect(() => {
+    handleKeyboardRegister({ id: 'bkdShortcut', ctrlKey: true, char: 'K', onTrigger: () => setOpen((prev) => !prev), label: 'Toggle Shortcuts' })
 
+    return () => {
+      handleKeyboardDeRegister('bkdShortcut')
+    }
+  }, [])
+
+  return <Status {...{ tooltip: <div>test <KeyboardHelper shortcutId='keyboardShortcut' /> </div> }}
+    id="kbdShortcuts"
+    secondary
+    order={99}
+    options={{
+      as: StatusType.POPPER,
+      popper: {
+        width: PopperWidth.SM,
+      } as StatusPopperProps,
+      title: 'Keyboard Shortcuts',
+      open,
+      content
+    } as StatusOptionsProps}
+  >
+    <Status.Template icon={<ChatOutlinedIcon />} text="Shortcuts" />
+  </Status>
 }

@@ -14,7 +14,7 @@ const items = [
 ]
 
 export default function () {
-  const { handleKeyboardAnnouncement, handleKeyboardsDestroy } =  useRegisterShortcut()
+  const { handleKeyboardRegister, handleKeyboardsDeRegister } =  useRegisterShortcut()
   const [open, setOpen] = useState(false)
 
   const triggers = (kbdId: string, kbdText: any) => {
@@ -23,16 +23,16 @@ export default function () {
   }
 
   useEffect(() => {
-    handleKeyboardAnnouncement({ id: 'menuShortcut', ctrlKey: true, altKey: true, char: 'M', onTrigger: () => setOpen((prev) => !prev), label: 'Open Menu' })
+    handleKeyboardRegister({ id: 'menuShortcut', ctrlKey: true, altKey: true, char: 'M', onTrigger: () => setOpen((prev) => !prev), label: 'Open Menu' })
     items
       .filter(item => item.type !== 'divider')
       .filter(({ id, char }) => !!id && !!char)
       .map(({ id, char, altKey, metaKey, ctrlKey, shiftKey, text }) =>
-        handleKeyboardAnnouncement({ id: `${id || text}`, altKey, metaKey, ctrlKey, shiftKey, char, onTrigger: () => triggers(`${id}`, text), label: text })
+        handleKeyboardRegister({ id: `${id || text}`, altKey, metaKey, ctrlKey, shiftKey, char, onTrigger: () => triggers(`${id}`, text), label: text })
       )
 
     return () => {
-      handleKeyboardsDestroy(['menuShortcut', ...items.filter(i => i.type !== 'divider').map(i => `${i.id}`)])
+      handleKeyboardsDeRegister(['menuShortcut', ...items.filter(i => i.type !== 'divider').map(i => `${i.id}`)])
     }
   }, [])
 
