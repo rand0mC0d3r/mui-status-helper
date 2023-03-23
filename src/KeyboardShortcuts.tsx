@@ -18,7 +18,13 @@ export default function () {
   </Box>
 
   useEffect(() => {
-    handleKeyboardRegister({ id: 'bkdShortcut', ctrlKey: true, char: 'K', onTrigger: () => setOpen((prev) => !prev), label: 'Toggle Shortcuts' })
+    handleKeyboardRegister({
+      id: 'bkdShortcut',
+      ctrlKey: true,
+      char: 'K',
+      onTrigger: () => setOpen((prev) => !prev),
+      label: 'Toggle Shortcuts'
+    })
 
     return () => {
       handleKeyboardDeRegister('bkdShortcut')
