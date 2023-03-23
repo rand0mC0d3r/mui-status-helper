@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import { Box } from '@mui/material'
-import { Keyboard, KeyboardHelper, Status, useShortcuts } from 'mui-industrial'
+import { KeyboardHelper, Status, useShortcuts } from 'mui-industrial'
 import { PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
 import { useState } from 'react'
 import './App.css'

@@ -11,15 +11,14 @@ const items = [
   { id: 'paste', type: 'item', icon: <ContentPaste fontSize="small" />, text: 'Paste', char: 'V', ctrlKey: true, shiftKey: true,  metaKey: true },
   { type: 'divider' },
   { id: 'webClipboard', type: 'item', icon: <Cloud fontSize="small" />, text: 'Web Clipboard', char: 'W', ctrlKey: true, altKey: true },
-  { id: 'showShortcuts', type: 'item', icon: <Cloud fontSize="small" />, text: 'Show Shortcuts', char: 'S', shiftKey: true, altKey: true },
 ]
 
-export default function ({ showShortcuts, setShowShortcuts } : { showShortcuts: boolean, setShowShortcuts: (showShortcuts: boolean) => void }) {
+export default function () {
   const { handleKeyboardAnnouncement, handleKeyboardsDestroy } =  useRegisterShortcut()
   const [open, setOpen] = useState(false)
 
   const triggers = (kbdId: string, kbdText: any) => {
-    kbdId === 'showShortcuts' ? setShowShortcuts(!showShortcuts) : console.log(`menu ${kbdText}`)
+    console.log(`menu ${kbdText}`)
     setOpen(false)
   }
 

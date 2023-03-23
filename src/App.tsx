@@ -138,8 +138,8 @@ function App() {
 
       <ChatClient /> */}
 
-      {showMenu && <MenuPanel {...{ showShortcuts, setShowShortcuts }} />}
-      {showShortcuts && <KeyboardShortcuts />}
+      {showMenu && <MenuPanel/>}
+      <KeyboardShortcuts />
 
       {/* <SpeedMonitor /> */}
 
