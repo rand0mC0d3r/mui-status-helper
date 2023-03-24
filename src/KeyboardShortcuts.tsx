@@ -50,6 +50,7 @@ export default function () {
       as: StatusType.POPPER,
       popper: {
         width: PopperWidth.SM,
+        onClose: () => setOpen(false),
         actions: [
           {
             icon: <EditAttributesIcon color={edit ? 'primary' : 'action'} />,

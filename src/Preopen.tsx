@@ -10,8 +10,10 @@ import { useEffect, useState } from 'react'
 import './App.css'
 
 const statusId = 'preOpen'
+const kbdId = 'preLogin'
 
 export default function () {
+  const { handleKeyboardRegister, handleKeyboardDeRegister } =  useRegisterShortcut()
   const [open, setOpen] = useState<boolean>(true)
 
   const content = <Box
@@ -23,8 +25,22 @@ export default function () {
     Login buttons...
   </Box>
 
+  useEffect(() => {
+    handleKeyboardRegister({
+      id: kbdId,
+      ctrlKey: true,
+      char: 'L',
+      onTrigger: () => setOpen((prev) => !prev),
+      label: 'Toggle Login'
+    })
+
+    return () => {
+      handleKeyboardDeRegister(kbdId)
+    }
+  }, [])
+
   return <>
-    <Status {...{ tooltip: 'Login into Google/Facebook' }}
+    <Status {...{ tooltip: <>Login into Google/Facebook <KeyboardHelper shortcutId={kbdId} /></> }}
       id={statusId}
       highlight={Highlight.SECONDARY}
       order={-5}
@@ -33,6 +49,7 @@ export default function () {
         as: StatusType.POPPER,
         popper: {
           width: PopperWidth.SM,
+          onClose: () => setOpen(false)
         } as StatusPopperProps,
         title: 'You need to login to proceed...',
         open,
