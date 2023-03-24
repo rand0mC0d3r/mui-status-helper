@@ -1,17 +1,19 @@
-import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import Crop32OutlinedIcon from '@mui/icons-material/Crop32Outlined'
 import EditAttributesIcon from '@mui/icons-material/EditAttributes'
+import KeyboardIcon from '@mui/icons-material/Keyboard'
 import { Box } from '@mui/material'
 import { KeyboardHelper, Status, useRegisterShortcut, useShortcuts } from 'mui-industrial'
 import { PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
 import { useEffect, useState } from 'react'
 import './App.css'
 
+const kbdId = 'bkdShortcut'
+
 export default function () {
   const shortcuts = useShortcuts()
   const [open, setOpen] = useState<boolean>(false)
-  const [edit, setEdit] = useState<boolean>(true)
-  const [asChip, setAsChip] = useState<boolean>(true)
+  const [edit, setEdit] = useState<boolean>(false)
+  const [asChip, setAsChip] = useState<boolean>(false)
   const { handleKeyboardRegister, handleKeyboardDeRegister } =  useRegisterShortcut()
 
   const content = <Box display={'flex'} flexDirection="column" justifyItems={'flex-start'}>
@@ -27,7 +29,7 @@ export default function () {
 
   useEffect(() => {
     handleKeyboardRegister({
-      id: 'bkdShortcut',
+      id: kbdId,
       ctrlKey: true,
       char: 'K',
       onTrigger: () => setOpen((prev) => !prev),
@@ -35,14 +37,15 @@ export default function () {
     })
 
     return () => {
-      handleKeyboardDeRegister('bkdShortcut')
+      handleKeyboardDeRegister(kbdId)
     }
   }, [])
 
-  return <Status {...{ tooltip: <div>test <KeyboardHelper shortcutId='keyboardShortcut' /> </div> }}
-    id="kbdShortcuts"
+  return <Status {...{ tooltip: <>View/Change Keyboard Shortcuts <KeyboardHelper shortcutId={kbdId} /> </> }}
+    id={kbdId}
     secondary
     order={99}
+    onClick={() => setOpen(prev => !prev)}
     options={{
       as: StatusType.POPPER,
       popper: {
@@ -65,6 +68,6 @@ export default function () {
       content
     } as StatusOptionsProps}
   >
-    <Status.Template icon={<ChatOutlinedIcon />} badge={shortcuts.length} text="Shortcuts" />
+    <Status.Template icon={<KeyboardIcon />} badge={shortcuts.length} text="Shortcuts" />
   </Status>
 }

@@ -21,6 +21,7 @@ import ChatClient from './ChatClient'
 import ControlPanel from './ControlPanel'
 import KeyboardShortcuts from './KeyboardShortcuts'
 import MenuPanel from './MenuPanel'
+import Preopen from './Preopen'
 // import NotificationsGenerator from './NotificationsGenerator'
 import SpeedMonitor from './SpeedMonitor'
 
@@ -105,7 +106,7 @@ function App() {
 
   return <>
     <IndustrialProvider
-      debug
+      // debug
       fullWidth={fullWidth}
       hasLock={true}
       hasBorder={hasBorder}
@@ -130,18 +131,15 @@ function App() {
         <Status.Template badge="text" />
       </Status> */}
 
-      <MenuPanel />
-
-      {/* <Status id="onlyIcon" onClick={() => {}}>
+      <Status id="onlyIcon" onClick={() => {}}>
         <Status.Template icon={<ListAltIcon />} />
       </Status>
 
-      <ChatClient />
-
-      {showMenu && <MenuPanel/>} */}
+      <MenuPanel />
+      {/* <ChatClient /> */}
       <KeyboardShortcuts />
-
-      {/* <SpeedMonitor /> */}
+      <Preopen />
+      <SpeedMonitor />
 
       <ControlPanel {...{ variant, setVariant, showMenu, setShowMenu, fullWidth, setFullWidth, margin, setMargin, width,
         setWidth, hasBorder, setHasBorder, position, setPosition }} />
