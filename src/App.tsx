@@ -45,7 +45,6 @@ function App() {
   const [variant, setVariant] = useState<'default' | 'outlined'>('default')
   const [hasBorder, setHasBorder] = useState(true)
   const [showShortcuts, setShowShortcuts] = useState(false)
-  const [showMenu, setShowMenu] = useState(true)
   const [fullWidth, setFullWidth] = useState(false)
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
   const [progress, setProgress] = useState(0)
@@ -139,11 +138,12 @@ function App() {
       <MUI5Console />
       <MenuPanel />
       {/* <ChatClient /> */}
-      {/* <KeyboardShortcuts /> */}
+      <KeyboardShortcuts />
       <Preopen />
-      {/* <SpeedMonitor /> */}
+      <SpeedMonitor />
 
-      <ControlPanel {...{ variant, setVariant, showMenu, setShowMenu, fullWidth, setFullWidth, margin, setMargin, width,
+      <ControlPanel {...{ variant, setVariant,
+        fullWidth, setFullWidth, margin, setMargin, width,
         setWidth, hasBorder, setHasBorder, position, setPosition }} />
     </IndustrialProvider>
   </>

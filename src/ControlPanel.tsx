@@ -1,13 +1,16 @@
 /* eslint-disable no-unused-vars */
+import BrandingWatermarkOutlinedIcon from '@mui/icons-material/BrandingWatermarkOutlined'
 import FileCopyIcon from '@mui/icons-material/FileCopy'
 import InventoryIcon from '@mui/icons-material/Inventory'
+import LogoDevOutlinedIcon from '@mui/icons-material/LogoDevOutlined'
 import PersonIcon from '@mui/icons-material/Person'
 import ReplayIcon from '@mui/icons-material/Replay'
-import { Box, Button, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography } from '@mui/material'
 import Checkbox from '@mui/material/Checkbox'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import { ChangeEvent, createRef, MouseEvent, useState } from 'react'
+import { KeyboardHelper } from 'mui-industrial'
+import { ChangeEvent, createRef, MouseEvent, SyntheticEvent, useState } from 'react'
 import './App.css'
 
 const text = [
@@ -24,8 +27,6 @@ export default function ({
   setVariant,
   fullWidth,
   setFullWidth,
-  showMenu,
-  setShowMenu,
   margin,
   setMargin,
   width,
@@ -39,8 +40,6 @@ export default function ({
 	setVariant: any,
 	fullWidth: boolean,
 	setFullWidth: any,
-  showMenu: boolean,
-  setShowMenu: any,
 	margin: string,
 	setMargin: any,
 	width: string,
@@ -56,6 +55,12 @@ export default function ({
   const [progress, setProgress] = useState(0)
 
   const [open, setOpen] = useState(false)
+
+  const [expanded, setExpanded] = useState<boolean>(false)
+
+  const handleChange = () => {
+    setExpanded(p => !p)
+  }
 
   const individualTooltip = (title = 'Anonymous User', icon = <PersonIcon/>) => <>
     <Box display='flex' alignItems="center" style={{ gap: '8px' }}>
@@ -114,45 +119,58 @@ export default function ({
       style={{
         alignSelf: 'center',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'center',
         width: '80%',
         height: '100%',
         gap: '16px',
         alignItems: 'center'
       }}>
-      <div style={{
-        alignItems: 'stretch',
-        flexDirection: 'column',
-        display: 'flex',
-        border: '1px solid #888',
-        borderRadius: '8px',
-        padding: '16px',
-        gap: '16px'
-      }}>
-        {toggleBlock('Show Menu', showMenu, setShowMenu)}
-        {toggleBlock('Border', hasBorder, setHasBorder)}
-        {toggleBlock('FullWidth', fullWidth, setFullWidth)}
-        {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}
-        {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
-        {toggleOptions('Width', ['75vw', '100%', '60%', '1400px'], setWidth, width)}
-        {toggleOptions('Margin', ['0px', '4px', '16px'], setMargin, margin)}
-      </div>
-      <div style={{ alignItems: 'center', flexDirection: 'column', display: 'flex', gap: '16px' }}>
-        <Button onClick={() => window.location.reload()} variant='contained' color="primary"
-          fullWidth>
-          <ReplayIcon /> Reload
-        </Button>
-        <textarea onMouseUp={() => {
-          let textVal = selectionRef.current
-          let cursorStart = textVal.selectionStart
-          let cursorEnd = textVal.selectionEnd
-          let selectedText = text.substring(cursorStart,cursorEnd)
-          setSelectionIndexes({ start: cursorStart, end: cursorEnd })
-          setSelectedText(selectedText)
-        }} ref={selectionRef} style={{ width: '100%', height: '400px' }}
-        defaultValue={text.trim()} />
-      </div>
+      <Accordion expanded={expanded} onChange={handleChange}>
+        <AccordionSummary>Control Panel</AccordionSummary>
+        <AccordionDetails>
+          <div style={{
+            alignItems: 'stretch',
+            flexDirection: 'column',
+            display: 'flex',
+            border: '1px solid #888',
+            borderRadius: '8px',
+            padding: '16px',
+            gap: '16px'
+          }}>
+            {toggleBlock('Border', hasBorder, setHasBorder)}
+            {toggleBlock('FullWidth', fullWidth, setFullWidth)}
+            {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}
+            {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
+            {toggleOptions('Width', ['75vw', '100%', '60%', '1400px'], setWidth, width)}
+            {toggleOptions('Margin', ['0px', '4px', '16px'], setMargin, margin)}
+          </div>
+          <div style={{ alignItems: 'center', flexDirection: 'column', display: 'flex', gap: '16px' }}>
+            <Button onClick={() => window.location.reload()} variant='contained' color="primary"
+              fullWidth>
+              <ReplayIcon /> Reload
+            </Button>
+            <textarea onMouseUp={() => {
+              let textVal = selectionRef.current
+              let cursorStart = textVal.selectionStart
+              let cursorEnd = textVal.selectionEnd
+              let selectedText = text.substring(cursorStart,cursorEnd)
+              setSelectionIndexes({ start: cursorStart, end: cursorEnd })
+              setSelectedText(selectedText)
+            }} ref={selectionRef} style={{ width: '100%', height: '400px' }}
+            defaultValue={text.trim()} />
+          </div>
+        </AccordionDetails>
+      </Accordion>
+
+      {!expanded && <>
+        <BrandingWatermarkOutlinedIcon color="action" style={{ fontSize: '150px' }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Typography variant="subtitle2" color="textPrimary">Check shortcuts</Typography>
+          <KeyboardHelper hasTooltip={true} asChip shortcutId='bkdShortcut' />
+        </div>
+      </>}
+
     </div>
   </>
 }
