@@ -9,7 +9,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography 
 import Checkbox from '@mui/material/Checkbox'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import { KeyboardHelper } from 'mui-industrial'
+import { KeyboardHelper, useRegisterShortcut } from 'mui-industrial'
 import { ChangeEvent, createRef, MouseEvent, SyntheticEvent, useState } from 'react'
 import './App.css'
 
@@ -49,6 +49,7 @@ export default function ({
 	position: string,
 	setPosition: any,
 }) {
+  const { handleKeyboardRegister, handleKeyboardDeRegister, handleKeyboardGetLabel } =  useRegisterShortcut()
   const selectionRef = createRef<any>()
   const [selectedText, setSelectedText] = useState('')
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
@@ -114,9 +115,14 @@ export default function ({
     </div>
   }
 
-  const previewShortcuts = (shortcutId: string, label: string) => {
+  const previewShortcuts = (shortcutId: string) => {
     return <div style={{ display: 'flex', width: '300px', alignItems: 'center', gap: '12px' }}>
-      <Typography style={{ flex: '1 0 auto', textAlign: 'right', alignSelf: 'flex-end' }} variant="subtitle2" color="textSecondary">{label}</Typography>
+      <Typography
+        style={{ flex: '1 0 auto', textAlign: 'right', alignSelf: 'flex-end' }}
+        variant="subtitle2"
+        color="textSecondary">
+        {handleKeyboardGetLabel(shortcutId)}
+      </Typography>
       <div style={{ flex: '0 0 130px' }}>
         <KeyboardHelper
           hasOverride
@@ -140,6 +146,18 @@ export default function ({
         gap: '16px',
         alignItems: 'center'
       }}>
+
+      {!expanded && <Box display={'flex'} flexDirection={'column'} alignItems="center"
+        style={{ gap: '32px' }}>
+        <BrandingWatermarkOutlinedIcon color="action" style={{ fontSize: '150px' }} />
+        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}
+          style={{ gap: '16px' }}>
+          {previewShortcuts('bkdShortcut')}
+          {previewShortcuts('menuShortcut')}
+          {previewShortcuts('console')}
+        </Box>
+      </Box>}
+
       <Accordion expanded={expanded} onChange={handleChange}>
         <AccordionSummary>Control Panel</AccordionSummary>
         <AccordionDetails>
@@ -177,11 +195,7 @@ export default function ({
         </AccordionDetails>
       </Accordion>
 
-      {!expanded && <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-        <BrandingWatermarkOutlinedIcon color="action" style={{ fontSize: '150px' }} />
-        {previewShortcuts('bkdShortcut', 'Check shortcuts')}
-        {previewShortcuts('menuShortcut', 'Open Menu')}
-      </div>}
+
 
     </div>
   </>

@@ -19,6 +19,8 @@ import { ChangeEvent, createRef, MouseEvent, useState } from 'react'
 import './App.css'
 import ChatClient from './ChatClient'
 import ControlPanel from './ControlPanel'
+import GithubPage from './GithubPage'
+import GsmArena from './GsmArena'
 import KeyboardShortcuts from './KeyboardShortcuts'
 import MenuPanel from './MenuPanel'
 import MUI5Console from './MUI5Console'
@@ -136,9 +138,11 @@ function App() {
         <Status.Template icon={<ListAltIcon />} />
       </Status> */}
 
+      <GithubPage />
       <NotificationsGenerator />
       <MUI5Console />
       <MenuPanel />
+      <GsmArena />
       {/* <ChatClient /> */}
       <KeyboardShortcuts />
       <Preopen />

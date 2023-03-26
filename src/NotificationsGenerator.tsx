@@ -4,7 +4,7 @@ import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined'
 import CircleNotificationsOutlinedIcon from '@mui/icons-material/CircleNotificationsOutlined'
 import ClearAllOutlinedIcon from '@mui/icons-material/ClearAllOutlined'
 import { Box, Button } from '@mui/material'
-import { Status, StatusType, useRegisterSnackbar, useSnackbars } from 'mui-industrial'
+import { SnackbarHelper, Status, StatusType, useRegisterSnackbar, useSnackbars } from 'mui-industrial'
 import { PopoverActions, PopperWidth, Severity } from 'mui-industrial/lib/esm/index.types'
 import { useState } from 'react'
 import './App.css'
@@ -16,7 +16,7 @@ export default function ({
 }) {
   const { handleSnackbarRegister, handleSnackbarCleaning } =  useRegisterSnackbar()
   const snackbars =  useSnackbars()
-  const [open, setOpen] = useState<boolean>(true)
+  const [open, setOpen] = useState<boolean>(false)
 
   const generateInfoNotification = (message = 'Sample Info Notification') => {
     handleSnackbarRegister({
@@ -144,7 +144,7 @@ export default function ({
         style={{ gap: '8px', padding: '16px' }}
         justifyContent={'stretch'}>
 
-        {snackbars.map(snackbar => <div style={{ border: '1px solid #CCC' }}>{JSON.stringify(snackbar)}</div>)}
+        {snackbars.map(snackbar => <SnackbarHelper snackbarId={snackbar.id} />)}
 
       </Box>
     }}
