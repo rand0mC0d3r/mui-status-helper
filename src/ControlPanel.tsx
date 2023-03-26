@@ -114,6 +114,19 @@ export default function ({
     </div>
   }
 
+  const previewShortcuts = (shortcutId: string, label: string) => {
+    return <div style={{ display: 'flex', width: '300px', alignItems: 'center', gap: '12px' }}>
+      <Typography style={{ flex: '1 0 auto', textAlign: 'right', alignSelf: 'flex-end' }} variant="subtitle2" color="textSecondary">{label}</Typography>
+      <div style={{ flex: '0 0 130px' }}>
+        <KeyboardHelper
+          hasOverride
+          asChip
+          hasTooltip={true}
+          shortcutId={shortcutId} />
+      </div>
+    </div>
+  }
+
   return <>
     <div
       style={{
@@ -121,8 +134,9 @@ export default function ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        width: '80%',
+        width: '100%',
         height: '100%',
+        // backgroundColor: '#eee',
         gap: '16px',
         alignItems: 'center'
       }}>
@@ -163,13 +177,11 @@ export default function ({
         </AccordionDetails>
       </Accordion>
 
-      {!expanded && <>
+      {!expanded && <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <BrandingWatermarkOutlinedIcon color="action" style={{ fontSize: '150px' }} />
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Typography variant="subtitle2" color="textPrimary">Check shortcuts</Typography>
-          <KeyboardHelper hasTooltip={true} asChip shortcutId='bkdShortcut' />
-        </div>
-      </>}
+        {previewShortcuts('bkdShortcut', 'Check shortcuts')}
+        {previewShortcuts('menuShortcut', 'Open Menu')}
+      </div>}
 
     </div>
   </>

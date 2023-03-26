@@ -14,7 +14,7 @@ const kbdId = 'preLogin'
 
 export default function () {
   const { handleKeyboardRegister, handleKeyboardDeRegister } =  useRegisterShortcut()
-  const [open, setOpen] = useState<boolean>(true)
+  const [open, setOpen] = useState<boolean>(false)
 
   const content = <Box
     display={'flex'}

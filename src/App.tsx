@@ -22,6 +22,7 @@ import ControlPanel from './ControlPanel'
 import KeyboardShortcuts from './KeyboardShortcuts'
 import MenuPanel from './MenuPanel'
 import MUI5Console from './MUI5Console'
+import NotificationsGenerator from './NotificationsGenerator'
 import Preopen from './Preopen'
 // import NotificationsGenerator from './NotificationsGenerator'
 import SpeedMonitor from './SpeedMonitor'
@@ -135,6 +136,7 @@ function App() {
         <Status.Template icon={<ListAltIcon />} />
       </Status> */}
 
+      <NotificationsGenerator />
       <MUI5Console />
       <MenuPanel />
       {/* <ChatClient /> */}
