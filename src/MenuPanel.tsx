@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Cloud, ContentCopy, ContentCut, ContentPaste, GridView } from '@mui/icons-material'
 import { Divider, ListItemIcon, ListItemText, MenuItem, MenuList } from '@mui/material'
-import { KeyboardHelper, Status, StatusOptionsProps, StatusType, useRegisterShortcut } from 'mui-industrial'
+import { KeyboardHelper, Status, StatusType, useRegisterShortcut } from 'mui-industrial'
 import { useEffect, useState } from 'react'
 import './App.css'
 
@@ -22,9 +22,26 @@ export default function () {
     setOpen(false)
   }
 
+  const content = <MenuList>
+    {items.map((item, index) => item.type === 'divider'
+    ? <Divider key={`${item.type}-${item.label || index}`} />
+    : <MenuItem key={`${item.type}-${item.label || index}`} onClick={() => triggers(item.label)} >
+      <ListItemIcon>{item.icon}</ListItemIcon>
+      <ListItemText style={{ width: '250px' }}>{item.label}</ListItemText>
+      {item?.id && <KeyboardHelper hasTooltip={true} shortcutId={item.id} />}
+    </MenuItem>)}
+  </MenuList>
+
   useEffect(() => {
     handleKeyboardsRegister([
-      { id: 'menuShortcut', ctrlKey: true, altKey: true, char: 'M', onTrigger: () => setOpen((prev) => !prev), label: 'Open Menu' },
+      {
+        id: 'menuShortcut',
+        ctrlKey: true,
+        altKey: true,
+        char: 'M',
+        onTrigger: () => setOpen((prev) => !prev),
+        label: 'Open Menu'
+      },
       ...items
         .filter(({ id }) => !!id)
         .map(({ id, char, altKey, metaKey, ctrlKey, shiftKey, label }) => {
@@ -37,36 +54,24 @@ export default function () {
     }
   }, [])
 
-  const content = <MenuList>
-    {items.map((item, index) => item.type === 'divider'
-    ? <Divider key={`${item.type}-${item.label || index}`} />
-    : <MenuItem key={`${item.type}-${item.label || index}`} onClick={() => triggers(item.label)} >
-      <ListItemIcon>{item.icon}</ListItemIcon>
-      <ListItemText style={{ width: '250px' }}>{item.label}</ListItemText>
-      {item?.id && <KeyboardHelper hasTooltip={true} shortcutId={item.id} />}
-    </MenuItem>)}
-  </MenuList>
-
-  return <>
-    <Status
-      options={ {
-        as: StatusType.POPPER,
-        popper: {
-          hasDecoration: false,
-          hasToolbar: false,
-          onClose: () => setOpen(false)
-        },
-        separators: {
-          end: true,
-        },
-        content,
-        open,
-      } as StatusOptionsProps}
-      id="menu"
-      order={-1}
-      onClick={() => setOpen((prev) => !prev)}
-      tooltip={<>Menu / Options <KeyboardHelper shortcutId={'menuShortcut'} /></>}>
-      <Status.Template {...{ icon: <GridView />, text: 'Menu' }}/>
-    </Status>
-  </>
+  return <Status
+    options={ {
+      as: StatusType.POPPER,
+      popper: {
+        hasDecoration: false,
+        hasToolbar: false,
+        onClose: () => setOpen(false)
+      },
+      separators: {
+        end: true,
+      },
+      content,
+      open,
+    }}
+    id="menu"
+    order={-2}
+    onClick={() => setOpen((prev) => !prev)}
+    tooltip={<>Menu / Options <KeyboardHelper shortcutId={'menuShortcut'} /></>}>
+    <Status.Template {...{ icon: <GridView />, text: 'Menu' }}/>
+  </Status>
 }

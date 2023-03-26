@@ -1,28 +1,22 @@
-/* eslint-disable no-unused-vars */
-import Crop32OutlinedIcon from '@mui/icons-material/Crop32Outlined'
-import EditAttributesIcon from '@mui/icons-material/EditAttributes'
-import KeyboardIcon from '@mui/icons-material/Keyboard'
+import FacebookIcon from '@mui/icons-material/Facebook'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import GoogleIcon from '@mui/icons-material/Google'
 import PasswordIcon from '@mui/icons-material/Password'
-import { Box } from '@mui/material'
-import { KeyboardHelper, Status, useRegisterShortcut, useShortcuts } from 'mui-industrial'
-import { Highlight, PopperHeight, PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
+import { Box, Typography } from '@mui/material'
+import { KeyboardHelper, Status, useRegisterShortcut } from 'mui-industrial'
+import { Highlight, PopperWidth, StatusType } from 'mui-status/lib/esm/index.types'
 import { useEffect, useState } from 'react'
 import './App.css'
 
-const statusId = 'preOpen'
+const id = 'preOpen'
 const kbdId = 'preLogin'
 
 export default function () {
   const { handleKeyboardRegister, handleKeyboardDeRegister } =  useRegisterShortcut()
   const [open, setOpen] = useState<boolean>(false)
 
-  const content = <Box
-    display={'flex'}
-    flexDirection="column"
-    justifyItems={'flex-start'}
-    style={{ padding: '8px 16px', userSelect: 'none' }}
-  >
-    Login buttons...
+  const content = <Box style={{ padding: '32px', textAlign: 'center' }}>
+    <Typography variant='subtitle2' color="textSecondary">Login buttons...</Typography>
   </Box>
 
   useEffect(() => {
@@ -39,25 +33,30 @@ export default function () {
     }
   }, [])
 
-  return <>
-    <Status {...{ tooltip: <>Login into Google/Facebook <KeyboardHelper shortcutId={kbdId} /></> }}
-      id={statusId}
-      highlight={Highlight.SECONDARY}
-      order={-5}
-      onClick={() => setOpen(p => !p)}
-      options={{
-        as: StatusType.POPPER,
-        popper: {
-          width: PopperWidth.SM,
-          onClose: () => setOpen(false)
-        } as StatusPopperProps,
-        title: 'You need to login to proceed...',
-        open,
-        content
-      } as StatusOptionsProps}
-    >
-
-      <Status.Template icon={<PasswordIcon />} text="Login" />
-    </Status>
-  </>
+  return <Status {...{ id, tooltip: <>Login into Google/Facebook <KeyboardHelper shortcutId={kbdId} /></> }}
+    highlight={Highlight.SECONDARY}
+    order={-3}
+    onClick={() => setOpen(p => !p)}
+    options={{
+      as: StatusType.POPPER,
+      popper: {
+        width: PopperWidth.SM,
+        onClose: () => setOpen(false)
+      },
+      actions: [
+        { icon: <GoogleIcon />, title: 'Login with Google', onClick: () => console.log('Google') },
+        { icon: <FacebookIcon />, title: 'Login with Facebook', onClick: () => console.log('Facebook') },
+        { icon: <GitHubIcon />, title: 'Login with GitHub', onClick: () => console.log('GitHub') }
+      ],
+      separators: {
+        end: true,
+        start: true
+      },
+      title: 'You need to login to proceed...',
+      open,
+      content
+    }}
+  >
+    <Status.Template icon={<PasswordIcon />} text="Login" />
+  </Status>
 }

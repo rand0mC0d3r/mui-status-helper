@@ -3,7 +3,7 @@ import EditAttributesIcon from '@mui/icons-material/EditAttributes'
 import KeyboardIcon from '@mui/icons-material/Keyboard'
 import { ListItemText, MenuItem, MenuList } from '@mui/material'
 import { KeyboardHelper, Status, useRegisterShortcut, useShortcuts } from 'mui-industrial'
-import { PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
+import { PopperWidth, StatusType } from 'mui-status/lib/esm/index.types'
 import { useEffect, useState } from 'react'
 import './App.css'
 
@@ -20,13 +20,8 @@ export default function () {
   const shortcuts = useShortcuts()
   const [open, setOpen] = useState<boolean>(false)
   const [edit, setEdit] = useState<boolean>(false)
-  const [asChip, setAsChip] = useState<boolean>(false)
+  const [asChip, setAsChip] = useState<boolean>(true)
   const { handleKeyboardRegister, handleKeyboardDeRegister, handleKeyboardGetLabel } =  useRegisterShortcut()
-
-  const actions = [
-    { icon: <EditAttributesIcon color={edit ? 'primary' : 'action'} />, title: i18n.actionOne, onClick: () => setEdit(prev => !prev) },
-    { icon: <Crop32OutlinedIcon color={asChip ? 'primary' : 'action'} />, title: i18n.actionTwo, onClick: () => setAsChip(prev => !prev) }
-  ]
 
   const content = <MenuList>
     {shortcuts.map(({ id }) => <MenuItem key={id} style={{ cursor: 'auto' }}>
@@ -34,18 +29,6 @@ export default function () {
       <KeyboardHelper {...{ asChip }} hasOverride={edit} shortcutId={id} />
     </MenuItem>)}
   </MenuList>
-
-  const options = {
-    as: StatusType.POPPER,
-    popper: {
-      width: PopperWidth.SM,
-      onClose: () => setOpen(false),
-      actions
-    } as StatusPopperProps,
-    title: 'Keyboard Shortcuts',
-    open,
-    content
-  } as StatusOptionsProps
 
   useEffect(() => {
     handleKeyboardRegister({ id: kbdId, ctrlKey: true, char: 'K', onTrigger: () => setOpen((prev) => !prev), label: 'Toggle Shortcuts' })
@@ -59,7 +42,20 @@ export default function () {
       order: 99,
       onClick: () => setOpen(prev => !prev),
       tooltip: <>View/Change Keyboard Shortcuts <KeyboardHelper shortcutId={kbdId} /> </>,
-      options,
+      options: {
+        as: StatusType.POPPER,
+        popper: {
+          width: PopperWidth.SM,
+          onClose: () => setOpen(false),
+        },
+        actions: [
+          { icon: <EditAttributesIcon color={edit ? 'primary' : 'action'} />, title: i18n.actionOne, onClick: () => setEdit(prev => !prev) },
+          { icon: <Crop32OutlinedIcon color={asChip ? 'primary' : 'action'} />, title: i18n.actionTwo, onClick: () => setAsChip(prev => !prev) }
+        ],
+        title: 'Keyboard Shortcuts',
+        open,
+        content
+      },
     }}
     secondary
   >

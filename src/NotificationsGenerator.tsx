@@ -9,6 +9,8 @@ import { PopoverActions, PopperWidth, Severity } from 'mui-industrial/lib/esm/in
 import { useState } from 'react'
 import './App.css'
 
+const id = 'notificationsGenerator'
+
 export default function ({
   baseDomain,
 } : {
@@ -103,50 +105,52 @@ export default function ({
     })
   }
 
-  return <Status
+  const actions = [{
+    icon: <AddAlertOutlinedIcon />,
+    title: 'Generate positive notifications',
+    onClick: () => {
+      generateInfoNotification()
+      generateSuccessNotification()
+    },
+  }, {
+    icon: <CampaignOutlinedIcon />,
+    title: 'Generate negative notifications',
+    onClick: () => {
+      generateWarningNotification()
+      generateErrorNotification()
+    },
+  }, {
+    disabled: snackbars.length === 0,
+    icon: <ClearAllOutlinedIcon />,
+    title: 'Remove all notifications',
+    onClick: () => handleSnackbarCleaning(),
+  }] satisfies PopoverActions
+
+  const content = <Box display={'flex'}
+    flexDirection={'column'}
+    alignItems={'stretch'}
+    style={{ gap: '8px', padding: '16px' }}
+    justifyContent={'stretch'}
+  >
+    {snackbars.map(snackbar => <SnackbarHelper snackbarId={snackbar.id} />)}
+  </Box>
+
+  return <Status {...{ id }}
+    order={-1}
     onClick={() => setOpen(p => !p)}
-    id="notificationsGeneratorPanel"
     options={{
+      actions,
+      open,
+      content,
+      separators: {
+        end: true,
+      },
       as: StatusType.POPPER,
       title: 'Notifications Generator',
       popper: {
         onClose: () => setOpen(false),
-        width: PopperWidth.LG,
-        actions: [
-          {
-            icon: <AddAlertOutlinedIcon />,
-            title: 'Generate positive notifications',
-            onClick: () => {
-              generateInfoNotification()
-              generateSuccessNotification()
-            },
-          },
-          {
-            icon: <CampaignOutlinedIcon />,
-            title: 'Generate negative notifications',
-            onClick: () => {
-              generateWarningNotification()
-              generateErrorNotification()
-            },
-          },
-          {
-            disabled: snackbars.length === 0,
-            icon: <ClearAllOutlinedIcon />,
-            title: 'Remove all notifications',
-            onClick: () => handleSnackbarCleaning(),
-          },
-        ] as PopoverActions
+        width: PopperWidth.MD,
       },
-      open,
-      content: <Box display={'flex'}
-        flexDirection={'column'}
-        alignItems={'stretch'}
-        style={{ gap: '8px', padding: '16px' }}
-        justifyContent={'stretch'}>
-
-        {snackbars.map(snackbar => <SnackbarHelper snackbarId={snackbar.id} />)}
-
-      </Box>
     }}
     tooltip='Iframe'
   >

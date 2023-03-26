@@ -143,7 +143,7 @@ function App() {
       <MUI5Console />
       <MenuPanel />
       <GsmArena />
-      {/* <ChatClient /> */}
+      <ChatClient />
       <KeyboardShortcuts />
       <Preopen />
       <SpeedMonitor />

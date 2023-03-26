@@ -154,8 +154,10 @@ export default function ({
           style={{ gap: '16px' }}>
           {previewShortcuts('bkdShortcut')}
           {previewShortcuts('menuShortcut')}
+          {previewShortcuts('preLogin')}
           {previewShortcuts('console')}
         </Box>
+        <Typography variant="caption" color="textSecondary">*Hint: Right-Click on a shortcut to customize it</Typography>
       </Box>}
 
       <Accordion expanded={expanded} onChange={handleChange}>

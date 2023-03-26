@@ -4,7 +4,7 @@ import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAlt
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import { Avatar, Box, Button, TextField } from '@mui/material'
 import { KeyboardHelper, Status } from 'mui-industrial'
-import { Highlight, PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
+import { Highlight, PopperHeight, PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
 import { Fragment, useEffect, useState } from 'react'
 import './App.css'
 
@@ -82,15 +82,16 @@ export default function () {
         as: StatusType.POPPER,
         popper: {
           width: PopperWidth.SM,
-          actions: [{
-            icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
-            title: 'Generate fake chats',
-            onClick: () => setFake(!fake)
-          }]
-        } as StatusPopperProps,
+          height: PopperHeight.SM,
+        },
+        actions: [{
+          icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
+          title: 'Generate fake chats',
+          onClick: () => setFake(!fake)
+        }],
         title: 'Chats',
         content
-      } as StatusOptionsProps}
+      }}
     >
       <Status.Template {...{ badge }}
         icon={<ChatOutlinedIcon />}

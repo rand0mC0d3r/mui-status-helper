@@ -3,7 +3,8 @@ import { Box, Tooltip, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { Status } from 'mui-status'
 import { useEffect, useState } from 'react'
-import './App.css'
+
+const id = 'speedMonitor'
 
 const STypography = styled(Typography)(() => ({
   borderBottom: '1px solid',
@@ -71,8 +72,9 @@ export default function () {
     return () => clearInterval(interval)
   }, [requests])
 
-  return <Status id="tooltipAndText2Status"  secondary {...{ tooltip }}>
-    <Status.Template style={{ minWidth: '150px' }} {...{ badge }}
+  return <Status {...{ id, tooltip }} secondary>
+    <Status.Template {...{ badge }}
+      style={{ minWidth: '150px' }}
       icon={<NetworkCheckIcon color="primary" />}
       text="Traffic"
     />
