@@ -18,6 +18,7 @@ import { PlacementPosition } from 'mui-industrial/lib/esm/index.types'
 import { ChangeEvent, createRef, MouseEvent, useState } from 'react'
 import './App.css'
 import ChatClient from './ChatClient'
+import Commands from './Commands'
 import ControlPanel from './ControlPanel'
 import GithubPage from './GithubPage'
 import GsmArena from './GsmArena'
@@ -26,6 +27,7 @@ import MenuPanel from './MenuPanel'
 import MUI5Console from './MUI5Console'
 import NotificationsGenerator from './NotificationsGenerator'
 import Preopen from './Preopen'
+import Search from './Search'
 // import NotificationsGenerator from './NotificationsGenerator'
 import SpeedMonitor from './SpeedMonitor'
 
@@ -138,6 +140,7 @@ function App() {
         <Status.Template icon={<ListAltIcon />} />
       </Status> */}
 
+      {/* <Search /> */}
       <GithubPage />
       <NotificationsGenerator />
       <MUI5Console />
@@ -147,6 +150,7 @@ function App() {
       <KeyboardShortcuts />
       <Preopen />
       <SpeedMonitor />
+      <Commands />
 
       <ControlPanel {...{ variant, setVariant,
         fullWidth, setFullWidth, margin, setMargin, width,

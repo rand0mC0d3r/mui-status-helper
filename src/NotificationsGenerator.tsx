@@ -105,27 +105,6 @@ export default function ({
     })
   }
 
-  const actions = [{
-    icon: <AddAlertOutlinedIcon />,
-    title: 'Generate positive notifications',
-    onClick: () => {
-      generateInfoNotification()
-      generateSuccessNotification()
-    },
-  }, {
-    icon: <CampaignOutlinedIcon />,
-    title: 'Generate negative notifications',
-    onClick: () => {
-      generateWarningNotification()
-      generateErrorNotification()
-    },
-  }, {
-    disabled: snackbars.length === 0,
-    icon: <ClearAllOutlinedIcon />,
-    title: 'Remove all notifications',
-    onClick: () => handleSnackbarCleaning(),
-  }] satisfies PopoverActions
-
   const content = <Box display={'flex'}
     flexDirection={'column'}
     alignItems={'stretch'}
@@ -139,7 +118,26 @@ export default function ({
     order={-1}
     onClick={() => setOpen(p => !p)}
     options={{
-      actions,
+      actions: [{
+        icon: <AddAlertOutlinedIcon />,
+        tooltip: 'Generate positive notifications',
+        onClick: () => {
+          generateInfoNotification()
+          generateSuccessNotification()
+        },
+      }, {
+        icon: <CampaignOutlinedIcon />,
+        tooltip: 'Generate negative notifications',
+        onClick: () => {
+          generateWarningNotification()
+          generateErrorNotification()
+        },
+      }, {
+        disabled: snackbars.length === 0,
+        icon: <ClearAllOutlinedIcon />,
+        tooltip: 'Remove all notifications',
+        onClick: () => handleSnackbarCleaning(),
+      }],
       open,
       content,
       separators: {

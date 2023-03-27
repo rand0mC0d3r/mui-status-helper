@@ -20,7 +20,7 @@ export default function () {
         actions: [{
           icon: <ScreenRotationIcon />,
           onClick: () => setType(type === StatusType.POPPER ? StatusType.CONSOLE : StatusType.POPPER),
-          title: 'Toggle type',
+          tooltip: 'Toggle type',
         }],
         title: 'GSM Arena homepage',
         content: <iframe style={{ border: '0px', width: '100%', height: '100%' }} src="https://www.gsmarena.com/"/>,

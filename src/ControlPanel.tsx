@@ -116,7 +116,7 @@ export default function ({
   }
 
   const previewShortcuts = (shortcutId: string) => {
-    return <div style={{ display: 'flex', width: '300px', alignItems: 'center', gap: '12px' }}>
+    return <div style={{ display: 'flex', width: '350px', alignItems: 'center', gap: '12px' }}>
       <Typography
         style={{ flex: '1 0 auto', textAlign: 'right', alignSelf: 'flex-end' }}
         variant="subtitle2"
@@ -149,13 +149,14 @@ export default function ({
 
       {!expanded && <Box display={'flex'} flexDirection={'column'} alignItems="center"
         style={{ gap: '32px' }}>
-        <BrandingWatermarkOutlinedIcon color="action" style={{ fontSize: '150px' }} />
+        <BrandingWatermarkOutlinedIcon color="action" style={{ fontSize: '200px' }} />
         <Box display={'flex'} flexDirection={'column'} alignItems={'center'}
           style={{ gap: '16px' }}>
           {previewShortcuts('bkdShortcut')}
           {previewShortcuts('menuShortcut')}
           {previewShortcuts('preLogin')}
           {previewShortcuts('console')}
+          {previewShortcuts('commands')}
         </Box>
         <Typography variant="caption" color="textSecondary">*Hint: Right-Click on a shortcut to customize it</Typography>
       </Box>}

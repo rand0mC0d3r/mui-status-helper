@@ -86,7 +86,7 @@ export default function () {
         },
         actions: [{
           icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
-          title: 'Generate fake chats',
+          tooltip: 'Generate fake chats',
           onClick: () => setFake(!fake)
         }],
         title: 'Chats',
