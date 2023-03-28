@@ -25,6 +25,8 @@ const text = [
 export default function ({
   variant,
   setVariant,
+  loggedIn,
+  setLoggedIn,
   fullWidth,
   setFullWidth,
   margin,
@@ -38,6 +40,8 @@ export default function ({
 } : {
 	variant: string,
 	setVariant: any,
+  loggedIn: boolean,
+  setLoggedIn: any,
 	fullWidth: boolean,
 	setFullWidth: any,
 	margin: string,
@@ -173,6 +177,7 @@ export default function ({
             padding: '16px',
             gap: '16px'
           }}>
+            {toggleBlock('Simulate logged in', loggedIn, setLoggedIn)}
             {toggleBlock('Border', hasBorder, setHasBorder)}
             {toggleBlock('FullWidth', fullWidth, setFullWidth)}
             {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}

@@ -12,31 +12,38 @@ import './App.css'
 const id = 'preOpen'
 const kbdId = 'preLogin'
 
+
+
 export default function () {
-  const { handleKeyboardRegister, handleKeyboardDeRegister } =  useRegisterShortcut()
-  const { handleCommandsRegister } =  useRegisterCommand()
+  const { handleKeyboardsRegister, handleKeyboardsDeRegister } =  useRegisterShortcut()
+  const { handleCommandsDeRegister, handleCommandsRegister } =  useRegisterCommand()
   const [open, setOpen] = useState<boolean>(false)
+
+  const kbdShortcuts = [{
+    id: kbdId,
+    ctrlKey: true,
+    char: 'L',
+    onTrigger: () => setOpen((prev) => !prev),
+    label: 'Toggle Login'
+  }]
+
+  const commands = [
+    { id: 'googleLogin', icon : <GoogleIcon />, onClick: () => console.log('Google', id), label: 'Google Login' },
+    { id: 'facebookLogin', icon : <FacebookIcon />, onClick: () => console.log('Facebook', id), label: 'Facebook Login' },
+    { id: 'githubLogin', icon : <GitHubIcon />, onClick: () => console.log('Github', id), label: 'Github Login' },
+  ]
 
   const content = <Box style={{ padding: '32px', textAlign: 'center' }}>
     <Typography variant='subtitle2' color="textSecondary">Login buttons...</Typography>
   </Box>
 
   useEffect(() => {
-    handleKeyboardRegister({
-      id: kbdId,
-      ctrlKey: true,
-      char: 'L',
-      onTrigger: () => setOpen((prev) => !prev),
-      label: 'Toggle Login'
-    })
-    // handleCommandsRegister([
-    //   { id: 'googleLogin', icon : <GoogleIcon />, onClick: () => console.log('Google', id), label: 'Google Login' },
-    //   { id: 'facebookLogin', icon : <FacebookIcon />, onClick: () => console.log('Facebook', id), label: 'Facebook Login' },
-    //   { id: 'githubLogin', icon : <GitHubIcon />, onClick: () => console.log('Github', id), label: 'Github Login' },
-    // ])
+    handleKeyboardsRegister(kbdShortcuts)
+    handleCommandsRegister(commands)
 
     return () => {
-      handleKeyboardDeRegister(kbdId)
+      handleKeyboardsDeRegister(kbdShortcuts.map(({ id }) => id))
+      handleCommandsDeRegister(commands.map(({ id }) => id))
     }
   }, [])
 

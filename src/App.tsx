@@ -50,6 +50,7 @@ function App() {
   const [variant, setVariant] = useState<'default' | 'outlined'>('default')
   const [hasBorder, setHasBorder] = useState(true)
   const [showShortcuts, setShowShortcuts] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
   const [fullWidth, setFullWidth] = useState(false)
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
   const [progress, setProgress] = useState(0)
@@ -148,11 +149,11 @@ function App() {
       <GsmArena />
       <ChatClient />
       <KeyboardShortcuts />
-      <Preopen />
+      {!loggedIn && <Preopen />}
       <SpeedMonitor />
       <Commands />
 
-      <ControlPanel {...{ variant, setVariant,
+      <ControlPanel {...{ variant, setVariant, loggedIn, setLoggedIn,
         fullWidth, setFullWidth, margin, setMargin, width,
         setWidth, hasBorder, setHasBorder, position, setPosition }} />
     </IndustrialProvider>
