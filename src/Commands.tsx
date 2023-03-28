@@ -35,7 +35,7 @@ export default function () {
             id: `${id}`,
             shortcutId,
             icon,
-            onClick: () => console.log('triggered', id),
+            onTrigger: () => console.log('triggered', id),
             label }
         })
     ])

@@ -9,7 +9,8 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography 
 import Checkbox from '@mui/material/Checkbox'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import { KeyboardHelper, useRegisterShortcut } from 'mui-industrial'
+import { KeyboardHelper, useRegisterShortcut, useShortcuts } from 'mui-industrial'
+import { ShortcutObject } from 'mui-industrial/lib/esm/index.types'
 import { ChangeEvent, createRef, MouseEvent, SyntheticEvent, useState } from 'react'
 import './App.css'
 
@@ -54,6 +55,7 @@ export default function ({
 	setPosition: any,
 }) {
   const { handleKeyboardRegister, handleKeyboardDeRegister, handleKeyboardGetLabel } =  useRegisterShortcut()
+  const shortcuts =  useShortcuts()
   const selectionRef = createRef<any>()
   const [selectedText, setSelectedText] = useState('')
   const [selectionIndexes, setSelectionIndexes] = useState({ start: 0, end: 0 })
@@ -120,7 +122,7 @@ export default function ({
   }
 
   const previewShortcuts = (shortcutId: string) => {
-    return <div style={{ display: 'flex', width: '350px', alignItems: 'center', gap: '12px' }}>
+    return <div key={shortcutId} style={{ display: 'flex', width: '350px', alignItems: 'center', gap: '12px' }}>
       <Typography
         style={{ flex: '1 0 auto', textAlign: 'right', alignSelf: 'flex-end' }}
         variant="subtitle2"
@@ -156,11 +158,9 @@ export default function ({
         <BrandingWatermarkOutlinedIcon color="action" style={{ fontSize: '200px' }} />
         <Box display={'flex'} flexDirection={'column'} alignItems={'center'}
           style={{ gap: '16px' }}>
-          {previewShortcuts('bkdShortcut')}
-          {previewShortcuts('menuShortcut')}
-          {previewShortcuts('preLogin')}
-          {previewShortcuts('console')}
-          {previewShortcuts('commands')}
+          {shortcuts
+            .filter(({ id }) => ['bkdShortcut','googleLogin','menuShortcut','preLogin','console','commands'].some((s) => s === id))
+            .map(({ id }) => previewShortcuts(id))}
         </Box>
         <Typography variant="caption" color="textSecondary">*Hint: Right-Click on a shortcut to customize it</Typography>
       </Box>}
