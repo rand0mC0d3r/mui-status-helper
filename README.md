@@ -1,5 +1,4 @@
-start
-
+Mui-Industrial sample web app
 
 ---
 
