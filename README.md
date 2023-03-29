@@ -1,5 +1,7 @@
 ## Mui-Industrial sample web app
 
+![Preview](public/preview.png)
+
 This is a sample web app that uses the Mui-Industrial React components.
 
 It features sample panels, status bar elements, and a sample menu.
