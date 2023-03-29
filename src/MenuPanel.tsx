@@ -1,20 +1,12 @@
 /* eslint-disable no-console */
 import { Cloud, ContentCopy, ContentCut, ContentPaste, GridView } from '@mui/icons-material'
 import { Divider, ListItemIcon, ListItemText, MenuItem, MenuList } from '@mui/material'
-import { KeyboardHelper, Status, StatusType, useRegisterShortcut } from 'mui-industrial'
+import { KeyboardHelper, Status, StatusType, useConfig } from 'mui-industrial'
 import { useEffect, useState } from 'react'
 import './App.css'
 
-const items = [
-  { id: 'cut', type: 'item', icon: <ContentCut fontSize="small" />, label: 'Cut', char: 'X', altKey: true },
-  { id: 'copy', type: 'item', icon: <ContentCopy fontSize="small" />, label: 'Copy', char: 'C', altKey: true, shiftKey: true },
-  { id: 'paste', type: 'item', icon: <ContentPaste fontSize="small" />, label: 'Paste', char: 'V', ctrlKey: true, shiftKey: true,  metaKey: true },
-  { type: 'divider', label: 'divider', char: '...' },
-  { id: 'webClipboard', type: 'item', icon: <Cloud fontSize="small" />, label: 'Web Clipboard', char: 'W', ctrlKey: true, altKey: true },
-]
-
 export default function () {
-  const { handleKeyboardsRegister, handleKeyboardsDeRegister } =  useRegisterShortcut()
+  const { config, configUnmount } = useConfig()
   const [open, setOpen] = useState(false)
 
   const triggers = (kbdText: any) => {
@@ -22,8 +14,25 @@ export default function () {
     setOpen(false)
   }
 
+  const items = [
+    { type: 'item', id: 'cut', icon: <ContentCut fontSize="small" />, label: 'Cut',
+      char: 'X', onTrigger: () => triggers('cut'), altKey: true },
+    { type: 'item', id: 'copy', icon: <ContentCopy fontSize="small" />, label: 'Copy',
+      char: 'C', onTrigger: () => triggers('copy'), altKey: true, shiftKey: true },
+    { type: 'item', id: 'paste', icon: <ContentPaste fontSize="small" />, label: 'Paste',
+      char: 'V', onTrigger: () => triggers('paste'), ctrlKey: true, shiftKey: true,  metaKey: true },
+    { type: 'divider', label: 'divider', id: '--', char: '...' },
+    { type: 'item', id: 'webClipboard', icon: <Cloud fontSize="small" />, label: 'Web Clipboard',
+      char: 'W', onTrigger: () => triggers('wb'), ctrlKey: true, altKey: true },
+    { type: 'command', id: 'menuShortcut', shortcutId: 'menuShortcut', icon: <Cloud fontSize="small" />, label: 'Open Menu',
+      char: 'M', onTrigger: () => setOpen((prev) => !prev),
+      ctrlKey: true, altKey: true },
+  ]
+
   const content = <MenuList>
-    {items.map((item, index) => item.type === 'divider'
+    {items
+      .filter((item) => ['divider', 'item'].some(t => item.type === t))
+      .map((item, index) => item.type === 'divider'
     ? <Divider key={`${item.type}-${item.label || index}`} />
     : <MenuItem key={`${item.type}-${item.label || index}`} onClick={() => triggers(item.label)} >
       <ListItemIcon>{item.icon}</ListItemIcon>
@@ -32,25 +41,14 @@ export default function () {
     </MenuItem>)}
   </MenuList>
 
+  const keyboards = items.filter((item) => ['command', 'item'].some(t => item.type === t))
+  const commands = items.filter((item) => ['command'].some(t => item.type === t))
+
   useEffect(() => {
-    handleKeyboardsRegister([
-      {
-        id: 'menuShortcut',
-        ctrlKey: true,
-        altKey: true,
-        char: 'M',
-        onTrigger: () => setOpen((prev) => !prev),
-        label: 'Open Menu'
-      },
-      ...items
-        .filter(({ id }) => !!id)
-        .map(({ id, char, altKey, metaKey, ctrlKey, shiftKey, label }) => {
-          return { id: `${id}`, altKey, metaKey, ctrlKey, shiftKey, char, onTrigger: () => triggers(label), label }
-        })
-    ])
+    config({ keyboards, commands })
 
     return () => {
-      handleKeyboardsDeRegister(['menuShortcut', ...items.filter(({ id }) => !!id).map(({ id }) => `${id}`)])
+      configUnmount({ keyboards, commands })
     }
   }, [])
 
@@ -61,9 +59,6 @@ export default function () {
         hasDecoration: false,
         hasToolbar: false,
         onClose: () => setOpen(false)
-      },
-      separators: {
-        end: true,
       },
       content,
       open,

@@ -142,16 +142,16 @@ function App() {
       </Status> */}
 
       {/* <Search /> */}
-      <GithubPage />
+      {/* <GithubPage /> */}
       <NotificationsGenerator />
-      <MUI5Console />
+      {/* <MUI5Console /> */}
       <MenuPanel />
-      <GsmArena />
-      <ChatClient />
+      {/* <GsmArena /> */}
+      {/* <ChatClient /> */}
       <KeyboardShortcuts />
-      {!loggedIn && <Preopen />}
-      <SpeedMonitor />
-      <Commands />
+      {/* {!loggedIn && <Preopen />} */}
+      {/* <SpeedMonitor /> */}
+      {/* <Commands /> */}
 
       <ControlPanel {...{ variant, setVariant, loggedIn, setLoggedIn,
         fullWidth, setFullWidth, margin, setMargin, width,

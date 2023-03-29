@@ -4,9 +4,9 @@ import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined'
 import CircleNotificationsOutlinedIcon from '@mui/icons-material/CircleNotificationsOutlined'
 import ClearAllOutlinedIcon from '@mui/icons-material/ClearAllOutlined'
 import { Box, Button } from '@mui/material'
-import { SnackbarHelper, Status, StatusType, useRegisterSnackbar, useSnackbars } from 'mui-industrial'
+import { SnackbarHelper, Status, StatusType, useConfig, useRegisterSnackbar, useSnackbars } from 'mui-industrial'
 import { PopoverActions, PopperWidth, Severity } from 'mui-industrial/lib/esm/index.types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 const id = 'notificationsGenerator'
@@ -19,6 +19,7 @@ export default function ({
   const { handleSnackbarRegister, handleSnackbarCleaning } =  useRegisterSnackbar()
   const snackbars =  useSnackbars()
   const [open, setOpen] = useState<boolean>(false)
+  const { config, configUnmount } = useConfig()
 
   const generateInfoNotification = (message = 'Sample Info Notification') => {
     handleSnackbarRegister({
@@ -104,6 +105,36 @@ export default function ({
       severity: Severity.ERROR
     })
   }
+
+  const commands = [
+    { id: 'generatePositiveNotifications',
+      onTrigger: () =>  {
+        generateInfoNotification()
+        generateSuccessNotification()
+      },
+      label: 'Generate positive notifications',
+      icon: <AddAlertOutlinedIcon />
+    }, {
+      id: 'generateNegativeNotifications',
+      onTrigger: () => {
+        generateWarningNotification()
+        generateErrorNotification()
+      },
+      label: 'Generate negative notifications',
+      icon: <CampaignOutlinedIcon />,
+    }, {
+      id: 'removeAllNotifications',
+      onTrigger: () => handleSnackbarCleaning(),
+      label: 'Remove all notifications',
+      icon: <ClearAllOutlinedIcon />,
+    },
+  ]
+
+  useEffect(() => {
+    config({ commands })
+
+    return () => configUnmount({ commands })
+  }, [])
 
   const content = <Box display={'flex'}
     flexDirection={'column'}

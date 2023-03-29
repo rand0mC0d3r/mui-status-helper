@@ -2,7 +2,7 @@ import Crop32OutlinedIcon from '@mui/icons-material/Crop32Outlined'
 import EditAttributesIcon from '@mui/icons-material/EditAttributes'
 import KeyboardIcon from '@mui/icons-material/Keyboard'
 import { ListItemText, MenuItem, MenuList } from '@mui/material'
-import { KeyboardHelper, Status, useRegisterShortcut, useShortcuts } from 'mui-industrial'
+import { KeyboardHelper, Status, useConfig, useRegisterShortcut, useShortcuts } from 'mui-industrial'
 import { PopperWidth, StatusType } from 'mui-status/lib/esm/index.types'
 import { useEffect, useState } from 'react'
 import './App.css'
@@ -21,7 +21,8 @@ export default function () {
   const [open, setOpen] = useState<boolean>(false)
   const [edit, setEdit] = useState<boolean>(false)
   const [asChip, setAsChip] = useState<boolean>(true)
-  const { handleKeyboardRegister, handleKeyboardDeRegister, handleKeyboardGetLabel } =  useRegisterShortcut()
+  const { handleKeyboardGetLabel } =  useRegisterShortcut()
+  const { config, configUnmount } = useConfig()
 
   const content = <MenuList>
     {shortcuts.map(({ id }) => <MenuItem key={id} style={{ cursor: 'auto' }}>
@@ -30,10 +31,14 @@ export default function () {
     </MenuItem>)}
   </MenuList>
 
-  useEffect(() => {
-    handleKeyboardRegister({ id: kbdId, ctrlKey: true, char: 'K', onTrigger: () => setOpen((prev) => !prev), label: 'Toggle Shortcuts' })
+  const keyboards = [
+    { id: kbdId, ctrlKey: true, char: 'K', onTrigger: () => setOpen((prev) => !prev), label: 'Toggle Shortcuts' }
+  ]
 
-    return () => handleKeyboardDeRegister(kbdId)
+  useEffect(() => {
+    config({ keyboards })
+
+    return () => configUnmount({ keyboards })
   }, [])
 
   return <Status
