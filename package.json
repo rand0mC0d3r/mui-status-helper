@@ -1,6 +1,7 @@
 {
   "name": "mui-status-helper",
   "version": "0.1.1",
+  "homepage": ".",
   "dependencies": {
 		"@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
@@ -22,9 +23,7 @@
     "prestart": "npx link",
     "start": "concurrently --names 'CRA,Size' --prefix-colors 'green,yellow' \"PORT=3005 react-scripts start\" \"npm run check.links\"",
     "===BUILD===": "----------------------------------------------------------------------",
-		"prebuild": "rm -rf build && rm -rf docs",
-		"build": "react-scripts build && npm run copy",
-		"copy": "mkdir -p docs && cp -r build/* docs/ && rm -rf build",
+		"build": "react-scripts build",
     "===TOOLS===": "----------------------------------------------------------------------",
     "clean": "rm -rf node_modules && npm cache clean --force",
     "check.links": "npm ls -g --depth=0 --link=true"
