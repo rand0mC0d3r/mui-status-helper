@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { IndustrialProvider } from 'mui-industrial'
-import { PlacementPosition } from 'mui-industrial/lib/esm/index.types'
+import { IndustrialProvider, PlacementPosition } from 'mui-industrial'
+
 import { useState } from 'react'
-import './App.css'
+
 import ChatClient from './components/ChatClient'
 import Commands from './components/Commands'
 import ControlPanel from './components/ControlPanel'
@@ -17,6 +17,7 @@ import Samples from './components/Samples'
 import Search from './components/Search'
 import SpeedMonitor from './components/SpeedMonitor'
 
+import './App.css'
 
 function App() {
   const [width, setWidth] = useState('100%')
