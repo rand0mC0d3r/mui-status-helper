@@ -1,12 +1,12 @@
 import NetworkCheckIcon from '@mui/icons-material/NetworkCheck'
 import { Box, Tooltip, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { Status } from 'mui-status'
+import { Status } from 'mui-industrial'
 import { useEffect, useState } from 'react'
 
 const id = 'speedMonitor'
 
-const STypography = styled(Typography)(() => ({
+const STypography: any = styled(Typography)(() => ({
   borderBottom: '1px solid',
   paddingBottom: '4px',
   marginBottom: '4px',
@@ -20,9 +20,9 @@ export default () => {
   const generateHeader = (title: string) => <STypography variant="subtitle2">{title}</STypography>
 
   const registerRequest = (resource: any) => {
-    if(requests.length === 0 || !requests.some(p => p.name === resource.name)) {
-      setRequests((prev) => [...prev, resource])
-      setDetails((prev) => ({
+    if(requests.length === 0 || !requests.some((p: { name: any }) => p.name === resource.name)) {
+      setRequests((prev: any) => [...prev, resource])
+      setDetails((prev: { download: number; size: any }) => ({
         download: (prev.download + ((resource.encodedBodySize / 1000) / (resource.duration / 1000) )) / 2,
         size: prev.size + resource.encodedBodySize
       }))
@@ -39,8 +39,8 @@ export default () => {
 
     <Box display='flex' flexDirection="column">
       {generateHeader('Call stack')}
-      {requestedItems.map(r => <Tooltip key={r.name} title={r.name}>
-        <Typography variant="caption">...{r.name.slice(-20)} ({r.size / 1000} KB)</Typography>
+      {requestedItems.map((r: { name: {} | null | undefined; size: number }) => <Tooltip key={`${r?.name}-key`} title={r.name}>
+        <Typography variant="caption">...{`${r?.name}`.slice(-20)} ({r.size / 1000} KB)</Typography>
       </Tooltip>)}
     </Box>
   </Box>
@@ -51,8 +51,8 @@ export default () => {
 
   useEffect(() => {
     setRequestedItems(requests
-      .filter(r => String(r.name).includes(location.origin))
-      .map((r) => ({ name: r.name.replace(location.origin, ''), size: r.encodedBodySize })))
+      .filter((r: { name: any }) => String(r.name).includes(location.origin))
+      .map((r: { name: string; encodedBodySize: any }) => ({ name: r.name.replace(location.origin, ''), size: r.encodedBodySize })))
   }, [requests])
 
   useEffect(() => {

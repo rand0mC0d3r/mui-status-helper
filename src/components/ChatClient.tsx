@@ -3,8 +3,10 @@ import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined'
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
 import { Avatar, Box, Button, TextField } from '@mui/material'
-import { KeyboardHelper, Status } from 'mui-industrial'
-import { Highlight, PopperHeight, PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
+import {
+  Highlight, KeyboardHelper, PopperHeight, PopperWidth,
+  Status, StatusOptionsProps, StatusPopperProps, StatusType
+} from 'mui-industrial'
 import { Fragment, useEffect, useState } from 'react'
 
 export default function () {
@@ -38,7 +40,7 @@ export default function () {
       style={{ padding: '8px' }}
     >
       <Box display='flex'  flexDirection='row' style={{ gap: '8px', padding: '0px' }}>
-        {users.map(avatar => <Avatar key={avatar} style={avatar === user ? { backgroundColor: '#888' } : {}} variant="rounded">
+        {users.map((avatar: any) => <Avatar key={avatar} style={avatar === user ? { backgroundColor: '#888' } : {}} variant="rounded">
           {avatar}
         </Avatar>)}
       </Box>
@@ -74,7 +76,7 @@ export default function () {
   return <>
     {/* <Keyboard id='chatClient' char="T" ctrlKey={true}
       onTrigger={() => alert('opening chat client')} /> */}
-    <Status {...{ onClick, tooltip: <div>{tooltip} <KeyboardHelper shortcutId='chatClient' /> </div> }}
+    <Status {...{ onClick, tooltip: <>{tooltip} <KeyboardHelper shortcutId='chatClient' /> </> }}
       id="chatClient"
       highlight={badge !== '' ? Highlight.PRIMARY : Highlight.DEFAULT}
       options={{

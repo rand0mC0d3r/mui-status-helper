@@ -5,8 +5,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import GoogleIcon from '@mui/icons-material/Google'
 import PasswordIcon from '@mui/icons-material/Password'
 import { Box, Typography } from '@mui/material'
-import { KeyboardHelper, Status, useConfig } from 'mui-industrial'
-import { Highlight, PopperWidth, StatusType } from 'mui-status/lib/esm/index.types'
+import { Highlight, KeyboardHelper, PopperWidth, Status, StatusType, useConfig } from 'mui-industrial'
 import { useEffect, useState } from 'react'
 
 const id = 'preOpen'
@@ -17,7 +16,7 @@ export default function () {
   const [open, setOpen] = useState<boolean>(true)
 
   const keyboards = [
-    { id: kbdId, ctrlKey: true, char: 'L', onTrigger: () => setOpen((prev) => !prev), label: 'Toggle Login' },
+    { id: kbdId, ctrlKey: true, char: 'L', onTrigger: () => setOpen((prev: any) => !prev), label: 'Toggle Login' },
     { id: 'googleLogin', ctrlKey: true, char: 'G', onTrigger: () => console.log('Google kbd', id), label: 'Google Login' }
   ]
 
@@ -44,7 +43,7 @@ export default function () {
   return <Status {...{ id, tooltip: <>Login into Google/Facebook <KeyboardHelper shortcutId={kbdId} /></> }}
     highlight={Highlight.SECONDARY}
     order={-3}
-    onClick={() => setOpen(p => !p)}
+    onClick={() => setOpen((p: any) => !p)}
     options={{
       as: StatusType.POPPER,
       popper: {
