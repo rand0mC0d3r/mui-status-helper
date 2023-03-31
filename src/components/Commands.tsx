@@ -1,10 +1,7 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import { Cloud, ContentCopy, ContentCut, ContentPaste, GridView } from '@mui/icons-material'
-import { Divider, ListItemIcon, ListItemText, MenuItem, MenuList } from '@mui/material'
-import { KeyboardHelper, Status, StatusType, useRegisterCommand, useRegisterShortcut } from 'mui-industrial'
-import { useEffect, useState } from 'react'
-import './App.css'
+import { Cloud, ContentCopy, ContentCut, ContentPaste } from '@mui/icons-material'
+import { useRegisterCommand, useRegisterShortcut } from 'mui-industrial'
+import { useEffect } from 'react'
 
 const commands = [
   { id: 'func1', icon: <ContentCut fontSize="small" />, label: 'Function 1', shortcutId: 'random1' },
@@ -18,12 +15,19 @@ const items = [
   { id: 'random2', label: 'Func2', char: 'U', altKey: true },
 ]
 
-export default function () {
+export default function ({ wikiFrame, setWikiFrame } : { wikiFrame: boolean, setWikiFrame: any}) {
   const { handleCommandsRegister } =  useRegisterCommand()
   const { handleKeyboardsRegister } =  useRegisterShortcut()
 
   useEffect(() => {
     handleCommandsRegister([
+      {
+        id: 'toggleWiki',
+        icon: <Cloud fontSize="small" />,
+        onTrigger: () => setWikiFrame(!wikiFrame),
+        label: 'Toggle Wiki',
+        shortcutId: 'toggleWiki'
+      },
       ...commands
         .map(({
           id,
@@ -40,6 +44,16 @@ export default function () {
         })
     ])
     handleKeyboardsRegister([
+      {
+        id: 'toggleWiki',
+        char: 'O',
+        ctrlKey: true,
+        onTrigger: () => {
+          console.log('triggered', 'toggleWiki')
+          setWikiFrame((w: any) => !w)
+        },
+        label: 'Toggle Wiki'
+      },
       ...items
         .map(({ id, char, altKey, label }) => {
           return { id: `${id}`, altKey, char, onTrigger: () => console.log(label), label }

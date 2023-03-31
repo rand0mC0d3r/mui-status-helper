@@ -7,7 +7,6 @@ import { Box, Button } from '@mui/material'
 import { SnackbarHelper, Status, StatusType, useConfig, useRegisterSnackbar, useSnackbars } from 'mui-industrial'
 import { PopoverActions, PopperWidth, Severity } from 'mui-industrial/lib/esm/index.types'
 import { useEffect, useState } from 'react'
-import './App.css'
 
 const id = 'notificationsGenerator'
 

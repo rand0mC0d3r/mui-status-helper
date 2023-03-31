@@ -8,7 +8,6 @@ import { Box, Typography } from '@mui/material'
 import { KeyboardHelper, Status, useConfig } from 'mui-industrial'
 import { Highlight, PopperWidth, StatusType } from 'mui-status/lib/esm/index.types'
 import { useEffect, useState } from 'react'
-import './App.css'
 
 const id = 'preOpen'
 const kbdId = 'preLogin'

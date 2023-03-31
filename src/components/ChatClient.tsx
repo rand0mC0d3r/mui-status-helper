@@ -6,7 +6,6 @@ import { Avatar, Box, Button, TextField } from '@mui/material'
 import { KeyboardHelper, Status } from 'mui-industrial'
 import { Highlight, PopperHeight, PopperWidth, StatusOptionsProps, StatusPopperProps, StatusType } from 'mui-status/lib/esm/index.types'
 import { Fragment, useEffect, useState } from 'react'
-import './App.css'
 
 export default function () {
   const [fake, setFake] = useState<boolean>(false)

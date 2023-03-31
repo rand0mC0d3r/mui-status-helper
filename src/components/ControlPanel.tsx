@@ -12,7 +12,6 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import { KeyboardHelper, useRegisterShortcut, useShortcuts } from 'mui-industrial'
 import { ShortcutObject } from 'mui-industrial/lib/esm/index.types'
 import { ChangeEvent, createRef, MouseEvent, SyntheticEvent, useState } from 'react'
-import './App.css'
 
 const text = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -24,6 +23,8 @@ const text = [
 ].join(' ')
 
 export default function ({
+  wikiFrame,
+  setWikiFrame,
   variant,
   setVariant,
   loggedIn,
@@ -39,6 +40,8 @@ export default function ({
   position,
   setPosition,
 } : {
+  wikiFrame: boolean,
+  setWikiFrame: any,
 	variant: string,
 	setVariant: any,
   loggedIn: boolean,
@@ -148,63 +151,62 @@ export default function ({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        // backgroundColor: '#eee',
         gap: '16px',
         alignItems: 'center'
       }}>
+      {wikiFrame
+        ? <iframe style={{ border: '0px', width: '100%', height: '100%' }} src="https://en.wikipedia.org/wiki/Special:Random"/>
+        : <>
+          {!expanded && <Box display={'flex'} flexDirection={'column'} alignItems="center"
+            style={{ gap: '32px' }}>
+            <BrandingWatermarkOutlinedIcon color="action" style={{ fontSize: '200px' }} />
+            <Box display={'flex'} flexDirection={'column'} alignItems={'center'}
+              style={{ gap: '16px' }}>
+              {shortcuts
+                .filter(({ id }) => ['bkdShortcut','googleLogin','toggleWiki','menuShortcut','preLogin','console','commands'].some((s) => s === id))
+                .map(({ id }) => previewShortcuts(id))}
+            </Box>
+            <Typography variant="caption" color="textSecondary">*Hint: Right-Click on a shortcut to customize it</Typography>
+          </Box>}
 
-      {!expanded && <Box display={'flex'} flexDirection={'column'} alignItems="center"
-        style={{ gap: '32px' }}>
-        <BrandingWatermarkOutlinedIcon color="action" style={{ fontSize: '200px' }} />
-        <Box display={'flex'} flexDirection={'column'} alignItems={'center'}
-          style={{ gap: '16px' }}>
-          {shortcuts
-            .filter(({ id }) => ['bkdShortcut','googleLogin','menuShortcut','preLogin','console','commands'].some((s) => s === id))
-            .map(({ id }) => previewShortcuts(id))}
-        </Box>
-        <Typography variant="caption" color="textSecondary">*Hint: Right-Click on a shortcut to customize it</Typography>
-      </Box>}
-
-      <Accordion expanded={expanded} onChange={handleChange}>
-        <AccordionSummary>Control Panel</AccordionSummary>
-        <AccordionDetails>
-          <div style={{
-            alignItems: 'stretch',
-            flexDirection: 'column',
-            display: 'flex',
-            border: '1px solid #888',
-            borderRadius: '8px',
-            padding: '16px',
-            gap: '16px'
-          }}>
-            {toggleBlock('Simulate logged in', loggedIn, setLoggedIn)}
-            {toggleBlock('Border', hasBorder, setHasBorder)}
-            {toggleBlock('FullWidth', fullWidth, setFullWidth)}
-            {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}
-            {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
-            {toggleOptions('Width', ['75vw', '100%', '60%', '1400px'], setWidth, width)}
-            {toggleOptions('Margin', ['0px', '4px', '16px'], setMargin, margin)}
-          </div>
-          <div style={{ alignItems: 'center', flexDirection: 'column', display: 'flex', gap: '16px' }}>
-            <Button onClick={() => window.location.reload()} variant='contained' color="primary"
-              fullWidth>
-              <ReplayIcon /> Reload
-            </Button>
-            <textarea onMouseUp={() => {
-              let textVal = selectionRef.current
-              let cursorStart = textVal.selectionStart
-              let cursorEnd = textVal.selectionEnd
-              let selectedText = text.substring(cursorStart,cursorEnd)
-              setSelectionIndexes({ start: cursorStart, end: cursorEnd })
-              setSelectedText(selectedText)
-            }} ref={selectionRef} style={{ width: '100%', height: '400px' }}
-            defaultValue={text.trim()} />
-          </div>
-        </AccordionDetails>
-      </Accordion>
-
-
-
+          <Accordion expanded={expanded} onChange={handleChange}>
+            <AccordionSummary>Control Panel</AccordionSummary>
+            <AccordionDetails>
+              <div style={{
+                alignItems: 'stretch',
+                flexDirection: 'column',
+                display: 'flex',
+                border: '1px solid #888',
+                borderRadius: '8px',
+                padding: '16px',
+                gap: '16px'
+              }}>
+                {toggleBlock('Simulate logged in', loggedIn, setLoggedIn)}
+                {toggleBlock('Border', hasBorder, setHasBorder)}
+                {toggleBlock('FullWidth', fullWidth, setFullWidth)}
+                {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}
+                {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
+                {toggleOptions('Width', ['75vw', '100%', '60%', '1400px'], setWidth, width)}
+                {toggleOptions('Margin', ['0px', '4px', '16px'], setMargin, margin)}
+              </div>
+              <div style={{ alignItems: 'center', flexDirection: 'column', display: 'flex', gap: '16px' }}>
+                <Button onClick={() => window.location.reload()} variant='contained' color="primary"
+                  fullWidth>
+                  <ReplayIcon /> Reload
+                </Button>
+                <textarea onMouseUp={() => {
+                  let textVal = selectionRef.current
+                  let cursorStart = textVal.selectionStart
+                  let cursorEnd = textVal.selectionEnd
+                  let selectedText = text.substring(cursorStart,cursorEnd)
+                  setSelectionIndexes({ start: cursorStart, end: cursorEnd })
+                  setSelectedText(selectedText)
+                }} ref={selectionRef} style={{ width: '100%', height: '400px' }}
+                defaultValue={text.trim()} />
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        </>}
     </div>
   </>
 }

@@ -3,7 +3,6 @@ import { Cloud, ContentCopy, ContentCut, ContentPaste, GridView } from '@mui/ico
 import { Divider, ListItemIcon, ListItemText, MenuItem, MenuList } from '@mui/material'
 import { KeyboardHelper, Status, StatusType, useConfig } from 'mui-industrial'
 import { useEffect, useState } from 'react'
-import './App.css'
 
 export default function () {
   const { config, configUnmount } = useConfig()

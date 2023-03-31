@@ -12,14 +12,10 @@ const STypography = styled(Typography)(() => ({
   marginBottom: '4px',
 }))
 
-export default function () {
+export default () => {
   const [requests, setRequests] = useState<any[]>([])
   const [requestedItems, setRequestedItems] = useState<any[]>([])
-
-  const [details, setDetails] = useState<{
-		download: number,
-		size: number
-  }>({ download: 0, size: 0 })
+  const [details, setDetails] = useState<{ download: number, size: number }>({ download: 0, size: 0 })
 
   const generateHeader = (title: string) => <STypography variant="subtitle2">{title}</STypography>
 
