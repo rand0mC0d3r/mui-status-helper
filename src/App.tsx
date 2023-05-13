@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { IndustrialProvider, PlacementPosition } from 'mui-industrial'
+import { IndustrialProvider, PlacementPosition, Sidebar } from 'mui-industrial'
 
 import { useState } from 'react'
 
@@ -18,6 +18,7 @@ import Search from './components/Search'
 import SpeedMonitor from './components/SpeedMonitor'
 
 import './App.css'
+import Sidebars from './components/Sidebars'
 
 function App() {
   const [width, setWidth] = useState('100%')
@@ -41,7 +42,8 @@ function App() {
       size="medium"
       variant={variant}
     >
-      <Samples />
+      <Sidebars />
+      {/* <Samples />
       <Search />
       <GithubPage />
       <NotificationsGenerator />
@@ -52,7 +54,7 @@ function App() {
       <KeyboardShortcuts />
       {!loggedIn && <Preopen />}
       <SpeedMonitor />
-      <Commands {...{ wikiFrame, setWikiFrame }} />
+      <Commands {...{ wikiFrame, setWikiFrame }} /> */}
 
       <ControlPanel {...{
         wikiFrame, setWikiFrame,
