@@ -2,22 +2,22 @@ import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalance
 import AdbIcon from '@mui/icons-material/Adb'
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined'
 import AddRoadOutlinedIcon from '@mui/icons-material/AddRoadOutlined'
-import { Sidebar } from 'mui-industrial'
+// import { Sidebar } from 'mui-industrial'
 
 export default () => {
   return <>
-    <Sidebar {...{  icon: <AdbIcon />, id: 'sample1', title: 'sampleTitle', tooltip: 'sampleTooltip'  }}>
+    {/* <Sidebar {...{  icon: <AdbIcon />, id: 'sample1', tooltip: 'sampleTooltip'  }}>
       ff
     </Sidebar>
-    <Sidebar {...{  icon: <AccountBalanceWalletOutlinedIcon />, id: 'sample2'  }}>
+    <Sidebar {...{  icon: <AccountBalanceWalletOutlinedIcon />, id: 'sample2'  } } additional>
       ffsd
     </Sidebar>
-    <Sidebar {...{  icon: <AddAPhotoOutlinedIcon />, id: 'sample3'  }}>
+    <Sidebar {...{  icon: <AddAPhotoOutlinedIcon />, id: 'sample3' }} secondary>
       fffd
     </Sidebar>
 
-    <Sidebar {...{  icon: <AddRoadOutlinedIcon />, id: 'sample4_secondary' }} secondary>
+    <Sidebar {...{  icon: <AddRoadOutlinedIcon />, id: 'sample4_secondary' }} additional secondary>
       fffd
-    </Sidebar>
+    </Sidebar> */}
   </>
 }

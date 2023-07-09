@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { IndustrialProvider, PlacementPosition, Sidebar } from 'mui-industrial'
+import { IndustrialProvider, PlacementPosition } from 'mui-industrial'
 
 import { useState } from 'react'
 
@@ -18,7 +18,7 @@ import Search from './components/Search'
 import SpeedMonitor from './components/SpeedMonitor'
 
 import './App.css'
-import Sidebars from './components/Sidebars'
+// import Sidebars from './components/Sidebars'
 
 function App() {
   const [width, setWidth] = useState('100%')
@@ -33,7 +33,7 @@ function App() {
 
   return <>
     <IndustrialProvider
-      // debug
+      debug
       fullWidth={fullWidth}
       hasLock={true}
       hasBorder={hasBorder}
@@ -42,19 +42,19 @@ function App() {
       size="medium"
       variant={variant}
     >
-      <Sidebars />
-      {/* <Samples />
-      <Search />
-      <GithubPage />
+      {/* <Sidebars /> */}
+      {/* <Samples /> */}
+      {/* <Search /> */}
+      {/* <GithubPage /> */}
       <NotificationsGenerator />
-      <MUI5Console />
-      <MenuPanel />
-      <GsmArena />
-      <ChatClient />
-      <KeyboardShortcuts />
-      {!loggedIn && <Preopen />}
-      <SpeedMonitor />
-      <Commands {...{ wikiFrame, setWikiFrame }} /> */}
+      {/* <MUI5Console /> */}
+      {/* <MenuPanel /> */}
+      {/* <GsmArena /> */}
+      {/* <ChatClient /> */}
+      {/* <KeyboardShortcuts /> */}
+      {/* {!loggedIn && <Preopen />} */}
+      {/* <SpeedMonitor /> */}
+      {/* <Commands {...{ wikiFrame, setWikiFrame }} /> */}
 
       <ControlPanel {...{
         wikiFrame, setWikiFrame,

@@ -1,11 +1,13 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import AddAlertOutlinedIcon from '@mui/icons-material/AddAlertOutlined'
 import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined'
 import CircleNotificationsOutlinedIcon from '@mui/icons-material/CircleNotificationsOutlined'
 import ClearAllOutlinedIcon from '@mui/icons-material/ClearAllOutlined'
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined'
 import { Box, Button } from '@mui/material'
-import { SnackbarHelper, Status, StatusType, useConfig, useRegisterSnackbar, useSnackbars } from 'mui-industrial'
-import { PopoverActions, PopperWidth, Severity } from 'mui-industrial/lib/esm/index.types'
+import { SnackbarHelper, Status, StatusType, useConfig, useSnackbars } from 'mui-industrial'
+import { PopoverActions, PopperHeight, PopperWidth, Severity } from 'mui-industrial/lib/esm/index.types'
 import { useEffect, useState } from 'react'
 
 const id = 'notificationsGenerator'
@@ -15,14 +17,15 @@ export default function ({
 } : {
 	baseDomain?: string
 }) {
-  const { handleSnackbarRegister, handleSnackbarCleaning } =  useRegisterSnackbar()
-  const snackbars =  useSnackbars()
+  const { snackbars, handleSnackbarRegister, handleSnackbarCleaning } =  useSnackbars()
   const [open, setOpen] = useState<boolean>(false)
   const { config, configUnmount } = useConfig()
 
   const generateInfoNotification = (message = 'Sample Info Notification') => {
     handleSnackbarRegister({
       message,
+      id: 'sample-info',
+      autoHideDuration: 1000,
       source: 'AutoFixer',
       severity: Severity.INFO,
     })
@@ -39,7 +42,7 @@ export default function ({
       source:'AutoFixer',
       severity: Severity.SUCCESS,
       actions:[
-        <Button>Slack it</Button>,
+        <Button onClick={() => console.log('slack')}>Slack it</Button>,
         <Button color="inherit">Post to Jira</Button>,
       ] })
 
@@ -135,14 +138,25 @@ export default function ({
     return () => configUnmount({ commands })
   }, [])
 
-  const content = <Box display={'flex'}
-    flexDirection={'column'}
-    alignItems={'stretch'}
-    style={{ gap: '8px', padding: '16px' }}
-    justifyContent={'stretch'}
-  >
-    {snackbars.map(snackbar => <SnackbarHelper snackbarId={snackbar.id} />)}
-  </Box>
+  const content = <>
+    {snackbars.length > 0
+      ? <Box display={'flex'}
+        flexDirection={'column'}
+        alignItems={'stretch'}
+        style={{ gap: '8px', padding: '8px' }}
+        justifyContent={'stretch'}
+      >
+        {snackbars.map(({ id }) => <SnackbarHelper key={id} snackbarId={id} />)}
+      </Box>
+      : <Box display={'flex'}
+        flexDirection={'column'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        height={'100%'}
+      >
+        <NotificationsNoneOutlinedIcon />
+      </Box>}
+  </>
 
   return <Status {...{ id }}
     order={-1}
@@ -178,6 +192,7 @@ export default function ({
       popper: {
         onClose: () => setOpen(false),
         width: PopperWidth.MD,
+        height: PopperHeight.MD,
       },
     }}
     tooltip='Iframe'
