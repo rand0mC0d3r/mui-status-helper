@@ -43,18 +43,18 @@ function App() {
       variant={variant}
     >
       {/* <Sidebars /> */}
-      {/* <Samples /> */}
-      {/* <Search /> */}
-      {/* <GithubPage /> */}
+      <Samples />
+      <Search />
+      <GithubPage />
       <NotificationsGenerator />
-      {/* <MUI5Console /> */}
-      {/* <MenuPanel /> */}
-      {/* <GsmArena /> */}
-      {/* <ChatClient /> */}
-      {/* <KeyboardShortcuts /> */}
-      {/* {!loggedIn && <Preopen />} */}
-      {/* <SpeedMonitor /> */}
-      {/* <Commands {...{ wikiFrame, setWikiFrame }} /> */}
+      <MUI5Console />
+      <MenuPanel />
+      <GsmArena />
+      <ChatClient />
+      <KeyboardShortcuts />
+      {!loggedIn && <Preopen />}
+      <SpeedMonitor />
+      <Commands {...{ wikiFrame, setWikiFrame }} />
 
       <ControlPanel {...{
         wikiFrame, setWikiFrame,
