@@ -172,38 +172,40 @@ export default function ({
           <Accordion expanded={expanded} onChange={handleChange}>
             <AccordionSummary>Control Panel</AccordionSummary>
             <AccordionDetails>
-              <div style={{
-                alignItems: 'stretch',
-                flexDirection: 'column',
-                display: 'flex',
-                border: '1px solid #888',
-                borderRadius: '8px',
-                padding: '16px',
-                gap: '16px'
-              }}>
-                {toggleBlock('Simulate logged in', loggedIn, setLoggedIn)}
-                {toggleBlock('Border', hasBorder, setHasBorder)}
-                {toggleBlock('FullWidth', fullWidth, setFullWidth)}
-                {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}
-                {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
-                {toggleOptions('Width', ['75vw', '100%', '60%', '1400px'], setWidth, width)}
-                {toggleOptions('Margin', ['0px', '4px', '16px'], setMargin, margin)}
-              </div>
-              <div style={{ alignItems: 'center', flexDirection: 'column', display: 'flex', gap: '16px' }}>
-                <Button onClick={() => window.location.reload()} variant='contained' color="primary"
-                  fullWidth>
-                  <ReplayIcon /> Reload
-                </Button>
-                <textarea onMouseUp={() => {
-                  let textVal = selectionRef.current
-                  let cursorStart = textVal.selectionStart
-                  let cursorEnd = textVal.selectionEnd
-                  let selectedText = text.substring(cursorStart,cursorEnd)
-                  setSelectionIndexes({ start: cursorStart, end: cursorEnd })
-                  setSelectedText(selectedText)
-                }} ref={selectionRef} style={{ width: '100%', height: '400px' }}
-                defaultValue={text.trim()} />
-              </div>
+              {expanded && <>
+                <div style={{
+                  alignItems: 'stretch',
+                  flexDirection: 'column',
+                  display: 'flex',
+                  border: '1px solid #888',
+                  borderRadius: '8px',
+                  padding: '16px',
+                  gap: '16px'
+                }}>
+                  {toggleBlock('Simulate logged in', loggedIn, setLoggedIn)}
+                  {toggleBlock('Border', hasBorder, setHasBorder)}
+                  {toggleBlock('FullWidth', fullWidth, setFullWidth)}
+                  {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}
+                  {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
+                  {toggleOptions('Width', ['75vw', '100%', '60%', '1400px'], setWidth, width)}
+                  {toggleOptions('Margin', ['0px', '4px', '16px'], setMargin, margin)}
+                </div>
+                <div style={{ alignItems: 'center', flexDirection: 'column', display: 'flex', gap: '16px' }}>
+                  <Button onClick={() => window.location.reload()} variant='contained' color="primary"
+                    fullWidth>
+                    <ReplayIcon /> Reload
+                  </Button>
+                  <textarea onMouseUp={() => {
+                    let textVal = selectionRef.current
+                    let cursorStart = textVal.selectionStart
+                    let cursorEnd = textVal.selectionEnd
+                    let selectedText = text.substring(cursorStart,cursorEnd)
+                    setSelectionIndexes({ start: cursorStart, end: cursorEnd })
+                    setSelectedText(selectedText)
+                  }} ref={selectionRef} style={{ width: '100%', height: '400px' }}
+                  defaultValue={text.trim()} />
+                </div>
+              </>}
             </AccordionDetails>
           </Accordion>
         </>}

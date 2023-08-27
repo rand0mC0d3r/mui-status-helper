@@ -99,9 +99,9 @@ export default function () {
         childrenOrder = {5}
         text="Chats" >
         <Fragment>
-          <Status.Template mask image={'https://avatars.githubusercontent.com/u/79695292?v=4'}/>
-          <Status.Template mask image={'https://avatars.githubusercontent.com/u/11871180?v=4'}/>
-          <Status.Template mask image={'https://avatars.githubusercontent.com/u/11874180?v=4'}/>
+          <Status.Template icon={<Avatar src='https://avatars.githubusercontent.com/u/79695292?v=4' />}/>
+          <Status.Template icon={<Avatar src='https://avatars.githubusercontent.com/u/11871180?v=4'/>}/>
+          <Status.Template icon={<Avatar src='https://avatars.githubusercontent.com/u/11874180?v=4'/>}/>
         </Fragment>
       </Status.Template>
     </Status>

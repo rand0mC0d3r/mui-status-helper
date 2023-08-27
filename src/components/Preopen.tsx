@@ -4,7 +4,8 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import GoogleIcon from '@mui/icons-material/Google'
 import PasswordIcon from '@mui/icons-material/Password'
-import { Box, Typography } from '@mui/material'
+import { Avatar, Box, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import { Highlight, KeyboardHelper, PopperWidth, Status, StatusType, useConfig } from 'mui-industrial'
 import { useEffect, useState } from 'react'
 
@@ -12,8 +13,10 @@ const id = 'preOpen'
 const kbdId = 'preLogin'
 
 export default function () {
+  const theme = useTheme()
   const { config, configUnmount } = useConfig()
   const [open, setOpen] = useState<boolean>(true)
+  const [isLogged, setIsLogged] = useState<boolean>(false)
 
   const keyboards = [
     { id: kbdId, ctrlKey: true, char: 'L', onTrigger: () => setOpen((prev: any) => !prev), label: 'Toggle Login' },
@@ -24,14 +27,21 @@ export default function () {
     { id: 'googleLogin',
       icon : <GoogleIcon />,
       shortcutId: 'googleLogin',
-      onTrigger: () => console.log('Google command', id),
+      onTrigger: () => {
+        console.log('Google command', id)
+        setIsLogged(true)
+      },
       label: 'Google Login' },
     { id: 'facebookLogin', icon : <FacebookIcon />, onTrigger: () => console.log('Facebook', id), label: 'Facebook Login' },
     { id: 'githubLogin', icon : <GitHubIcon />, onTrigger: () => console.log('Github', id), label: 'Github Login' },
   ]
 
-  const content = <Box style={{ padding: '32px', textAlign: 'center' }}>
-    <Typography variant='subtitle2' color="textSecondary">Login buttons...</Typography>
+  const content = <Box display="flex" style={{ padding: '32px 16px', gap: '16px',  textAlign: 'center' }} flexDirection="column">
+    {/* {isLogged ? 'yes' : 'no'} */}
+    {!isLogged && <Avatar sx={{ width: '64px', backgroundColor: theme.palette.primary.light, height: '64px', margin: 'auto' }} >AU</Avatar>}
+    {isLogged && <Avatar src='https://avatars.githubusercontent.com/u/79695292?v=4'
+      sx={{ width: '64px', backgroundColor: theme.palette.primary.light, height: '64px', margin: 'auto' }} />}
+    <Typography variant='h6'>{isLogged ? 'Anonymous User' : 'Login...'}</Typography>
   </Box>
 
   useEffect(() => {
@@ -51,7 +61,10 @@ export default function () {
         onClose: () => setOpen(false)
       },
       actions: [
-        { icon: <GoogleIcon />, tooltip: 'Login with Google', onClick: () => console.log('Google button') },
+        { icon: <GoogleIcon />, tooltip: 'Login with Google', onClick: () => {
+          console.log('Google button')
+          setIsLogged(true)
+        } },
         { icon: <FacebookIcon />, tooltip: 'Login with Facebook', onClick: () => console.log('Facebook') },
         { icon: <GitHubIcon />, tooltip: 'Login with GitHub', onClick: () => console.log('GitHub') }
       ],
@@ -64,6 +77,14 @@ export default function () {
       content
     }}
   >
-    <Status.Template icon={<PasswordIcon />} text="Login" />
+    <Status.Template
+      childrenOrder={10}
+      text={isLogged ? 'Random Guy' : 'Login now'}
+    >
+      <>
+        {!isLogged && <Status.Template icon={<PasswordIcon />}/>}
+        {isLogged && <Status.Template icon={<Avatar src='https://avatars.githubusercontent.com/u/79695292?v=4'/>}/>}
+      </>
+    </Status.Template>
   </Status>
 }

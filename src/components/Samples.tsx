@@ -18,7 +18,7 @@ export default () => <>
     <Status.Template badge="badge" />
   </Status>
 
-  <Status id="onlyIcon" onClick={() => {}}>
+  <Status  id="onlyIcon" onClick={() => {}}>
     <Status.Template icon={<ListAltIcon />} />
   </Status>
 </>

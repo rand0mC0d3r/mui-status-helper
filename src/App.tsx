@@ -16,9 +16,10 @@ import Preopen from './components/Preopen'
 import Samples from './components/Samples'
 import Search from './components/Search'
 import SpeedMonitor from './components/SpeedMonitor'
+// import Sidebars from './components/Sidebars'
 
 import './App.css'
-// import Sidebars from './components/Sidebars'
+import StatusCoreGenerator from './components/StatusCoreGenerator'
 
 function App() {
   const [width, setWidth] = useState('100%')
@@ -33,7 +34,7 @@ function App() {
 
   return <>
     <IndustrialProvider
-      debug
+      // debug
       fullWidth={fullWidth}
       hasLock={true}
       hasBorder={hasBorder}
@@ -42,8 +43,9 @@ function App() {
       size="medium"
       variant={variant}
     >
+      <StatusCoreGenerator />
       {/* <Sidebars /> */}
-      <Samples />
+      {/* <Samples />
       <Search />
       <GithubPage />
       <NotificationsGenerator />
@@ -53,9 +55,11 @@ function App() {
       <ChatClient />
       <KeyboardShortcuts />
       {!loggedIn && <Preopen />}
+      <SpeedMonitor /> */}
+      {/* {!loggedIn && <Preopen />} */}
+      {/* <Commands {...{ wikiFrame, setWikiFrame }} /> */}
       <SpeedMonitor />
-      <Commands {...{ wikiFrame, setWikiFrame }} />
-
+      <KeyboardShortcuts />
       <ControlPanel {...{
         wikiFrame, setWikiFrame,
         variant, setVariant,

@@ -2,7 +2,7 @@ import Crop32OutlinedIcon from '@mui/icons-material/Crop32Outlined'
 import EditAttributesIcon from '@mui/icons-material/EditAttributes'
 import KeyboardIcon from '@mui/icons-material/Keyboard'
 import { ListItemText, MenuItem, MenuList } from '@mui/material'
-import { KeyboardHelper, PopperWidth, Status, StatusType, useConfig, useRegisterShortcut, useShortcuts } from 'mui-industrial'
+import { KeyboardHelper, PopperWidth, ShortcutObject, Status, StatusType, useConfig, useRegisterShortcut, useShortcuts } from 'mui-industrial'
 import { useEffect, useState } from 'react'
 
 const kbdId = 'bkdShortcut'
@@ -16,7 +16,7 @@ const i18n = {
 
 export default function () {
   const shortcuts = useShortcuts()
-  const [open, setOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(true)
   const [edit, setEdit] = useState<boolean>(false)
   const [asChip, setAsChip] = useState<boolean>(true)
   const { handleKeyboardGetLabel } =  useRegisterShortcut()
@@ -31,7 +31,7 @@ export default function () {
 
   const keyboards = [
     { id: kbdId, ctrlKey: true, char: 'K', onTrigger: () => setOpen((prev) => !prev), label: 'Toggle Shortcuts' }
-  ]
+  ] as ShortcutObject[]
 
   useEffect(() => {
     config({ keyboards })
