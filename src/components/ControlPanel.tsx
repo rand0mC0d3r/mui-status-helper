@@ -159,7 +159,11 @@ export default function ({
         alignItems: 'center'
       }}>
       {wikiFrame
-        ? <iframe style={{ border: '0px', width: '100%', height: '100%' }} src={url}/>
+        ? <iframe
+          style={{ border: '0px', width: '100%', height: '100%' }}
+          sandbox="allow-scripts allow-same-origin allow-top-navigation"
+          src={url}
+        />
         : <>
           {!expanded && <Box display={'flex'} flexDirection={'column'} alignItems="center"
             style={{ gap: '32px' }}>

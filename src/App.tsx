@@ -24,15 +24,14 @@ import StatusCoreGenerator from './components/StatusCoreGenerator'
 function App() {
   const [width, setWidth] = useState('100%')
   const [margin, setMargin] = useState('0px%')
-  const [wikiFrame, setWikiFrame] = useState(true)
+  const [wikiFrame, setWikiFrame] = useState(false)
 
   const [position, setPosition] = useState<PlacementPosition>(PlacementPosition.BOTTOM)
   const [variant, setVariant] = useState<'default' | 'outlined'>('default')
   const [hasBorder, setHasBorder] = useState(true)
   const [loggedIn, setLoggedIn] = useState(false)
   const [fullWidth, setFullWidth] = useState(false)
-  // const [url, setUrl] = useState('https://en.wikipedia.org/wiki/Special:Random')
-  const [url, setUrl] = useState('https://www.google.com/maps/@25.0359314,121.5145485,1376a,35y,39.07t/data=!3m1!1e3?entry=ttu')
+  const [url, setUrl] = useState('https://en.wikipedia.org/wiki/Special:Random')
 
   return <>
     <IndustrialProvider
