@@ -22,8 +22,9 @@ export default function () {
   const [secondary, setSecondary] = useState<boolean>(false)
   const [showIcon, setShowIcon] = useState<boolean>(false)
   const [showChildren, setShowChildren] = useState<boolean>(true)
+  const [as, setAs] = useState<StatusType>(StatusType.CONSOLE)
 
-  const content = <Box display="flex" style={{ padding: '16px', gap: '16px',  textAlign: 'center' }} flexDirection="column">
+  const content = <Box display="flex" style={{ padding: '16px', gap: '16px', flex: 1,  textAlign: 'center' }} flexDirection="column">
     <TextField value={primaryText} onChange={(e) => setPrimaryText(e.target.value)} label="Primary Text" />
     <TextField value={popperText} onChange={(e) => setPopperText(e.target.value)} label="Popper Text" />
     <TextField value={badgeText} onChange={(e) => setBadgeText(e.target.value)} label="Badge Text" />
@@ -41,6 +42,13 @@ export default function () {
       <MenuItem value={Highlight.PRIMARY}>Primary</MenuItem>
       <MenuItem value={Highlight.SECONDARY}>Secondary</MenuItem>
       <MenuItem value={Highlight.DEFAULT}>None</MenuItem>
+    </Select>
+
+    <Select value={as} onChange={(e) => {
+      setAs(e.target.value as StatusType)
+    } } label="As">
+      <MenuItem value={StatusType.CONSOLE}>Console</MenuItem>
+      <MenuItem value={StatusType.POPPER}>Popper</MenuItem>
     </Select>
 
     <Select value={width} onChange={(e) => {
@@ -91,7 +99,7 @@ export default function () {
     highlight={highlight as Highlight}
     onClick={() => setOpen((p: any) => !p)}
     options = {{
-      as: StatusType.POPPER,
+      as,
       popper: {
         width,
         height,
