@@ -45,6 +45,7 @@ function App() {
     >
       <StatusCoreGenerator />
       <MenuPanel />
+      <KeyboardShortcuts />
       {/* <Sidebars /> */}
       {/* <Samples />
       <Search />

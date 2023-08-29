@@ -28,16 +28,17 @@ export default function () {
       ctrlKey: true, altKey: true },
   ]
 
-  const content = <MenuList>
+  const content = <MenuList autoFocusItem variant="menu">
     {items
       .filter((item) => ['divider', 'item'].some(t => item.type === t))
-      .map((item, index) => item.type === 'divider'
-    ? <Divider key={`${item.type}-${item.label || index}`} />
-    : <MenuItem key={`${item.type}-${item.label || index}`} onClick={() => triggers(item.label)} >
-      <ListItemIcon>{item.icon}</ListItemIcon>
-      <ListItemText style={{ width: '250px' }}>{item.label}</ListItemText>
-      {item?.id && <KeyboardHelper hasTooltip={true} shortcutId={item.id} />}
-    </MenuItem>)}
+      .map((item, index) =>
+      item.type === 'divider'
+        ? <Divider key={`${item.type}-${item.label || index}`} />
+        : <MenuItem key={`${item.type}-${item.label || index}`} onClick={() => triggers(item.label)} >
+          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemText style={{ width: '250px' }}>{item.label}</ListItemText>
+          {item?.id && <KeyboardHelper hasTooltip={true} shortcutId={item.id} />}
+        </MenuItem>)}
   </MenuList>
 
   const keyboards = items.filter((item) => ['command', 'item'].some(t => item.type === t))
