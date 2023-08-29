@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles'
 import { Status } from 'mui-industrial'
 import { useEffect, useState } from 'react'
 
-const id = 'speedMonitor'
+const id = 'speedMonitorX'
 
 const STypography: any = styled(Typography)(() => ({
   borderBottom: '1px solid',
@@ -68,7 +68,7 @@ export default () => {
     return () => clearInterval(interval)
   }, [requests])
 
-  return <Status {...{ id, tooltip }} secondary>
+  return <Status {...{ id, tooltip }} secondary order={-6}>
     <Status.Template {...{ badge }}
       style={{ minWidth: '150px' }}
       icon={<NetworkCheckIcon color="primary" />}

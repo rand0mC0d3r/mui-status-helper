@@ -34,7 +34,7 @@ function App() {
 
   return <>
     <IndustrialProvider
-      // debug
+      debug
       fullWidth={fullWidth}
       hasLock={true}
       hasBorder={hasBorder}
@@ -44,6 +44,7 @@ function App() {
       variant={variant}
     >
       <StatusCoreGenerator />
+      <MenuPanel />
       {/* <Sidebars /> */}
       {/* <Samples />
       <Search />
@@ -59,7 +60,7 @@ function App() {
       {/* {!loggedIn && <Preopen />} */}
       {/* <Commands {...{ wikiFrame, setWikiFrame }} /> */}
       <SpeedMonitor />
-      <KeyboardShortcuts />
+      {/* <KeyboardShortcuts /> */}
       <ControlPanel {...{
         wikiFrame, setWikiFrame,
         variant, setVariant,

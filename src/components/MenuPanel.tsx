@@ -66,6 +66,6 @@ export default function () {
     order={-2}
     onClick={() => setOpen((prev) => !prev)}
     tooltip={<>Menu / Options <KeyboardHelper shortcutId={'menuShortcut'} /></>}>
-    <Status.Template {...{ icon: <GridView />, text: 'Menu' }}/>
+    <Status.Template {...{ icon: <GridView />, text: 'Sample Menu' }}/>
   </Status>
 }
