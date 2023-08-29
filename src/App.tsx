@@ -47,6 +47,7 @@ function App() {
       <StatusCoreGenerator />
       <MenuPanel />
       <KeyboardShortcuts />
+      <ChatClient />
       <NotificationsGenerator />
       <GsmArena />
       {!loggedIn && <Preopen />}
