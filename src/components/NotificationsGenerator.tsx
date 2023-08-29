@@ -43,7 +43,12 @@ export default function ({
       severity: Severity.SUCCESS,
       actions:[
         <Button onClick={() => console.log('slack')}>Slack it</Button>,
-        <Button color="inherit">Post to Jira</Button>,
+        <Button color="inherit" onClick={() => {
+          handleSnackbarRegister({
+            message: 'Posted to JIRA',
+            severity: Severity.INFO,
+          })
+        }}>Post to Jira</Button>,
       ] })
 
     handleSnackbarRegister({

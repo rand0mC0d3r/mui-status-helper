@@ -5,7 +5,7 @@ import InventoryIcon from '@mui/icons-material/Inventory'
 import LogoDevOutlinedIcon from '@mui/icons-material/LogoDevOutlined'
 import PersonIcon from '@mui/icons-material/Person'
 import ReplayIcon from '@mui/icons-material/Replay'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, TextField, Typography } from '@mui/material'
 import Checkbox from '@mui/material/Checkbox'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
@@ -39,6 +39,8 @@ export default function ({
   setHasBorder,
   position,
   setPosition,
+  url,
+  setUrl,
 } : {
   wikiFrame: boolean,
   setWikiFrame: any,
@@ -56,6 +58,8 @@ export default function ({
 	setHasBorder: any,
 	position: string,
 	setPosition: any,
+  url: string,
+  setUrl: any,
 }) {
   const { handleKeyboardRegister, handleKeyboardDeRegister, handleKeyboardGetLabel } =  useRegisterShortcut()
   const shortcuts =  useShortcuts()
@@ -155,7 +159,7 @@ export default function ({
         alignItems: 'center'
       }}>
       {wikiFrame
-        ? <iframe style={{ border: '0px', width: '100%', height: '100%' }} src="https://en.wikipedia.org/wiki/Special:Random"/>
+        ? <iframe style={{ border: '0px', width: '100%', height: '100%' }} src={url}/>
         : <>
           {!expanded && <Box display={'flex'} flexDirection={'column'} alignItems="center"
             style={{ gap: '32px' }}>
@@ -184,6 +188,7 @@ export default function ({
                 }}>
                   {/* {toggleBlock('Simulate logged in', loggedIn, setLoggedIn)} */}
                   {toggleBlock('Border', hasBorder, setHasBorder)}
+                  {toggleBlock('Wiki Frame', wikiFrame, setWikiFrame)}
                   {toggleBlock('FullWidth', fullWidth, setFullWidth)}
                   {/* {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)} */}
                   {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
@@ -204,6 +209,9 @@ export default function ({
                     setSelectedText(selectedText)
                   }} ref={selectionRef} style={{ width: '100%', height: '400px' }}
                   defaultValue={text.trim()} />
+                  <TextField label="URL" variant="outlined" value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    fullWidth/>
                 </div>
               </>}
             </AccordionDetails>

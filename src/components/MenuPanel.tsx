@@ -56,7 +56,7 @@ export default function () {
     options={ {
       as: StatusType.POPPER,
       popper: {
-        hasToolbar: true,
+        hasToolbar: false,
         onClose: () => setOpen(false)
       },
       title: 'Sample Menu',

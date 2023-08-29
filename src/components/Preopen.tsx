@@ -20,7 +20,7 @@ export default function () {
 
   const keyboards = [
     { id: kbdId, ctrlKey: true, char: 'L', onTrigger: () => setOpen((prev: any) => !prev), label: 'Toggle Login' },
-    { id: 'googleLogin', ctrlKey: true, char: 'G', onTrigger: () => console.log('Google kbd', id), label: 'Google Login' }
+    { id: 'googleLogin', ctrlKey: true, char: 'G', onTrigger: () => setIsLogged(true), label: 'Google Login' }
   ]
 
   const commands = [
