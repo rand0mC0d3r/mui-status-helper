@@ -2,19 +2,26 @@
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined'
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined'
+import StopCircleIcon from '@mui/icons-material/StopCircle'
 import { Avatar, Box, Button, TextField } from '@mui/material'
-import {
-  Highlight, KeyboardHelper, PopperHeight, PopperWidth,
-  Status, StatusOptionsProps, StatusPopperProps, StatusType
-} from 'mui-industrial'
+import { Highlight, KeyboardHelper, PopperHeight, PopperWidth, Status, StatusType, useConfig } from 'mui-industrial'
 import { Fragment, useEffect, useState } from 'react'
 
 export default function () {
+  const { config, configUnmount } = useConfig()
+
   const [fake, setFake] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
   const [users, setUsers] = useState<string[]>(['DA', 'AC', 'BB', 'CF', 'BD', 'AA'])
   const [tooltip, setTooltip] = useState<string>('Chat client')
   const [badge, setBadge] = useState<string>('')
   const [user, setUser] = useState<string | undefined>()
+
+  const items = [
+    { type: 'command', id: 'chatClient', shortcutId: 'chatClient', label: 'Open Chat client',
+      char: 'M', onTrigger: () => setOpen((prev) => !prev),
+      ctrlKey: true, altKey: true },
+  ]
 
   const generateChat = (flag: boolean) => {
     if(flag === true) {
@@ -27,9 +34,10 @@ export default function () {
   }
 
   const onClick = () => {
-    setBadge('')
-    setTooltip('Chat client')
-    setFake(false)
+    // setBadge('')
+    // setTooltip('Chat client')
+    // setFake(false)
+    setOpen((p: any) => !p)
   }
 
   const content = <>
@@ -65,7 +73,20 @@ export default function () {
   </>
 
 
+  const keyboards = items.filter((item) => ['command', 'item'].some(t => item.type === t))
+  const commands = items.filter((item) => ['command'].some(t => item.type === t))
+
   useEffect(() => {
+    config({ keyboards, commands })
+
+    return () => {
+      configUnmount({ keyboards, commands })
+    }
+  }, [])
+
+  useEffect(() => {
+    if(fake) setOpen(false)
+
     const interval = setInterval(() => {
       generateChat(fake)
     }, 1500)
@@ -74,25 +95,39 @@ export default function () {
   }, [fake])
 
   return <>
-    {/* <Keyboard id='chatClient' char="T" ctrlKey={true}
-      onTrigger={() => alert('opening chat client')} /> */}
-    <Status {...{ onClick, tooltip: <>{tooltip} <KeyboardHelper shortcutId='chatClient' /> </> }}
-      id="chatClient"
-      highlight={badge !== '' ? Highlight.PRIMARY : Highlight.DEFAULT}
-      options={{
-        as: StatusType.POPPER,
-        popper: {
-          width: PopperWidth.SM,
-          height: PopperHeight.SM,
-        },
-        actions: [{
+    <Status {...{
+      onClick,
+      tooltip: <>{tooltip} <KeyboardHelper shortcutId='chatClient' /> </>
+    }}
+    id="chatClient"
+    highlight={fake ? Highlight.PRIMARY : Highlight.DEFAULT}
+    options={{
+      as: StatusType.POPPER,
+      popper: {
+        width: PopperWidth.SM,
+        height: PopperHeight.SM,
+        onClose: () => setOpen(false),
+      },
+      actions: [
+        {
           icon: <MarkUnreadChatAltOutlinedIcon color={fake ? 'primary' : 'action'} />,
           tooltip: 'Generate fake chats',
           onClick: () => setFake(!fake)
-        }],
-        title: 'Chats',
-        content
-      }}
+        },
+        {
+          icon: <StopCircleIcon color={'secondary'} />,
+          preserveColor: true,
+          tooltip: 'Turn off fake chats',
+          onClick: () => {
+            setFake(false)
+            setBadge('')
+          }
+        },
+      ],
+      title: 'Chats',
+      content,
+      open,
+    }}
     >
       <Status.Template {...{ badge }}
         icon={<ChatOutlinedIcon />}
