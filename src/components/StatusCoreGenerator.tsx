@@ -22,7 +22,7 @@ export default function () {
   const [secondary, setSecondary] = useState<boolean>(false)
   const [showIcon, setShowIcon] = useState<boolean>(false)
   const [showChildren, setShowChildren] = useState<boolean>(true)
-  const [as, setAs] = useState<StatusType>(StatusType.CONSOLE)
+  const [as, setAs] = useState<StatusType>(StatusType.POPPER)
 
   const content = <Box display="flex" style={{ padding: '16px', gap: '16px', flex: 1,  textAlign: 'center' }} flexDirection="column">
     <TextField value={primaryText} onChange={(e) => setPrimaryText(e.target.value)} label="Primary Text" />
@@ -49,6 +49,7 @@ export default function () {
     } } label="As">
       <MenuItem value={StatusType.CONSOLE}>Console</MenuItem>
       <MenuItem value={StatusType.POPPER}>Popper</MenuItem>
+      {/* <MenuItem value={StatusType.POPOVER}>Popover</MenuItem> */}
     </Select>
 
     <Select value={width} onChange={(e) => {

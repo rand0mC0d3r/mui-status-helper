@@ -46,6 +46,9 @@ function App() {
       <StatusCoreGenerator />
       <MenuPanel />
       <KeyboardShortcuts />
+      <NotificationsGenerator />
+      <GsmArena />
+      <GithubPage />
       {/* <Sidebars /> */}
       {/* <Samples />
       <Search />

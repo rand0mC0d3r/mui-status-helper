@@ -16,14 +16,14 @@ const i18n = {
 
 export default function () {
   const shortcuts = useShortcuts()
-  const [open, setOpen] = useState<boolean>(true)
+  const [open, setOpen] = useState<boolean>(false)
   const [edit, setEdit] = useState<boolean>(false)
   const [asChip, setAsChip] = useState<boolean>(true)
-  const { handleKeyboardGetLabel } =  useRegisterShortcut()
+  const { handleKeyboardGetLabel, handleKeyboardTrigger } =  useRegisterShortcut()
   const { config, configUnmount } = useConfig()
 
-  const content = <MenuList>
-    {shortcuts.map(({ id }) => <MenuItem key={id} style={{ cursor: 'auto' }}>
+  const content = <MenuList autoFocusItem variant="menu">
+    {shortcuts.map(({ id }) => <MenuItem key={id} style={{ cursor: 'auto' }} onClick={() => handleKeyboardTrigger(id) }>
       <ListItemText style={{ width: '250px' }}>{handleKeyboardGetLabel(id)}</ListItemText>
       <KeyboardHelper {...{ asChip }} hasOverride={edit} shortcutId={id} />
     </MenuItem>)}

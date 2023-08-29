@@ -182,10 +182,10 @@ export default function ({
                   padding: '16px',
                   gap: '16px'
                 }}>
-                  {toggleBlock('Simulate logged in', loggedIn, setLoggedIn)}
+                  {/* {toggleBlock('Simulate logged in', loggedIn, setLoggedIn)} */}
                   {toggleBlock('Border', hasBorder, setHasBorder)}
                   {toggleBlock('FullWidth', fullWidth, setFullWidth)}
-                  {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)}
+                  {/* {toggleOptions('Variant', ['default', 'outlined'], setVariant, variant)} */}
                   {toggleOptions('Position', ['top', 'bottom'], setPosition, position)}
                   {toggleOptions('Width', ['75vw', '100%', '60%', '1400px'], setWidth, width)}
                   {toggleOptions('Margin', ['0px', '4px', '16px'], setMargin, margin)}

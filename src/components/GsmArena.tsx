@@ -12,7 +12,7 @@ export default function () {
   return <>
     <Status {...{ id }}
       options={{
-        as: type,
+        as: StatusType.CONSOLE,
         popper: {
           width: PopperWidth.LG,
           height: PopperHeight.LG,

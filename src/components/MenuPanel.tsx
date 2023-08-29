@@ -37,7 +37,7 @@ export default function () {
         : <MenuItem key={`${item.type}-${item.label || index}`} onClick={() => triggers(item.label)} >
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText style={{ width: '250px' }}>{item.label}</ListItemText>
-          {item?.id && <KeyboardHelper hasTooltip={true} shortcutId={item.id} />}
+          {item?.id && <KeyboardHelper asChip hasTooltip={true} shortcutId={item.id} />}
         </MenuItem>)}
   </MenuList>
 
@@ -56,10 +56,10 @@ export default function () {
     options={ {
       as: StatusType.POPPER,
       popper: {
-        hasDecoration: false,
-        hasToolbar: false,
+        hasToolbar: true,
         onClose: () => setOpen(false)
       },
+      title: 'Sample Menu',
       content,
       open,
     }}
