@@ -52,6 +52,7 @@ function App() {
       <GsmArena />
       {!loggedIn && <Preopen />}
       <GithubPage />
+      <Search />
       {/* <Sidebars /> */}
       {/* <Samples />
       <Search />
@@ -68,6 +69,7 @@ function App() {
       {/* <Commands {...{ wikiFrame, setWikiFrame }} /> */}
       <SpeedMonitor />
       {/* <KeyboardShortcuts /> */}
+      <Commands {...{ wikiFrame, setWikiFrame }} />
       <ControlPanel {...{
         url, setUrl,
         wikiFrame, setWikiFrame,

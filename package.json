@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "homepage": ".",
   "dependencies": {
-		"@emotion/react": "11.10.4",
+    "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
     "@mui/icons-material": "5.10.9",
     "@mui/material": "5.10.9",
@@ -12,23 +12,23 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "react-scripts": "5.0.1",
     "@types/react": "17.0.52",
     "@types/react-dom": "17.0.18",
-		"concurrently": "^8.0.1",
+    "concurrently": "^8.0.1",
+    "react-scripts": "5.0.1",
     "typescript": "4.9.4"
   },
   "scripts": {
-		"===START===": "----------------------------------------------------------------------",
+    "===START===": "----------------------------------------------------------------------",
     "prestart": "npx link",
     "start": "concurrently --names 'CRA,Size' --prefix-colors 'green,yellow' \"PORT=3005 react-scripts start\" \"npm run check.links\"",
     "===BUILD===": "----------------------------------------------------------------------",
-		"build": "react-scripts build",
+    "build": "react-scripts build",
     "===TOOLS===": "----------------------------------------------------------------------",
     "clean": "rm -rf node_modules && npm cache clean --force",
     "check.links": "npm ls -g --depth=0 --link=true"
   },
-	"private": true,
+  "private": true,
   "eslintConfig": {
     "extends": [
       "react-app",
